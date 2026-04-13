@@ -1,0 +1,80 @@
+---
+title: Deep Talk
+description: AI-powered conversation analysis and insight discovery with local transcription, speaker diarisation, and privacy-first design.
+template: splash
+hero:
+  title: 'Deep <span class="brand-mark">Talk</span>'
+  tagline: Transcribe, diarise, and analyse conversations on your own machine — then let the AI surface the insights.
+---
+
+<div class="app-page" data-brand="deep-talk">
+
+<div class="app-download" data-repo="michael-borck/deep-talk"></div>
+
+<section class="app-shot">
+  <img src="/screenshots/deep-talk-1.png" alt="Deep Talk main interface" />
+</section>
+
+<section class="app-section">
+  <h2>What it does</h2>
+  <div class="app-features">
+    <div class="app-feature">
+      <h3>Local transcription</h3>
+      <p>Built-in Whisper via <code>@huggingface/transformers</code> runs fully on your machine — no external server required.</p>
+    </div>
+    <div class="app-feature">
+      <h3>Speaker diarisation</h3>
+      <p>pyannote-segmentation-3.0 + wespeaker gives real audio-level "who said what" instead of LLM guessing from text.</p>
+    </div>
+    <div class="app-feature">
+      <h3>Audio &amp; video support</h3>
+      <p>MP3, WAV, MP4, AVI, MOV, M4A, WebM, OGG and more. FFmpeg is bundled so it just works.</p>
+    </div>
+    <div class="app-feature">
+      <h3>Bring your own AI</h3>
+      <p>Analyse with local Ollama, or Anthropic, OpenAI, Groq, Gemini, OpenRouter, or a custom endpoint — your call.</p>
+    </div>
+    <div class="app-feature">
+      <h3>Privacy-first</h3>
+      <p>Transcription and diarisation stay on your device. Nothing leaves the machine unless you choose a cloud model.</p>
+    </div>
+    <div class="app-feature">
+      <h3>In-app docs</h3>
+      <p>Full documentation ships with the binary and renders in the app's theme — no internet required.</p>
+    </div>
+  </div>
+</section>
+
+<section class="app-section">
+  <h2>How it works</h2>
+  <div class="app-steps">
+    <div class="app-step">
+      <h3>Drop in a recording</h3>
+      <p>Open any supported audio or video file — interviews, lectures, meetings, field recordings.</p>
+    </div>
+    <div class="app-step">
+      <h3>Transcribe locally</h3>
+      <p>Whisper runs on your machine to produce an accurate transcript with timestamps.</p>
+    </div>
+    <div class="app-step">
+      <h3>Identify speakers</h3>
+      <p>Diarisation separates voices from the audio itself, so each line is attributed correctly.</p>
+    </div>
+    <div class="app-step">
+      <h3>Analyse &amp; explore</h3>
+      <p>Ask the AI for summaries, themes, quotes, or custom analyses — locally or via your preferred provider.</p>
+    </div>
+  </div>
+</section>
+
+<section class="app-shot">
+  <img src="/screenshots/deep-talk-2.png" alt="Deep Talk analysis view" />
+</section>
+
+<div class="app-back">
+  <a href="/">← Back to all tools</a>
+</div>
+
+</div>
+
+<script src="/app-landing.js"></script>
