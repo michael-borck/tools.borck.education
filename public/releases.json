@@ -1,8 +1,8 @@
 {
   "michael-borck/curriculum-curator": {
-    "win": "https://github.com/michael-borck/curriculum-curator/releases/download/v0.5.21/Curriculum.Curator-0.5.21-Setup.exe",
-    "mac": "https://github.com/michael-borck/curriculum-curator/releases/download/v0.5.21/Curriculum.Curator-0.5.21-arm64.dmg",
-    "linux": "https://github.com/michael-borck/curriculum-curator/releases/download/v0.5.21/Curriculum.Curator-0.5.21.AppImage"
+    "win": "https://github.com/michael-borck/curriculum-curator/releases/download/v0.5.23/Curriculum.Curator-0.5.23-Setup.exe",
+    "mac": "https://github.com/michael-borck/curriculum-curator/releases/download/v0.5.23/Curriculum.Curator-0.5.23-arm64.dmg",
+    "linux": "https://github.com/michael-borck/curriculum-curator/releases/download/v0.5.23/Curriculum.Curator-0.5.23.AppImage"
   },
   "michael-borck/talk-buddy": {
     "win": "https://github.com/michael-borck/talk-buddy/releases/download/v2.6.2/TalkBuddy-Setup-2.6.2.exe",
@@ -10,9 +10,9 @@
     "linux": "https://github.com/michael-borck/talk-buddy/releases/download/v2.6.2/TalkBuddy-2.6.2.AppImage"
   },
   "michael-borck/study-buddy": {
-    "win": "https://github.com/michael-borck/study-buddy/releases/download/v0.2.2/Study.Buddy.Setup.0.2.2.exe",
-    "mac": "https://github.com/michael-borck/study-buddy/releases/download/v0.2.2/Study.Buddy-0.2.2-arm64.dmg",
-    "linux": "https://github.com/michael-borck/study-buddy/releases/download/v0.2.2/Study.Buddy-0.2.2.AppImage"
+    "win": "https://github.com/michael-borck/study-buddy/releases/download/v0.4.0/Study.Buddy.Setup.0.4.0.exe",
+    "mac": "https://github.com/michael-borck/study-buddy/releases/download/v0.4.0/Study.Buddy-0.4.0-arm64.dmg",
+    "linux": "https://github.com/michael-borck/study-buddy/releases/download/v0.4.0/Study.Buddy-0.4.0.AppImage"
   },
   "michael-borck/deep-talk": {
     "win": "https://github.com/michael-borck/deep-talk/releases/download/v1.6.0/DeepTalk.Setup.1.6.0.exe",
@@ -25,9 +25,9 @@
     "linux": "https://github.com/michael-borck/career-compass/releases/download/v0.2.9/Career-Compass-0.2.9-x86_64.AppImage"
   },
   "michael-borck/insight-lens": {
-    "win": "https://github.com/michael-borck/insight-lens/releases/download/v1.4.1/InsightLens.Setup.1.4.1.exe",
-    "mac": "https://github.com/michael-borck/insight-lens/releases/download/v1.4.1/InsightLens-1.4.1-universal.dmg",
-    "linux": "https://github.com/michael-borck/insight-lens/releases/download/v1.4.1/InsightLens-1.4.1.AppImage"
+    "win": "https://github.com/michael-borck/insight-lens/releases/download/v1.5.0/InsightLens.Setup.1.5.0.exe",
+    "mac": "https://github.com/michael-borck/insight-lens/releases/download/v1.5.0/InsightLens-1.5.0-universal.dmg",
+    "linux": "https://github.com/michael-borck/insight-lens/releases/download/v1.5.0/InsightLens-1.5.0.AppImage"
   },
   "michael-borck/venture-lab": {
     "win": "https://github.com/michael-borck/venture-lab/releases/download/v1.1.0/VentureLab_1.0.0_x64-setup.exe",
@@ -35,8 +35,8 @@
     "linux": "https://github.com/michael-borck/venture-lab/releases/download/v1.1.0/VentureLab_1.0.0_amd64.AppImage"
   },
   "michael-borck/cite-sight": {
-    "win": "https://github.com/michael-borck/cite-sight/releases/download/v0.2.12/CiteSight-Setup-0.2.12.exe",
-    "mac": "https://github.com/michael-borck/cite-sight/releases/download/v0.2.12/CiteSight-0.2.12-arm64.dmg",
-    "linux": "https://github.com/michael-borck/cite-sight/releases/download/v0.2.12/CiteSight-0.2.12.AppImage"
+    "win": "https://github.com/michael-borck/cite-sight/releases/download/v0.3.0/CiteSight-Setup-0.3.0.exe",
+    "mac": "https://github.com/michael-borck/cite-sight/releases/download/v0.3.0/CiteSight-0.3.0-arm64.dmg",
+    "linux": "https://github.com/michael-borck/cite-sight/releases/download/v0.3.0/CiteSight-0.3.0.AppImage"
   }
 }
