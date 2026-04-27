@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { tools, books, goals } from '../data/tools';
+import { tools, books, teaching, goals } from '../data/tools';
 ---
 <Base title="borck.education — AI tools for educators">
 
@@ -62,6 +62,22 @@ import { tools, books, goals } from '../data/tools';
         </a>
       ))}
     </div>
+    <div class="sidebar-divider"></div>
+    <button class="sidebar-toggle" data-section="teach">
+      Teaching <span class="sidebar-chevron">›</span>
+    </button>
+    <div class="sidebar-section-items" id="sidebar-teach">
+      {teaching.map(t => (
+        <a href="#"
+           class="sidebar-item"
+           data-id={t.id}
+           data-tags="teach"
+           data-teach={t.id}>
+          {t.name}
+          <span class="sidebar-type">{t.category === 'exec-ed' ? 'Exec Ed' : t.category.charAt(0).toUpperCase() + t.category.slice(1)}</span>
+        </a>
+      ))}
+    </div>
   </aside>
 
   <!-- Main -->
@@ -73,7 +89,7 @@ import { tools, books, goals } from '../data/tools';
         <p class="home-eyebrow">borck.education</p>
         <h1 class="home-title">AI tools for <span class="home-accent">teaching</span> and <span class="home-accent">learning</span></h1>
         <p class="home-sub">
-          {tools.length} privacy-first tools and {books.length} books for educators, researchers, and students.<br />
+          {tools.length} privacy-first tools, {books.length} books, and {teaching.length} workshops &amp; courses for educators, researchers, and students.<br />
           All tools run locally — no data uploaded, no accounts required.
         </p>
 
@@ -129,6 +145,20 @@ import { tools, books, goals } from '../data/tools';
             </div>
           </a>
         ))}
+        {teaching.map(t => (
+          <a href="#"
+             class="grid-card"
+             data-id={t.id}
+             data-tags="teach"
+             data-teach={t.id}>
+            <div class="grid-card-name">{t.name}</div>
+            <div class="grid-card-desc">{t.description}</div>
+            <div class="grid-card-footer">
+              <span class="type-badge">{t.category === 'exec-ed' ? 'Exec Ed' : t.category.charAt(0).toUpperCase() + t.category.slice(1)}</span>
+              <span class="tag-badge">{t.format}</span>
+            </div>
+          </a>
+        ))}
       </div>
     </div>
 
@@ -154,14 +184,16 @@ import { tools, books, goals } from '../data/tools';
 
 </Base>
 
-<script define:vars={{ toolsData: tools, booksData: books }}>
+<script define:vars={{ toolsData: tools, booksData: books, teachingData: teaching }}>
 const TOOLS = toolsData;
 const BOOKS = booksData;
+const TEACHING = teachingData;
 
 const goalLabels = {
-  all: 'All tools', analyze: 'Analyze', feedback: 'Get feedback',
+  all: 'All', analyze: 'Analyze', feedback: 'Get feedback',
   create: 'Create', practice: 'Practice & learn', grade: 'Grade & assess',
-  research: 'Research', engage: 'Engage a class', career: 'Career & writing', book: 'Books',
+  research: 'Research', engage: 'Engage a class', career: 'Career & writing',
+  book: 'Books', teach: 'Teaching',
 };
 
 let activeFilter = 'all';
@@ -203,6 +235,7 @@ function showGrid() {
   siteFooter.classList.remove('hidden');
   toggleSection('books', true);
   toggleSection('tools', true);
+  toggleSection('teach', true);
 }
 
 // ── Filtering ─────────────────────────────────────────────
@@ -238,12 +271,19 @@ function applyFilters() {
   if (activeFilter === 'book') {
     toggleSection('books', true);
     toggleSection('tools', false);
+    toggleSection('teach', false);
+  } else if (activeFilter === 'teach') {
+    toggleSection('books', false);
+    toggleSection('tools', false);
+    toggleSection('teach', true);
   } else if (activeFilter !== 'all') {
     toggleSection('books', false);
     toggleSection('tools', true);
+    toggleSection('teach', false);
   } else {
     toggleSection('books', true);
     toggleSection('tools', true);
+    toggleSection('teach', true);
   }
 
   let noRes = document.getElementById('no-results');
@@ -433,6 +473,45 @@ function renderInlinePanel(tool) {
   </div>`;
 }
 
+function openTeach(id) {
+  const t = TEACHING.find(x => x.id === id);
+  if (!t) return;
+
+  homeView.classList.add('hidden');
+  gridView.classList.add('hidden');
+  siteFooter.classList.add('hidden');
+  mainEl.classList.remove('has-iframe');
+  detailView.classList.remove('has-iframe');
+  detailView.classList.remove('hidden');
+  detailContent.innerHTML = renderTeachPanel(t);
+
+  toggleSection('teach', true);
+  setActive(id);
+  currentTool = id;
+}
+
+function renderTeachPanel(t) {
+  const catLabel = { university: 'University', workshop: 'Workshop', 'exec-ed': 'Executive Education', research: 'Research' }[t.category] || t.category;
+  const tagBadges = t.tags.map(tag => `<span class="tag-badge">${tag}</span>`).join('');
+  return `<div class="tool-inline-panel">
+    <div class="panel-col-left">
+      <div class="panel-name">${t.name}</div>
+      <div class="panel-badges"><span class="type-badge">${catLabel}</span>${tagBadges}</div>
+      <p class="panel-desc">${t.description}</p>
+      <div class="panel-section-label">Audience</div>
+      <p class="panel-detail-value">${t.audience}</p>
+      <div class="panel-github-link"><a href="${t.repoUrl}" target="_blank" rel="noopener">GitHub ↗</a></div>
+    </div>
+    <div class="panel-col-right">
+      <a href="${t.siteUrl}" class="panel-web-btn" target="_blank" rel="noopener">View materials →</a>
+      <div class="panel-section-label" style="margin-top:1.25rem">Format</div>
+      <p class="panel-detail-value">${t.format}</p>
+      <div class="panel-section-label">More teaching</div>
+      <p class="panel-detail-value"><a href="https://teach.borck.dev" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none">teach.borck.dev ↗</a></p>
+    </div>
+  </div>`;
+}
+
 function renderBookPanel(book) {
   return `<div class="tool-inline-panel">
     <div class="panel-col-left">
@@ -470,6 +549,9 @@ document.addEventListener('click', e => {
 
   const bookEl = e.target.closest('[data-book]');
   if (bookEl) { e.preventDefault(); openBook(bookEl.dataset.book); return; }
+
+  const teachEl = e.target.closest('[data-teach]');
+  if (teachEl) { e.preventDefault(); openTeach(teachEl.dataset.teach); return; }
 });
 
 document.getElementById('back-btn')?.addEventListener('click', closeDetail);
