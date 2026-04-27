@@ -1,15 +1,14 @@
 ---
-title: Talk Buddy
-description: Practice real-world conversations with an AI partner in a safe, private space where it's OK to stumble.
-template: splash
-hero:
-  title: 'Talk <span class="brand-mark">Buddy</span>'
-  tagline: Practice real-world conversations with an AI partner in a safe, private space where it's OK to stumble.
+import ToolPage from '../layouts/ToolPage.astro';
 ---
-
-<div class="app-page" data-brand="talk-buddy">
-
-<div class="app-download" data-repo="michael-borck/talk-buddy"></div>
+<ToolPage
+  title="Talk Buddy"
+  titleHtml='Talk <span class="brand-mark">Buddy</span>'
+  tagline="Practice real-world conversations with an AI partner in a safe, private space where it's OK to stumble."
+  description="Practice real-world conversations with an AI partner in a safe, private space where it's OK to stumble."
+  brand="talk-buddy"
+  repo="michael-borck/talk-buddy"
+>
 
 <section class="app-shot">
   <img src="/screenshots/talk-buddy-1.png" alt="Talk Buddy main interface" />
@@ -71,10 +70,4 @@ hero:
   <img src="/screenshots/talk-buddy-2.png" alt="Talk Buddy session view" />
 </section>
 
-<div class="app-back">
-  <a href="/">← Back to all tools</a>
-</div>
-
-</div>
-
-<script src="/app-landing.js"></script>
+</ToolPage>

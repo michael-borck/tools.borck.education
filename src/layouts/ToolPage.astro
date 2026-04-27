@@ -1,0 +1,57 @@
+---
+import Base from './Base.astro';
+
+interface Props {
+  title: string;
+  titleHtml: string;
+  tagline: string;
+  description: string;
+  brand: string;
+  repo: string;
+}
+const { title, titleHtml, tagline, description, brand, repo } = Astro.props;
+---
+<Base title={`${title} — borck.education`} description={description}>
+
+<!-- Embed detection: hides topbar + back when loaded in an iframe via ?embed=1 -->
+<script is:inline>
+  if (new URLSearchParams(window.location.search).has('embed')) {
+    document.documentElement.classList.add('embedded');
+  }
+</script>
+
+<!-- Topbar (hidden when embedded) -->
+<div class="topbar">
+  <a href="/" class="topbar-logo">
+    <span>borck</span><span class="dot">.</span><span class="edu">education</span>
+  </a>
+  <div class="topbar-spacer"></div>
+  <nav class="topbar-links">
+    <a href="/">← All tools</a>
+    <a href="https://github.com/michael-borck">GitHub</a>
+    <a href="https://borck.dev/">borck.dev</a>
+  </nav>
+</div>
+
+<div class="tool-scroll-wrap">
+  <div class="app-page" data-brand={brand}>
+
+    <div class="app-hero">
+      <h1 set:html={titleHtml} />
+      <p class="app-tagline">{tagline}</p>
+    </div>
+
+    <div class="app-download" data-repo={repo}></div>
+
+    <slot />
+
+    <div class="app-back">
+      <a href="/">← Back to all tools</a>
+    </div>
+
+  </div>
+</div>
+
+</Base>
+
+<script src="/app-landing.js" is:inline></script>

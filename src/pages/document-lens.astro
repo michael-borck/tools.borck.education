@@ -1,15 +1,14 @@
 ---
-title: Document Lens
-description: Batch PDF analysis for researchers — keyword frameworks, n-gram discovery, and rich visualisations on your desktop.
-template: splash
-hero:
-  title: 'Document <span class="brand-mark">Lens</span>'
-  tagline: Batch-analyse large PDF collections with pre-built research frameworks, n-gram discovery, and shareable project bundles.
+import ToolPage from '../layouts/ToolPage.astro';
 ---
-
-<div class="app-page" data-brand="document-lens">
-
-<div class="app-download" data-repo="michael-borck/document-lens-desktop"></div>
+<ToolPage
+  title="Document Lens"
+  titleHtml='Document <span class="brand-mark">Lens</span>'
+  tagline="Batch-analyse large PDF collections with pre-built research frameworks, n-gram discovery, and shareable project bundles."
+  description="Batch PDF analysis for researchers — keyword frameworks, n-gram discovery, and rich visualisations on your desktop."
+  brand="document-lens"
+  repo="michael-borck/document-lens-desktop"
+>
 
 <section class="app-shot">
   <img src="/screenshots/document-lens-1.png" alt="Document Lens main interface" />
@@ -71,10 +70,4 @@ hero:
   <img src="/screenshots/document-lens-2.png" alt="Document Lens analysis view" />
 </section>
 
-<div class="app-back">
-  <a href="/">← Back to all tools</a>
-</div>
-
-</div>
-
-<script src="/app-landing.js"></script>
+</ToolPage>

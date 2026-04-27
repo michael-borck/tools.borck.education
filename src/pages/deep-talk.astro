@@ -1,15 +1,14 @@
 ---
-title: Deep Talk
-description: AI-powered conversation analysis and insight discovery with local transcription, speaker diarisation, and privacy-first design.
-template: splash
-hero:
-  title: 'Deep <span class="brand-mark">Talk</span>'
-  tagline: Transcribe, diarise, and analyse conversations on your own machine — then let the AI surface the insights.
+import ToolPage from '../layouts/ToolPage.astro';
 ---
-
-<div class="app-page" data-brand="deep-talk">
-
-<div class="app-download" data-repo="michael-borck/deep-talk"></div>
+<ToolPage
+  title="Deep Talk"
+  titleHtml='Deep <span class="brand-mark">Talk</span>'
+  tagline="Transcribe, diarise, and analyse conversations on your own machine — then let the AI surface the insights."
+  description="AI-powered conversation analysis and insight discovery with local transcription, speaker diarisation, and privacy-first design."
+  brand="deep-talk"
+  repo="michael-borck/deep-talk"
+>
 
 <section class="app-shot">
   <img src="/screenshots/deep-talk-1.png" alt="Deep Talk main interface" />
@@ -71,10 +70,4 @@ hero:
   <img src="/screenshots/deep-talk-2.png" alt="Deep Talk analysis view" />
 </section>
 
-<div class="app-back">
-  <a href="/">← Back to all tools</a>
-</div>
-
-</div>
-
-<script src="/app-landing.js"></script>
+</ToolPage>

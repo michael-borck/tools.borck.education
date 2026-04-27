@@ -1,0 +1,319 @@
+---
+import Base from '../layouts/Base.astro';
+import { tools, books, goals } from '../data/tools';
+---
+<Base title="borck.education — AI tools for educators">
+
+<!-- Topbar -->
+<div class="topbar">
+  <a href="/" class="topbar-logo">
+    <span>borck</span><span class="dot">.</span><span class="edu">education</span>
+  </a>
+  <div class="topbar-search">
+    <input type="text" id="search" placeholder="Search…" autocomplete="off" />
+  </div>
+  <div class="topbar-filter">
+    <label for="goal-select">Goal:</label>
+    <select id="goal-select">
+      {goals.map(g => <option value={g.value}>{g.label}</option>)}
+    </select>
+  </div>
+  <div class="topbar-spacer"></div>
+  <nav class="topbar-links">
+    <a href="https://github.com/michael-borck">GitHub</a>
+    <a href="https://borck.dev/">borck.dev</a>
+    <a href="https://locolabo.org">LocoLab</a>
+  </nav>
+</div>
+
+<!-- Shell -->
+<div class="shell">
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-section">Books</div>
+    {books.map(b => (
+      <a href={b.url} class="sidebar-item" data-id={b.id} data-tags="book" target="_blank" rel="noopener">
+        {b.name}
+        <span class="sidebar-type">Book</span>
+      </a>
+    ))}
+    <div class="sidebar-divider"></div>
+    <div class="sidebar-section">Tools</div>
+    {tools.map(t => (
+      <a href={t.page || t.github || t.web || '#'}
+         class="sidebar-item"
+         data-id={t.id}
+         data-tags={t.tags.join(' ')}
+         data-tool={t.id}>
+        {t.name}
+        <span class="sidebar-type">{t.type.split('·')[0].trim()}</span>
+      </a>
+    ))}
+  </aside>
+
+  <!-- Main -->
+  <main class="main" id="main">
+
+    <!-- Grid view (default) -->
+    <div class="grid-view" id="grid-view">
+      <div class="grid-header">
+        <span class="grid-title" id="grid-label">All tools</span>
+        <span class="grid-count" id="grid-count">{tools.length} tools</span>
+      </div>
+      <div class="tool-grid" id="tool-grid">
+        {tools.map(t => (
+          <a href={t.page || t.github || t.web || '#'}
+             class="grid-card"
+             data-id={t.id}
+             data-tags={t.tags.join(' ')}
+             data-tool={t.id}>
+            <div class="grid-card-name">{t.name}</div>
+            <div class="grid-card-desc">{t.shortDesc}</div>
+            <div class="grid-card-footer">
+              <span class="type-badge">{t.type}</span>
+              <span class="tag-badge">{t.tags[0]}</span>
+            </div>
+          </a>
+        ))}
+        {books.map(b => (
+          <a href={b.url}
+             class="grid-card"
+             data-id={b.id}
+             data-tags="book"
+             target="_blank" rel="noopener">
+            <div class="grid-card-name">{b.emoji} {b.name}</div>
+            <div class="grid-card-desc">{b.shortDesc}</div>
+            <div class="grid-card-footer">
+              <span class="type-badge">Book</span>
+              <span class="tag-badge">book</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <!-- Detail view (shown on tool click) -->
+    <div class="detail-view hidden" id="detail-view">
+      <div class="detail-back-bar">
+        <button class="back-btn" id="back-btn">← All tools</button>
+      </div>
+      <div id="detail-content"></div>
+    </div>
+
+    <footer class="site-footer" id="site-footer">
+      <div class="footer-links">
+        <a href="https://github.com/michael-borck">GitHub</a>
+        <a href="https://borck.dev/">borck.dev</a>
+        <a href="https://locolabo.org">LocoLab</a>
+        <a href="https://books.borck.education">Books</a>
+      </div>
+      <p>Built by Michael Borck · Curtin University · MIT License</p>
+    </footer>
+  </main>
+</div>
+
+</Base>
+
+<script define:vars={{ toolsData: tools }}>
+const TOOLS = toolsData;
+
+const goalLabels = {
+  all: 'All tools', analyze: 'Analyze', feedback: 'Get feedback',
+  create: 'Create', practice: 'Practice & learn', grade: 'Grade & assess',
+  research: 'Research', engage: 'Engage a class', career: 'Career & writing', book: 'Books',
+};
+
+let activeFilter = 'all';
+let activeSearch = '';
+let currentTool = null;
+
+const searchEl = document.getElementById('search');
+const goalEl = document.getElementById('goal-select');
+const gridLabel = document.getElementById('grid-label');
+const gridCount = document.getElementById('grid-count');
+const detailView = document.getElementById('detail-view');
+const gridView = document.getElementById('grid-view');
+const detailContent = document.getElementById('detail-content');
+const mainEl = document.getElementById('main');
+const siteFooter = document.getElementById('site-footer');
+
+// ── Filtering ─────────────────────────────────────────────
+function applyFilters() {
+  const cards = document.querySelectorAll('#tool-grid .grid-card');
+  const sidebarItems = document.querySelectorAll('#sidebar .sidebar-item[data-id]');
+  let visible = 0;
+
+  cards.forEach(card => {
+    const tags = (card.dataset.tags || '').split(' ');
+    const name = card.querySelector('.grid-card-name')?.textContent?.toLowerCase() || '';
+    const desc = card.querySelector('.grid-card-desc')?.textContent?.toLowerCase() || '';
+    const matchTag = activeFilter === 'all' || tags.includes(activeFilter);
+    const matchSearch = !activeSearch || name.includes(activeSearch) || desc.includes(activeSearch);
+    const show = matchTag && matchSearch;
+    card.classList.toggle('hidden', !show);
+    if (show) visible++;
+  });
+
+  sidebarItems.forEach(item => {
+    const tags = (item.dataset.tags || '').split(' ');
+    const name = item.textContent?.toLowerCase() || '';
+    const matchTag = activeFilter === 'all' || tags.includes(activeFilter);
+    const matchSearch = !activeSearch || name.includes(activeSearch);
+    item.classList.toggle('hidden', !(matchTag && matchSearch));
+  });
+
+  const label = goalLabels[activeFilter] || activeFilter;
+  gridLabel.textContent = label + (activeSearch ? ` · "${activeSearch}"` : '');
+  gridCount.textContent = activeFilter === 'book' ? '' : `${visible} tools`;
+
+  let noRes = document.getElementById('no-results');
+  if (visible === 0 && activeFilter !== 'book') {
+    if (!noRes) {
+      noRes = document.createElement('div');
+      noRes.id = 'no-results';
+      noRes.className = 'no-results';
+      noRes.textContent = 'No tools match — try a different filter or search term.';
+      document.getElementById('tool-grid').appendChild(noRes);
+    }
+  } else {
+    noRes?.remove();
+  }
+}
+
+searchEl?.addEventListener('input', () => {
+  if (currentTool) closeDetail();
+  activeSearch = searchEl.value.trim().toLowerCase();
+  applyFilters();
+});
+
+goalEl?.addEventListener('change', () => {
+  if (currentTool) closeDetail();
+  activeFilter = goalEl.value;
+  applyFilters();
+});
+
+// ── Detail panel ──────────────────────────────────────────
+function openTool(id) {
+  const tool = TOOLS.find(t => t.id === id);
+  if (!tool) return;
+
+  gridView.classList.add('hidden');
+  siteFooter.classList.add('hidden');
+  detailView.classList.remove('hidden');
+
+  if (tool.page) {
+    mainEl.classList.add('has-iframe');
+    detailView.classList.add('has-iframe');
+    detailContent.innerHTML = renderIframePanel(tool);
+  } else {
+    mainEl.classList.remove('has-iframe');
+    detailView.classList.remove('has-iframe');
+    detailContent.innerHTML = renderInlinePanel(tool);
+  }
+
+  document.querySelectorAll('.sidebar-item').forEach(el => el.classList.remove('active'));
+  const sideItem = document.querySelector(`.sidebar-item[data-tool="${id}"]`);
+  if (sideItem) sideItem.classList.add('active');
+
+  currentTool = id;
+}
+
+function closeDetail() {
+  const iframe = detailContent.querySelector('iframe');
+  if (iframe) iframe.src = '';
+  detailContent.innerHTML = '';
+
+  detailView.classList.add('hidden');
+  detailView.classList.remove('has-iframe');
+  gridView.classList.remove('hidden');
+  siteFooter.classList.remove('hidden');
+  mainEl.classList.remove('has-iframe');
+  document.querySelectorAll('.sidebar-item').forEach(el => el.classList.remove('active'));
+  currentTool = null;
+}
+
+function renderIframePanel(tool) {
+  return `<div class="tool-iframe-wrapper">
+    <iframe src="${tool.page}?embed=1" class="tool-iframe" title="${tool.name}" loading="lazy"></iframe>
+  </div>`;
+}
+
+function renderInlinePanel(tool) {
+  const releasesUrl = tool.github ? tool.github + '/releases/latest' : '#';
+
+  let installHtml = '';
+  if (tool.download) {
+    const btns = [];
+    if (tool.download.win) btns.push(`<a href="${releasesUrl}" class="panel-dl-btn win" target="_blank" rel="noopener">⊞ Windows</a>`);
+    if (tool.download.mac) btns.push(`<a href="${releasesUrl}" class="panel-dl-btn" target="_blank" rel="noopener">&#xf8ff; Mac</a>`);
+    if (tool.download.linux) btns.push(`<a href="${releasesUrl}" class="panel-dl-btn" target="_blank" rel="noopener">🐧 Linux</a>`);
+    installHtml = `<div class="panel-dl-box">
+      <div class="panel-section-label">Download</div>
+      <div class="panel-dl-buttons">${btns.join('')}</div>
+    </div>`;
+  } else if (tool.pip) {
+    installHtml = `<div class="panel-pip-box">
+      <div class="panel-section-label">Install</div>
+      <code class="panel-pip-code">${tool.pip}</code>
+      ${tool.pypi ? `<div class="panel-pypi-link"><a href="${tool.pypi}" target="_blank" rel="noopener">PyPI ↗</a></div>` : ''}
+    </div>`;
+  } else if (tool.web) {
+    installHtml = `<a href="${tool.web}" class="panel-web-btn" target="_blank" rel="noopener">Open App →</a>`;
+  }
+
+  let trustHtml = '';
+  if (tool.download) {
+    trustHtml = `<div class="panel-trust">
+      <span class="trust-badge">✓ Fully local</span>
+      <span class="trust-badge">✓ Data stays on your machine</span>
+      <span class="trust-badge">✓ BYOK or Ollama</span>
+    </div>`;
+  } else if (tool.pip) {
+    trustHtml = `<div class="panel-trust">
+      <span class="trust-badge">✓ Runs locally</span>
+      <span class="trust-badge">✓ Data stays on your machine</span>
+    </div>`;
+  }
+
+  let featuresHtml = '';
+  if (tool.features && tool.features.length > 0) {
+    const cards = tool.features.map(f =>
+      `<div class="panel-feature"><strong>${f.title}</strong><p>${f.desc}</p></div>`
+    ).join('');
+    featuresHtml = `<div class="panel-features-section">
+      <div class="panel-section-label">What it does</div>
+      <div class="panel-features-grid">${cards}</div>
+    </div>`;
+  }
+
+  const tagBadges = tool.tags.map(t => `<span class="tag-badge">${t}</span>`).join('');
+
+  const githubHtml = tool.github
+    ? `<div class="panel-github-link"><a href="${tool.github}" target="_blank" rel="noopener">GitHub ↗</a></div>`
+    : '';
+
+  return `<div class="tool-inline-panel">
+    <div class="panel-name">${tool.name}</div>
+    <div class="panel-badges">
+      <span class="type-badge">${tool.type}</span>
+      ${tagBadges}
+    </div>
+    <p class="panel-desc">${tool.shortDesc}</p>
+    ${installHtml}
+    ${trustHtml}
+    ${featuresHtml}
+    ${githubHtml}
+  </div>`;
+}
+
+// ── Click delegation ──────────────────────────────────────
+document.addEventListener('click', e => {
+  const el = e.target.closest('[data-tool]');
+  if (!el) return;
+  e.preventDefault();
+  openTool(el.dataset.tool);
+});
+
+document.getElementById('back-btn')?.addEventListener('click', closeDetail);
+</script>

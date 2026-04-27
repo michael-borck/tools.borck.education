@@ -1,15 +1,14 @@
 ---
-title: Insight Lens
-description: Unit survey analysis for lecturers — import PDF reports, visualise trends, and get AI-powered insights on your desktop.
-template: splash
-hero:
-  title: 'Insight <span class="brand-mark">Lens</span>'
-  tagline: Turn unit survey PDFs into charts, comparisons, and AI-assisted insights — all running locally on your machine.
+import ToolPage from '../layouts/ToolPage.astro';
 ---
-
-<div class="app-page" data-brand="insight-lens">
-
-<div class="app-download" data-repo="michael-borck/insight-lens"></div>
+<ToolPage
+  title="Insight Lens"
+  titleHtml='Insight <span class="brand-mark">Lens</span>'
+  tagline="Turn unit survey PDFs into charts, comparisons, and AI-assisted insights — all running locally on your machine."
+  description="Unit survey analysis for lecturers — import PDF reports, visualise trends, and get AI-powered insights on your desktop."
+  brand="insight-lens"
+  repo="michael-borck/insight-lens"
+>
 
 <section class="app-shot">
   <img src="/screenshots/insight-lens-1.png" alt="Insight Lens dashboard" />
@@ -71,10 +70,4 @@ hero:
   <img src="/screenshots/insight-lens-2.png" alt="Insight Lens analysis view" />
 </section>
 
-<div class="app-back">
-  <a href="/">← Back to all tools</a>
-</div>
-
-</div>
-
-<script src="/app-landing.js"></script>
+</ToolPage>

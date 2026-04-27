@@ -1,15 +1,14 @@
 ---
-title: Career Compass
-description: Privacy-first career exploration powered by AI — your data stays on your device, your future stays in your hands.
-template: splash
-hero:
-  title: 'Career <span class="brand-mark">Compass</span>'
-  tagline: Privacy-first career exploration powered by AI — your data stays on your device, your future stays in your hands.
+import ToolPage from '../layouts/ToolPage.astro';
 ---
-
-<div class="app-page" data-brand="career-compass">
-
-<div class="app-download" data-repo="michael-borck/career-compass"></div>
+<ToolPage
+  title="Career Compass"
+  titleHtml='Career <span class="brand-mark">Compass</span>'
+  tagline="Privacy-first career exploration powered by AI — your data stays on your device, your future stays in your hands."
+  description="Privacy-first career exploration powered by AI — your data stays on your device, your future stays in your hands."
+  brand="career-compass"
+  repo="michael-borck/career-compass"
+>
 
 <section class="app-shot">
   <img src="/screenshots/career-compass-1.png" alt="Career Compass desktop interface" />
@@ -71,10 +70,4 @@ hero:
   <img src="/screenshots/career-compass-2.png" alt="Career Compass careers view" />
 </section>
 
-<div class="app-back">
-  <a href="/">← Back to all tools</a>
-</div>
-
-</div>
-
-<script src="/app-landing.js"></script>
+</ToolPage>
