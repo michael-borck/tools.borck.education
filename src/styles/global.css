@@ -758,6 +758,37 @@ html.embedded .app-shot img { max-width: 40%; height: auto; margin: 0 auto; disp
   line-height: 1.5;
 }
 
+/* Book panel */
+.book-panel-name { font-size: clamp(1.4rem, 3.5vw, 2rem); }
+.book-panel-subtitle {
+  font-size: 1rem;
+  color: var(--gray-2);
+  font-style: italic;
+  margin: -0.75rem 0 1.5rem;
+}
+.book-panel-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  margin-bottom: 1.75rem;
+}
+.book-amazon-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #ff9900;
+  color: #0a0a0b;
+  font-family: var(--font);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.7rem 1.4rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  transition: filter 0.15s;
+}
+.book-amazon-btn:hover { filter: brightness(1.1); }
+
 /* GitHub link at bottom */
 .panel-github-link {
   padding-top: 1.5rem;

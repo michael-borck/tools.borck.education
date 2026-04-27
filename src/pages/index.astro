@@ -33,9 +33,13 @@ import { tools, books, goals } from '../data/tools';
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-section">Books</div>
     {books.map(b => (
-      <a href={b.url} class="sidebar-item" data-id={b.id} data-tags="book" target="_blank" rel="noopener">
+      <a href={b.readUrl}
+         class="sidebar-item"
+         data-id={b.id}
+         data-tags="book"
+         data-book={b.id}>
         {b.name}
-        <span class="sidebar-type">Book</span>
+        <span class="sidebar-type">{b.track}</span>
       </a>
     ))}
     <div class="sidebar-divider"></div>
@@ -60,7 +64,10 @@ import { tools, books, goals } from '../data/tools';
       <div class="home-hero">
         <p class="home-eyebrow">borck.education</p>
         <h1 class="home-title">AI tools for <span class="home-accent">teaching</span> and <span class="home-accent">learning</span></h1>
-        <p class="home-sub">{tools.length} privacy-first tools for educators, researchers, and students.<br />All run locally — no student data uploaded, no accounts required.</p>
+        <p class="home-sub">
+          {tools.length} privacy-first tools and {books.length} books for educators, researchers, and students.<br />
+          All tools run locally — no data uploaded, no accounts required.
+        </p>
 
         <div class="home-goals">
           {goals.filter(g => g.value !== 'all').map(g => (
@@ -68,7 +75,7 @@ import { tools, books, goals } from '../data/tools';
           ))}
         </div>
 
-        <button class="home-browse-btn" id="browse-all-btn">Browse all {tools.length} tools →</button>
+        <button class="home-browse-btn" id="browse-all-btn">Browse everything →</button>
       </div>
 
       <div class="home-trust">
@@ -101,23 +108,23 @@ import { tools, books, goals } from '../data/tools';
           </a>
         ))}
         {books.map(b => (
-          <a href={b.url}
+          <a href={b.readUrl}
              class="grid-card"
              data-id={b.id}
              data-tags="book"
-             target="_blank" rel="noopener">
-            <div class="grid-card-name">{b.emoji} {b.name}</div>
-            <div class="grid-card-desc">{b.shortDesc}</div>
+             data-book={b.id}>
+            <div class="grid-card-name">{b.name}</div>
+            <div class="grid-card-desc">{b.description}</div>
             <div class="grid-card-footer">
               <span class="type-badge">Book</span>
-              <span class="tag-badge">book</span>
+              <span class="tag-badge">{b.track}</span>
             </div>
           </a>
         ))}
       </div>
     </div>
 
-    <!-- Detail view (shown on tool click) -->
+    <!-- Detail view (shown on tool or book click) -->
     <div class="detail-view hidden" id="detail-view">
       <div class="detail-back-bar">
         <button class="back-btn" id="back-btn">← All tools</button>
@@ -139,8 +146,9 @@ import { tools, books, goals } from '../data/tools';
 
 </Base>
 
-<script define:vars={{ toolsData: tools }}>
+<script define:vars={{ toolsData: tools, booksData: books }}>
 const TOOLS = toolsData;
+const BOOKS = booksData;
 
 const goalLabels = {
   all: 'All tools', analyze: 'Analyze', feedback: 'Get feedback',
@@ -197,15 +205,15 @@ function applyFilters() {
 
   const label = goalLabels[activeFilter] || activeFilter;
   gridLabel.textContent = label + (activeSearch ? ` · "${activeSearch}"` : '');
-  gridCount.textContent = activeFilter === 'book' ? '' : `${visible} tools`;
+  gridCount.textContent = `${visible} items`;
 
   let noRes = document.getElementById('no-results');
-  if (visible === 0 && activeFilter !== 'book') {
+  if (visible === 0) {
     if (!noRes) {
       noRes = document.createElement('div');
       noRes.id = 'no-results';
       noRes.className = 'no-results';
-      noRes.textContent = 'No tools match — try a different filter or search term.';
+      noRes.textContent = 'No results — try a different filter or search term.';
       document.getElementById('tool-grid').appendChild(noRes);
     }
   } else {
@@ -259,10 +267,23 @@ function openTool(id) {
     detailContent.innerHTML = renderInlinePanel(tool);
   }
 
-  document.querySelectorAll('.sidebar-item').forEach(el => el.classList.remove('active'));
-  const sideItem = document.querySelector(`.sidebar-item[data-tool="${id}"]`);
-  if (sideItem) sideItem.classList.add('active');
+  setActive(id);
+  currentTool = id;
+}
 
+function openBook(id) {
+  const book = BOOKS.find(b => b.id === id);
+  if (!book) return;
+
+  homeView.classList.add('hidden');
+  gridView.classList.add('hidden');
+  siteFooter.classList.add('hidden');
+  mainEl.classList.remove('has-iframe');
+  detailView.classList.remove('has-iframe');
+  detailView.classList.remove('hidden');
+  detailContent.innerHTML = renderBookPanel(book);
+
+  setActive(id);
   currentTool = id;
 }
 
@@ -280,6 +301,12 @@ function closeDetail() {
   currentTool = null;
 }
 
+function setActive(id) {
+  document.querySelectorAll('.sidebar-item').forEach(el => el.classList.remove('active'));
+  const sideItem = document.querySelector(`.sidebar-item[data-id="${id}"]`);
+  if (sideItem) sideItem.classList.add('active');
+}
+
 function renderIframePanel(tool) {
   return `<div class="tool-iframe-wrapper">
     <iframe src="${tool.page}?embed=1" class="tool-iframe" title="${tool.name}" loading="lazy"></iframe>
@@ -293,7 +320,7 @@ function renderInlinePanel(tool) {
   if (tool.download) {
     const btns = [];
     if (tool.download.win) btns.push(`<a href="${releasesUrl}" class="panel-dl-btn win" target="_blank" rel="noopener">⊞ Windows</a>`);
-    if (tool.download.mac) btns.push(`<a href="${releasesUrl}" class="panel-dl-btn" target="_blank" rel="noopener">&#xf8ff; Mac</a>`);
+    if (tool.download.mac) btns.push(`<a href="${releasesUrl}" class="panel-dl-btn" target="_blank" rel="noopener"> Mac</a>`);
     if (tool.download.linux) btns.push(`<a href="${releasesUrl}" class="panel-dl-btn" target="_blank" rel="noopener">🐧 Linux</a>`);
     installHtml = `<div class="panel-dl-box">
       <div class="panel-section-label">Download</div>
@@ -335,7 +362,6 @@ function renderInlinePanel(tool) {
   }
 
   const tagBadges = tool.tags.map(t => `<span class="tag-badge">${t}</span>`).join('');
-
   const githubHtml = tool.github
     ? `<div class="panel-github-link"><a href="${tool.github}" target="_blank" rel="noopener">GitHub ↗</a></div>`
     : '';
@@ -354,12 +380,42 @@ function renderInlinePanel(tool) {
   </div>`;
 }
 
+function renderBookPanel(book) {
+  return `<div class="tool-inline-panel">
+    <div class="panel-name book-panel-name">${book.name}</div>
+    <div class="panel-badges">
+      <span class="type-badge">Book</span>
+      <span class="tag-badge">${book.track}</span>
+    </div>
+    <p class="book-panel-subtitle">${book.subtitle}</p>
+    <p class="panel-desc">${book.description}</p>
+
+    <div class="book-panel-actions">
+      <a href="${book.readUrl}" class="panel-web-btn" target="_blank" rel="noopener">Read online →</a>
+      <a href="${book.amazonUrl}" class="book-amazon-btn" target="_blank" rel="noopener">Amazon ↗</a>
+    </div>
+
+    <div class="panel-section-label" style="margin-top:1rem">Every online edition includes</div>
+    <div class="panel-trust">
+      <span class="trust-badge">✓ Chatbot</span>
+      <span class="trust-badge">✓ PDF download</span>
+      <span class="trust-badge">✓ EPUB download</span>
+      <span class="trust-badge">✓ llms.txt</span>
+    </div>
+
+    <div class="panel-github-link">
+      <a href="https://books.borck.education" target="_blank" rel="noopener">All books at books.borck.education ↗</a>
+    </div>
+  </div>`;
+}
+
 // ── Click delegation ──────────────────────────────────────
 document.addEventListener('click', e => {
-  const el = e.target.closest('[data-tool]');
-  if (!el) return;
-  e.preventDefault();
-  openTool(el.dataset.tool);
+  const toolEl = e.target.closest('[data-tool]');
+  if (toolEl) { e.preventDefault(); openTool(toolEl.dataset.tool); return; }
+
+  const bookEl = e.target.closest('[data-book]');
+  if (bookEl) { e.preventDefault(); openBook(bookEl.dataset.book); return; }
 });
 
 document.getElementById('back-btn')?.addEventListener('click', closeDetail);
