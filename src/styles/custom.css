@@ -99,120 +99,13 @@ code {
   letter-spacing: 0.02em;
 }
 
-/* ── Carousel ── */
-.carousel-wrapper {
-  margin: 2rem 0 3rem;
-}
-
-.carousel {
-  display: flex;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  gap: 1.5rem;
-  padding: 0.5rem 0 1rem;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-
-.carousel::-webkit-scrollbar {
-  display: none;
-}
-
-.carousel-card {
-  flex: 0 0 min(85vw, 420px);
-  scroll-snap-align: center;
-  background: var(--sl-color-gray-5);
-  border: 1px solid var(--sl-color-gray-4);
-  border-radius: 12px;
-  padding: 1.5rem;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.carousel-card:hover {
-  border-color: var(--sl-color-accent);
-  box-shadow: 0 0 20px rgba(6, 182, 212, 0.1);
-}
-
-.carousel-card h3 {
-  margin-top: 0;
-  font-size: 1.25rem;
-  color: var(--sl-color-white);
-}
-
-.carousel-card p {
-  color: var(--sl-color-gray-1);
-  font-size: 0.95rem;
-  line-height: 1.6;
-}
-
-.carousel-card .tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 0.75rem;
-}
-
-.carousel-card .tag {
-  background: var(--sl-color-accent-low);
-  color: var(--sl-color-accent-high);
-  font-size: 0.75rem;
-  padding: 0.2rem 0.6rem;
-  border-radius: 9999px;
-  font-weight: 500;
-}
-
-.carousel-card .links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: 1rem;
-}
-
-.carousel-card .links a {
-  color: var(--sl-color-accent);
-  font-size: 0.85rem;
-  font-weight: 500;
-  text-decoration: none;
-}
-
-.carousel-card .links a:hover {
-  text-decoration: underline;
-}
-
-/* ── Carousel Dots ── */
-.carousel-dots {
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-top: 0.75rem;
-}
-
-.carousel-dots .dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  border: none;
-  background: var(--sl-color-gray-3);
-  cursor: pointer;
-  padding: 0;
-  transition: background 0.2s ease, transform 0.2s ease;
-}
-
-.carousel-dots .dot.active {
-  background: var(--sl-color-accent);
-  transform: scale(1.3);
-}
-
-.carousel-dots .dot:hover {
-  background: var(--sl-color-gray-1);
-}
 
 /* ── Tool Grid ── */
 .tool-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1rem;
-  margin: 2rem 0;
+  margin: 1.5rem 0;
 }
 
 @media (min-width: 640px) {
@@ -221,7 +114,7 @@ code {
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1100px) {
   .tool-grid {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -231,36 +124,49 @@ code {
   background: var(--sl-color-gray-5);
   border: 1px solid var(--sl-color-gray-4);
   border-radius: 10px;
-  padding: 1.25rem;
-  transition: border-color 0.2s ease;
+  padding: 1.25rem 1.25rem 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
 }
 
 .tool-card:hover {
-  border-color: var(--sl-color-gray-2);
+  border-color: var(--sl-color-accent);
+  box-shadow: 0 0 16px rgba(6, 182, 212, 0.08);
 }
 
 .tool-card h4 {
-  margin: 0 0 0.4rem 0;
+  margin: 0 0 0.5rem 0;
   font-size: 1rem;
-  color: var(--sl-color-white);
+  font-family: var(--sl-font-mono);
+}
+
+.tool-card h4 a {
+  color: var(--sl-color-accent);
+  text-decoration: none;
+}
+
+.tool-card h4 a:hover {
+  text-decoration: underline;
 }
 
 .tool-card p {
-  margin: 0 0 0.75rem 0;
+  margin: 0;
   color: var(--sl-color-gray-1);
   font-size: 0.85rem;
-  line-height: 1.5;
+  line-height: 1.55;
+  flex: 1;
 }
 
 .tool-card .badge {
   display: inline-block;
   background: var(--sl-color-gray-4);
-  color: var(--sl-color-gray-1);
-  font-size: 0.7rem;
+  color: var(--sl-color-gray-2);
+  font-size: 0.68rem;
   padding: 0.15rem 0.5rem;
   border-radius: 9999px;
   font-weight: 500;
-  margin-right: 0.5rem;
+  letter-spacing: 0.02em;
 }
 
 .tool-card .card-footer {
@@ -268,18 +174,20 @@ code {
   flex-wrap: wrap;
   gap: 0.5rem;
   align-items: center;
-  margin-top: 0.5rem;
+  margin-top: 0.85rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--sl-color-gray-4);
 }
 
 .tool-card .card-footer a {
-  color: var(--sl-color-accent);
-  font-size: 0.8rem;
+  color: var(--sl-color-gray-1);
+  font-size: 0.78rem;
   font-weight: 500;
   text-decoration: none;
 }
 
 .tool-card .card-footer a:hover {
-  text-decoration: underline;
+  color: var(--sl-color-accent);
 }
 
 /* ── Platform Download Icons ── */
@@ -320,10 +228,9 @@ code {
   border: 1px solid var(--sl-color-gray-4);
   color: var(--sl-color-gray-1);
   font-family: var(--sl-font-mono);
-  font-size: 0.7rem;
-  padding: 0.2rem 0.5rem;
-  border-radius: 6px;
-  margin-top: 0.5rem;
+  font-size: 0.68rem;
+  padding: 0.15rem 0.45rem;
+  border-radius: 5px;
   user-select: all;
 }
 
@@ -669,18 +576,10 @@ code {
   border-bottom-color: var(--brand);
 }
 
-/* ── Audience finder ── */
+/* ── Goal finder ── */
 .finder-wrapper {
-  margin: 2rem 0 1.5rem;
+  margin: 0 0 2rem;
   text-align: center;
-}
-
-.finder-prompt {
-  font-size: 0.9rem;
-  color: var(--sl-color-gray-1);
-  margin-bottom: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
 }
 
 .finder-buttons {
