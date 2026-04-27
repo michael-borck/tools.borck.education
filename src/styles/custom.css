@@ -668,3 +668,48 @@ code {
   color: var(--brand);
   border-bottom-color: var(--brand);
 }
+
+/* ── Audience finder ── */
+.finder-wrapper {
+  margin: 2rem 0 1.5rem;
+  text-align: center;
+}
+
+.finder-prompt {
+  font-size: 0.9rem;
+  color: var(--sl-color-gray-1);
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.finder-buttons {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.finder-btn {
+  padding: 0.45rem 1.1rem;
+  border-radius: 999px;
+  border: 1px solid var(--sl-color-gray-3);
+  background: transparent;
+  color: var(--sl-color-gray-1);
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: var(--sl-font);
+}
+
+.finder-btn:hover {
+  border-color: var(--sl-color-accent);
+  color: var(--sl-color-accent);
+}
+
+.finder-btn.active {
+  background: var(--sl-color-accent);
+  border-color: var(--sl-color-accent);
+  color: var(--sl-color-black);
+  font-weight: 600;
+}
