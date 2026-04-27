@@ -55,8 +55,32 @@ import { tools, books, goals } from '../data/tools';
   <!-- Main -->
   <main class="main" id="main">
 
-    <!-- Grid view (default) -->
-    <div class="grid-view" id="grid-view">
+    <!-- Home / landing view (default) -->
+    <div class="home-view" id="home-view">
+      <div class="home-hero">
+        <p class="home-eyebrow">borck.education</p>
+        <h1 class="home-title">AI tools for <span class="home-accent">teaching</span> and <span class="home-accent">learning</span></h1>
+        <p class="home-sub">{tools.length} privacy-first tools for educators, researchers, and students.<br />All run locally — no student data uploaded, no accounts required.</p>
+
+        <div class="home-goals">
+          {goals.filter(g => g.value !== 'all').map(g => (
+            <button class="home-goal-btn" data-filter={g.value}>{g.label}</button>
+          ))}
+        </div>
+
+        <button class="home-browse-btn" id="browse-all-btn">Browse all {tools.length} tools →</button>
+      </div>
+
+      <div class="home-trust">
+        <span class="home-trust-item">✓ Fully local</span>
+        <span class="home-trust-item">✓ BYOK or Ollama</span>
+        <span class="home-trust-item">✓ No accounts</span>
+        <span class="home-trust-item">✓ MIT licensed</span>
+      </div>
+    </div>
+
+    <!-- Grid view (shown after interaction) -->
+    <div class="grid-view hidden" id="grid-view">
       <div class="grid-header">
         <span class="grid-title" id="grid-label">All tools</span>
         <span class="grid-count" id="grid-count">{tools.length} tools</span>
@@ -101,7 +125,7 @@ import { tools, books, goals } from '../data/tools';
       <div id="detail-content"></div>
     </div>
 
-    <footer class="site-footer" id="site-footer">
+    <footer class="site-footer hidden" id="site-footer">
       <div class="footer-links">
         <a href="https://github.com/michael-borck">GitHub</a>
         <a href="https://borck.dev/">borck.dev</a>
@@ -134,9 +158,17 @@ const gridLabel = document.getElementById('grid-label');
 const gridCount = document.getElementById('grid-count');
 const detailView = document.getElementById('detail-view');
 const gridView = document.getElementById('grid-view');
+const homeView = document.getElementById('home-view');
 const detailContent = document.getElementById('detail-content');
 const mainEl = document.getElementById('main');
 const siteFooter = document.getElementById('site-footer');
+
+// ── Home → Grid transition ────────────────────────────────
+function showGrid() {
+  homeView.classList.add('hidden');
+  gridView.classList.remove('hidden');
+  siteFooter.classList.remove('hidden');
+}
 
 // ── Filtering ─────────────────────────────────────────────
 function applyFilters() {
@@ -183,14 +215,28 @@ function applyFilters() {
 
 searchEl?.addEventListener('input', () => {
   if (currentTool) closeDetail();
+  showGrid();
   activeSearch = searchEl.value.trim().toLowerCase();
   applyFilters();
 });
 
 goalEl?.addEventListener('change', () => {
   if (currentTool) closeDetail();
+  showGrid();
   activeFilter = goalEl.value;
   applyFilters();
+});
+
+document.getElementById('browse-all-btn')?.addEventListener('click', showGrid);
+
+document.querySelectorAll('.home-goal-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const filter = btn.dataset.filter;
+    goalEl.value = filter;
+    activeFilter = filter;
+    showGrid();
+    applyFilters();
+  });
 });
 
 // ── Detail panel ──────────────────────────────────────────
@@ -198,6 +244,7 @@ function openTool(id) {
   const tool = TOOLS.find(t => t.id === id);
   if (!tool) return;
 
+  homeView.classList.add('hidden');
   gridView.classList.add('hidden');
   siteFooter.classList.add('hidden');
   detailView.classList.remove('hidden');
