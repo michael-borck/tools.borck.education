@@ -121,6 +121,36 @@ html, body {
   padding: 0.7rem 1rem 0.3rem;
 }
 
+.sidebar-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7rem 1rem 0.3rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.62rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--gray-2);
+  transition: color 0.15s;
+}
+.sidebar-toggle:hover { color: var(--gray-1); }
+
+.sidebar-chevron {
+  font-style: normal;
+  font-size: 0.8rem;
+  line-height: 1;
+  transition: transform 0.2s ease;
+  display: inline-block;
+}
+.sidebar-toggle.open .sidebar-chevron { transform: rotate(90deg); }
+
+.sidebar-section-items { display: none; }
+.sidebar-section-items.open { display: block; }
+
 .sidebar-divider {
   height: 1px;
   background: var(--gray-3);

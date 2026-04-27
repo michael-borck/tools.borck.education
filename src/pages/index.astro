@@ -31,29 +31,37 @@ import { tools, books, goals } from '../data/tools';
 
   <!-- Sidebar -->
   <aside class="sidebar" id="sidebar">
-    <div class="sidebar-section">Books</div>
-    {books.map(b => (
-      <a href={b.readUrl}
-         class="sidebar-item"
-         data-id={b.id}
-         data-tags="book"
-         data-book={b.id}>
-        {b.name}
-        <span class="sidebar-type">{b.track}</span>
-      </a>
-    ))}
+    <button class="sidebar-toggle" data-section="books">
+      Books <span class="sidebar-chevron">›</span>
+    </button>
+    <div class="sidebar-section-items" id="sidebar-books">
+      {books.map(b => (
+        <a href={b.readUrl}
+           class="sidebar-item"
+           data-id={b.id}
+           data-tags="book"
+           data-book={b.id}>
+          {b.name}
+          <span class="sidebar-type">{b.track}</span>
+        </a>
+      ))}
+    </div>
     <div class="sidebar-divider"></div>
-    <div class="sidebar-section">Tools</div>
-    {tools.map(t => (
-      <a href={t.page || t.github || t.web || '#'}
-         class="sidebar-item"
-         data-id={t.id}
-         data-tags={t.tags.join(' ')}
-         data-tool={t.id}>
-        {t.name}
-        <span class="sidebar-type">{t.type.split('·')[0].trim()}</span>
-      </a>
-    ))}
+    <button class="sidebar-toggle" data-section="tools">
+      Tools <span class="sidebar-chevron">›</span>
+    </button>
+    <div class="sidebar-section-items" id="sidebar-tools">
+      {tools.map(t => (
+        <a href={t.page || t.github || t.web || '#'}
+           class="sidebar-item"
+           data-id={t.id}
+           data-tags={t.tags.join(' ')}
+           data-tool={t.id}>
+          {t.name}
+          <span class="sidebar-type">{t.type.split('·')[0].trim()}</span>
+        </a>
+      ))}
+    </div>
   </aside>
 
   <!-- Main -->
@@ -171,11 +179,30 @@ const detailContent = document.getElementById('detail-content');
 const mainEl = document.getElementById('main');
 const siteFooter = document.getElementById('site-footer');
 
+// ── Sidebar collapse ──────────────────────────────────────
+function toggleSection(section, open) {
+  const items = document.getElementById(`sidebar-${section}`);
+  const btn = document.querySelector(`.sidebar-toggle[data-section="${section}"]`);
+  if (!items || !btn) return;
+  items.classList.toggle('open', open);
+  btn.classList.toggle('open', open);
+}
+
+document.querySelectorAll('.sidebar-toggle').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const section = btn.dataset.section;
+    const isOpen = btn.classList.contains('open');
+    toggleSection(section, !isOpen);
+  });
+});
+
 // ── Home → Grid transition ────────────────────────────────
 function showGrid() {
   homeView.classList.add('hidden');
   gridView.classList.remove('hidden');
   siteFooter.classList.remove('hidden');
+  toggleSection('books', true);
+  toggleSection('tools', true);
 }
 
 // ── Filtering ─────────────────────────────────────────────
@@ -206,6 +233,18 @@ function applyFilters() {
   const label = goalLabels[activeFilter] || activeFilter;
   gridLabel.textContent = label + (activeSearch ? ` · "${activeSearch}"` : '');
   gridCount.textContent = `${visible} items`;
+
+  // Auto-expand sidebar sections based on active filter
+  if (activeFilter === 'book') {
+    toggleSection('books', true);
+    toggleSection('tools', false);
+  } else if (activeFilter !== 'all') {
+    toggleSection('books', false);
+    toggleSection('tools', true);
+  } else {
+    toggleSection('books', true);
+    toggleSection('tools', true);
+  }
 
   let noRes = document.getElementById('no-results');
   if (visible === 0) {
@@ -267,6 +306,7 @@ function openTool(id) {
     detailContent.innerHTML = renderInlinePanel(tool);
   }
 
+  toggleSection('tools', true);
   setActive(id);
   currentTool = id;
 }
@@ -283,6 +323,7 @@ function openBook(id) {
   detailView.classList.remove('hidden');
   detailContent.innerHTML = renderBookPanel(book);
 
+  toggleSection('books', true);
   setActive(id);
   currentTool = id;
 }
