@@ -407,45 +407,58 @@ function renderInlinePanel(tool) {
     ? `<div class="panel-github-link"><a href="${tool.github}" target="_blank" rel="noopener">GitHub ↗</a></div>`
     : '';
 
+  const hasRight = installHtml || trustHtml || featuresHtml;
+
+  if (!hasRight) {
+    return `<div class="tool-inline-panel panel-single">
+      <div class="panel-name">${tool.name}</div>
+      <div class="panel-badges"><span class="type-badge">${tool.type}</span>${tagBadges}</div>
+      <p class="panel-desc">${tool.shortDesc}</p>
+      ${githubHtml}
+    </div>`;
+  }
+
   return `<div class="tool-inline-panel">
-    <div class="panel-name">${tool.name}</div>
-    <div class="panel-badges">
-      <span class="type-badge">${tool.type}</span>
-      ${tagBadges}
+    <div class="panel-col-left">
+      <div class="panel-name">${tool.name}</div>
+      <div class="panel-badges"><span class="type-badge">${tool.type}</span>${tagBadges}</div>
+      <p class="panel-desc">${tool.shortDesc}</p>
+      ${githubHtml}
     </div>
-    <p class="panel-desc">${tool.shortDesc}</p>
-    ${installHtml}
-    ${trustHtml}
-    ${featuresHtml}
-    ${githubHtml}
+    <div class="panel-col-right">
+      ${installHtml}
+      ${trustHtml}
+      ${featuresHtml}
+    </div>
   </div>`;
 }
 
 function renderBookPanel(book) {
   return `<div class="tool-inline-panel">
-    <div class="panel-name book-panel-name">${book.name}</div>
-    <div class="panel-badges">
-      <span class="type-badge">Book</span>
-      <span class="tag-badge">${book.track}</span>
+    <div class="panel-col-left">
+      <div class="panel-name book-panel-name">${book.name}</div>
+      <div class="panel-badges">
+        <span class="type-badge">Book</span>
+        <span class="tag-badge">${book.track}</span>
+      </div>
+      <p class="book-panel-subtitle">${book.subtitle}</p>
+      <p class="panel-desc">${book.description}</p>
+      <div class="panel-github-link">
+        <a href="https://books.borck.education" target="_blank" rel="noopener">All books at books.borck.education ↗</a>
+      </div>
     </div>
-    <p class="book-panel-subtitle">${book.subtitle}</p>
-    <p class="panel-desc">${book.description}</p>
-
-    <div class="book-panel-actions">
-      <a href="${book.readUrl}" class="panel-web-btn" target="_blank" rel="noopener">Read online →</a>
-      <a href="${book.amazonUrl}" class="book-amazon-btn" target="_blank" rel="noopener">Amazon ↗</a>
-    </div>
-
-    <div class="panel-section-label" style="margin-top:1rem">Every online edition includes</div>
-    <div class="panel-trust">
-      <span class="trust-badge">✓ Chatbot</span>
-      <span class="trust-badge">✓ PDF download</span>
-      <span class="trust-badge">✓ EPUB download</span>
-      <span class="trust-badge">✓ llms.txt</span>
-    </div>
-
-    <div class="panel-github-link">
-      <a href="https://books.borck.education" target="_blank" rel="noopener">All books at books.borck.education ↗</a>
+    <div class="panel-col-right">
+      <div class="book-panel-actions">
+        <a href="${book.readUrl}" class="panel-web-btn" target="_blank" rel="noopener">Read online →</a>
+        <a href="${book.amazonUrl}" class="book-amazon-btn" target="_blank" rel="noopener">Amazon ↗</a>
+      </div>
+      <div class="panel-section-label" style="margin-top:1.25rem">Every online edition includes</div>
+      <div class="panel-trust">
+        <span class="trust-badge">✓ Chatbot</span>
+        <span class="trust-badge">✓ PDF download</span>
+        <span class="trust-badge">✓ EPUB download</span>
+        <span class="trust-badge">✓ llms.txt</span>
+      </div>
     </div>
   </div>`;
 }
