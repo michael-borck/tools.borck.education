@@ -114,11 +114,17 @@ Educational AI toolkit with chatbot, RAG, and agent modules. A teaching resource
 <h2 id="finder">Find the Right Tool</h2>
 
 <div class="finder-wrapper">
-  <p class="finder-prompt">Who are you?</p>
+  <p class="finder-prompt">What do you want to do?</p>
   <div class="finder-buttons">
-    <button class="finder-btn active" data-audience="all">All tools</button>
-    <button class="finder-btn" data-audience="student">I'm a student</button>
-    <button class="finder-btn" data-audience="educator">I'm an educator / researcher</button>
+    <button class="finder-btn active" data-tag="all">All</button>
+    <button class="finder-btn" data-tag="analyze">Analyze</button>
+    <button class="finder-btn" data-tag="feedback">Get feedback</button>
+    <button class="finder-btn" data-tag="create">Create</button>
+    <button class="finder-btn" data-tag="practice">Practice & learn</button>
+    <button class="finder-btn" data-tag="grade">Grade & assess</button>
+    <button class="finder-btn" data-tag="research">Research</button>
+    <button class="finder-btn" data-tag="engage">Engage a class</button>
+    <button class="finder-btn" data-tag="career">Career & writing</button>
   </div>
 </div>
 
@@ -126,7 +132,7 @@ Educational AI toolkit with chatbot, RAG, and agent modules. A teaching resource
 
 <div class="tool-grid" id="tool-grid">
 
-<div class="tool-card" data-audience="educator">
+<div class="tool-card" data-tags="create">
 
 #### curriculum-curator
 
@@ -140,7 +146,7 @@ AI-powered course content creation.
 <div class="platform-downloads" data-repo="michael-borck/curriculum-curator"></div>
 </div>
 
-<div class="tool-card" data-audience="student">
+<div class="tool-card" data-tags="practice feedback">
 
 #### talk-buddy
 
@@ -154,7 +160,7 @@ AI conversation practice with speech.
 <div class="platform-downloads" data-repo="michael-borck/talk-buddy"></div>
 </div>
 
-<div class="tool-card" data-audience="student">
+<div class="tool-card" data-tags="practice">
 
 #### study-buddy
 
@@ -169,7 +175,7 @@ Desktop AI tutoring with local inference.
 <div class="platform-downloads" data-repo="michael-borck/study-buddy"></div>
 </div>
 
-<div class="tool-card" data-audience="educator">
+<div class="tool-card" data-tags="feedback grade">
 
 #### feed-forward
 
@@ -181,7 +187,7 @@ AI formative feedback on assignments.
 </div>
 </div>
 
-<div class="tool-card" data-audience="student">
+<div class="tool-card" data-tags="practice create">
 
 #### hands-on-ai
 
@@ -194,7 +200,7 @@ Educational AI toolkit with chatbot, RAG, and agents.
 </div>
 </div>
 
-<div class="tool-card" data-audience="educator">
+<div class="tool-card" data-tags="create engage">
 
 #### case-crafter
 
@@ -206,7 +212,7 @@ AI business case study generator for classroom use.
 </div>
 </div>
 
-<div class="tool-card" data-audience="student">
+<div class="tool-card" data-tags="practice feedback">
 
 #### critique-quest
 
@@ -218,7 +224,7 @@ AI case studies designed to build critical thinking skills.
 </div>
 </div>
 
-<div class="tool-card" data-audience="educator">
+<div class="tool-card" data-tags="analyze research">
 
 #### deep-talk
 
@@ -232,7 +238,7 @@ Transcribes and analyzes conversations locally with AI insights.
 <div class="platform-downloads" data-repo="michael-borck/deep-talk"></div>
 </div>
 
-<div class="tool-card" data-audience="educator">
+<div class="tool-card" data-tags="analyze research">
 
 #### document-lens
 
@@ -246,7 +252,7 @@ Batch PDF analysis with research frameworks, n-grams, and visualisations.
 <div class="platform-downloads" data-repo="michael-borck/document-lens-desktop"></div>
 </div>
 
-<div class="tool-card" data-audience="student">
+<div class="tool-card" data-tags="career">
 
 #### career-compass
 
@@ -260,7 +266,7 @@ AI career guidance and resume analysis for students.
 <div class="platform-downloads" data-repo="michael-borck/career-compass"></div>
 </div>
 
-<div class="tool-card" data-audience="educator">
+<div class="tool-card" data-tags="create">
 
 #### slide-stream
 
@@ -273,7 +279,7 @@ Convert Markdown or PowerPoint to AI-narrated video presentations.
 </div>
 </div>
 
-<div class="tool-card" data-audience="educator">
+<div class="tool-card" data-tags="analyze">
 
 #### insight-lens
 
@@ -287,7 +293,7 @@ Survey PDF analysis with AI-generated insights and summaries.
 <div class="platform-downloads" data-repo="michael-borck/insight-lens"></div>
 </div>
 
-<div class="tool-card" data-audience="student">
+<div class="tool-card" data-tags="practice create">
 
 #### venture-lab
 
@@ -300,7 +306,7 @@ AI tools for entrepreneurship education and business planning.
 <div class="platform-downloads" data-repo="michael-borck/venture-lab"></div>
 </div>
 
-<div class="tool-card" data-audience="educator">
+<div class="tool-card" data-tags="grade">
 
 #### mark-mate
 
@@ -313,7 +319,7 @@ AI grading CLI — batch-grade with consistent rubric application.
 </div>
 </div>
 
-<div class="tool-card" data-audience="student">
+<div class="tool-card" data-tags="research career">
 
 #### cite-sight
 
@@ -326,7 +332,7 @@ AI-powered citation and reference analysis tool.
 <div class="platform-downloads" data-repo="michael-borck/cite-sight"></div>
 </div>
 
-<div class="tool-card" data-audience="educator">
+<div class="tool-card" data-tags="career practice">
 
 #### style-mirror
 
@@ -339,7 +345,7 @@ Analyzes and mirrors writing styles through conversation examples.
 </div>
 </div>
 
-<div class="tool-card" data-audience="student">
+<div class="tool-card" data-tags="analyze feedback">
 
 #### video-lens
 
@@ -352,7 +358,7 @@ Analyzes presentation videos with speech transcription, computer vision, and AI 
 <div class="platform-downloads" data-repo="michael-borck/video-lens"></div>
 </div>
 
-<div class="tool-card" data-audience="educator">
+<div class="tool-card" data-tags="analyze research">
 
 #### extracta
 
@@ -364,7 +370,7 @@ Python library for academic content analysis across multiple media types for res
 </div>
 </div>
 
-<div class="tool-card" data-audience="educator">
+<div class="tool-card" data-tags="grade feedback">
 
 #### code-lens
 
@@ -377,7 +383,7 @@ Analyzes and grades student code submissions with plagiarism detection and sandb
 <div class="platform-downloads" data-repo="michael-borck/code-lens"></div>
 </div>
 
-<div class="tool-card" data-audience="educator">
+<div class="tool-card" data-tags="engage">
 
 #### class-pulse
 
@@ -389,7 +395,7 @@ Real-time audience engagement with interactive polls, word clouds, and QR code j
 </div>
 </div>
 
-<div class="tool-card" data-audience="educator">
+<div class="tool-card" data-tags="create engage">
 
 #### character-craft
 
@@ -402,7 +408,7 @@ Creates structured chatbot personalities for LLM prompts and RAG pipelines.
 <div class="platform-downloads" data-repo="michael-borck/character-craft"></div>
 </div>
 
-<div class="tool-card" data-audience="educator">
+<div class="tool-card" data-tags="grade">
 
 #### assessment-bench
 
@@ -455,14 +461,15 @@ document.addEventListener('DOMContentLoaded', () => {
       .catch(() => {});
   }
 
-  // ── Audience filter ──
+  // ── Goal filter ──
   document.querySelectorAll('.finder-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.finder-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      const audience = btn.dataset.audience;
+      const tag = btn.dataset.tag;
       document.querySelectorAll('#tool-grid .tool-card').forEach(card => {
-        if (audience === 'all' || card.dataset.audience === audience) {
+        const tags = (card.dataset.tags || '').split(' ');
+        if (tag === 'all' || tags.includes(tag)) {
           card.style.display = '';
         } else {
           card.style.display = 'none';
