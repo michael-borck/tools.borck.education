@@ -5,9 +5,9 @@
     "linux": "https://github.com/michael-borck/curriculum-curator/releases/download/v0.5.24/Curriculum.Curator-0.5.24.AppImage"
   },
   "michael-borck/talk-buddy": {
-    "win": "https://github.com/michael-borck/talk-buddy/releases/download/v2.6.2/TalkBuddy-Setup-2.6.2.exe",
-    "mac": "https://github.com/michael-borck/talk-buddy/releases/download/v2.6.2/TalkBuddy-2.6.2-arm64.dmg",
-    "linux": "https://github.com/michael-borck/talk-buddy/releases/download/v2.6.2/TalkBuddy-2.6.2.AppImage"
+    "win": "https://github.com/michael-borck/talk-buddy/releases/download/v2.10.1/TalkBuddy-Setup-2.10.1.exe",
+    "mac": "https://github.com/michael-borck/talk-buddy/releases/download/v2.10.1/TalkBuddy-2.10.1-arm64.dmg",
+    "linux": "https://github.com/michael-borck/talk-buddy/releases/download/v2.10.1/TalkBuddy-2.10.1.AppImage"
   },
   "michael-borck/study-buddy": {
     "win": "https://github.com/michael-borck/study-buddy/releases/download/v0.4.0/Study.Buddy.Setup.0.4.0.exe",

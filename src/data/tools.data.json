@@ -1,0 +1,986 @@
+[
+  {
+    "id": "talk-buddy",
+    "name": "talk-buddy",
+    "type": "Desktop App",
+    "tags": [
+      "practice",
+      "feedback"
+    ],
+    "shortDesc": "AI conversation practice with speech recognition and real-time feedback.",
+    "page": "/talk-buddy/",
+    "github": "https://github.com/michael-borck/talk-buddy",
+    "download": {
+      "win": true,
+      "mac": true,
+      "linux": true
+    },
+    "brand": "talk-buddy"
+  },
+  {
+    "id": "study-buddy",
+    "name": "study-buddy",
+    "type": "Desktop App",
+    "tags": [
+      "practice"
+    ],
+    "shortDesc": "Desktop AI tutoring with local inference via Ollama — no data leaves your machine.",
+    "page": "/study-buddy/",
+    "github": "https://github.com/michael-borck/study-buddy",
+    "pypi": "https://pypi.org/project/study-buddy/",
+    "pip": "pip install study-buddy",
+    "download": {
+      "win": true,
+      "mac": true,
+      "linux": true
+    },
+    "brand": "study-buddy"
+  },
+  {
+    "id": "career-compass",
+    "name": "career-compass",
+    "type": "Desktop App",
+    "tags": [
+      "career"
+    ],
+    "shortDesc": "AI career guidance and resume analysis — runs locally, no data uploaded.",
+    "page": "/career-compass/",
+    "github": "https://github.com/michael-borck/career-compass",
+    "download": {
+      "win": true,
+      "mac": true,
+      "linux": true
+    },
+    "brand": "career-compass"
+  },
+  {
+    "id": "deep-talk",
+    "name": "deep-talk",
+    "type": "Desktop App",
+    "tags": [
+      "analyze",
+      "research"
+    ],
+    "shortDesc": "Transcribes and analyzes audio/video conversations locally with AI-powered insights.",
+    "page": "/deep-talk/",
+    "github": "https://github.com/michael-borck/deep-talk",
+    "download": {
+      "win": true,
+      "mac": true,
+      "linux": true
+    },
+    "brand": "deep-talk"
+  },
+  {
+    "id": "insight-lens",
+    "name": "insight-lens",
+    "type": "Desktop App",
+    "tags": [
+      "analyze"
+    ],
+    "shortDesc": "Analyzes university survey PDFs with AI insights and data visualizations.",
+    "page": "/insight-lens/",
+    "github": "https://github.com/michael-borck/insight-lens",
+    "download": {
+      "win": true,
+      "mac": true,
+      "linux": true
+    },
+    "brand": "insight-lens"
+  },
+  {
+    "id": "case-crafter",
+    "name": "case-crafter",
+    "type": "Desktop App",
+    "tags": [
+      "create",
+      "engage"
+    ],
+    "shortDesc": "Generates AI-powered business case studies for education with offline functionality.",
+    "github": "https://github.com/michael-borck/case-crafter",
+    "download": {
+      "win": true,
+      "mac": true,
+      "linux": true
+    },
+    "features": [
+      {
+        "title": "Case generation",
+        "desc": "AI writes realistic business case studies in minutes"
+      },
+      {
+        "title": "Curriculum aligned",
+        "desc": "Fits your learning outcomes, industry, and context"
+      },
+      {
+        "title": "Offline mode",
+        "desc": "Generates cases without an internet connection"
+      },
+      {
+        "title": "Export ready",
+        "desc": "PDF and web-friendly output for immediate classroom use"
+      }
+    ]
+  },
+  {
+    "id": "class-pulse",
+    "name": "class-pulse",
+    "type": "Web App",
+    "tags": [
+      "engage"
+    ],
+    "shortDesc": "Real-time audience engagement with polls, word clouds, and QR code joining.",
+    "github": "https://github.com/michael-borck/class-pulse",
+    "web": "https://classpulse.eduserver.au",
+    "features": [
+      {
+        "title": "Live polls",
+        "desc": "Instant audience response from any device in the room"
+      },
+      {
+        "title": "Word clouds",
+        "desc": "Real-time visual aggregation of student responses"
+      },
+      {
+        "title": "QR joining",
+        "desc": "Students join a session with a single QR code scan"
+      },
+      {
+        "title": "No accounts",
+        "desc": "Guests participate instantly — no sign-up required"
+      }
+    ]
+  },
+  {
+    "id": "feed-forward",
+    "name": "feed-forward",
+    "type": "Python · CLI",
+    "tags": [
+      "feedback",
+      "grade"
+    ],
+    "shortDesc": "Generates formative feedback on student assignments using multiple AI models.",
+    "github": "https://github.com/michael-borck/feed-forward",
+    "pip": "pip install feed-forward"
+  },
+  {
+    "id": "curriculum-curator",
+    "name": "curriculum-curator",
+    "type": "Desktop App",
+    "tags": [
+      "create"
+    ],
+    "shortDesc": "AI-powered course content creation aligned with your teaching philosophy.",
+    "github": "https://github.com/michael-borck/curriculum-curator",
+    "pypi": "https://pypi.org/project/curriculum-curator/",
+    "pip": "pip install curriculum-curator",
+    "download": {
+      "win": true,
+      "mac": true,
+      "linux": true
+    }
+  },
+  {
+    "id": "assessment-bench",
+    "name": "assessment-bench",
+    "type": "Python · CLI",
+    "tags": [
+      "grade"
+    ],
+    "shortDesc": "Benchmarks AI grading systems using three-tier evaluation with statistical analysis.",
+    "github": "https://github.com/michael-borck/assessment-bench"
+  },
+  {
+    "id": "cite-sight",
+    "name": "cite-sight",
+    "type": "Desktop App",
+    "tags": [
+      "research",
+      "career"
+    ],
+    "shortDesc": "AI-powered citation and reference analysis for academic writing.",
+    "github": "https://github.com/michael-borck/cite-sight",
+    "download": {
+      "win": true,
+      "mac": true,
+      "linux": true
+    }
+  },
+  {
+    "id": "style-mirror",
+    "name": "style-mirror",
+    "type": "Web App",
+    "tags": [
+      "career",
+      "practice"
+    ],
+    "shortDesc": "Analyzes and mirrors writing styles — get AI to write the way you do.",
+    "github": "https://github.com/michael-borck/style-mirror",
+    "web": "https://stylemirror.eduserver.au"
+  },
+  {
+    "id": "slide-stream",
+    "name": "slide-stream",
+    "type": "Python",
+    "tags": [
+      "create"
+    ],
+    "shortDesc": "Convert Markdown or PowerPoint slides to AI-narrated video presentations.",
+    "github": "https://github.com/michael-borck/slide-stream",
+    "pypi": "https://pypi.org/project/slide-stream/",
+    "pip": "pip install slide-stream"
+  },
+  {
+    "id": "venture-lab",
+    "name": "venture-lab",
+    "type": "Desktop App",
+    "tags": [
+      "practice",
+      "create"
+    ],
+    "shortDesc": "AI tools for entrepreneurship education and business planning exercises.",
+    "github": "https://github.com/michael-borck/venture-lab",
+    "download": {
+      "win": true,
+      "mac": true,
+      "linux": true
+    }
+  },
+  {
+    "id": "hands-on-ai",
+    "name": "hands-on-ai",
+    "type": "Jupyter",
+    "tags": [
+      "practice",
+      "create"
+    ],
+    "shortDesc": "Educational AI toolkit with chatbot, RAG, and agent modules for hands-on learning.",
+    "github": "https://github.com/michael-borck/hands-on-ai",
+    "pypi": "https://pypi.org/project/hands-on-ai/",
+    "pip": "pip install hands-on-ai"
+  },
+  {
+    "id": "critique-quest",
+    "name": "critique-quest",
+    "type": "Python",
+    "tags": [
+      "practice",
+      "feedback"
+    ],
+    "shortDesc": "AI case studies designed to build critical thinking and analytical skills.",
+    "github": "https://github.com/michael-borck/critique-quest"
+  },
+  {
+    "id": "ask-docs",
+    "name": "ask-docs",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Queries documentation using RAG and multiple LLMs via CLI, web, or TUI interfaces.",
+    "github": "https://github.com/michael-borck/ask-docs"
+  },
+  {
+    "id": "auto-analyser",
+    "name": "auto-analyser",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Routes files to the correct analyser in the analyser family",
+    "github": "https://github.com/michael-borck/auto-analyser"
+  },
+  {
+    "id": "badge-quest",
+    "name": "badge-quest",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Gamifies student reflections in LMS with badge progression and quality validation system.",
+    "github": "https://github.com/michael-borck/badge-quest"
+  },
+  {
+    "id": "books.borck.education",
+    "name": "books.borck.education",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Landing page for books by Michael Borck",
+    "github": "https://github.com/michael-borck/books.borck.education"
+  },
+  {
+    "id": "borck.dev",
+    "name": "borck.dev",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Personal website and portfolio showcasing Michael Borck's work as developer, educator, and researche",
+    "github": "https://github.com/michael-borck/borck.dev"
+  },
+  {
+    "id": "borck.education",
+    "name": "borck.education",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Educational tools portal featuring AI-powered desktop apps and web platforms for teaching and learni",
+    "github": "https://github.com/michael-borck/borck.education"
+  },
+  {
+    "id": "botstash",
+    "name": "botstash",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "CLI tool and WebUI that ingests content sources into AnythingLLM workspaces for embedded chatbots",
+    "github": "https://github.com/michael-borck/botstash"
+  },
+  {
+    "id": "bowling-scoring-mathematics",
+    "name": "bowling-scoring-mathematics",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "The Mathematics of Ten-Pin Bowling: A Formal Analysis of the Traditional Scoring System",
+    "github": "https://github.com/michael-borck/bowling-scoring-mathematics"
+  },
+  {
+    "id": "bowling-wpa-analysis",
+    "name": "bowling-wpa-analysis",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Win Probability and Leverage analysis of bowling scoring systems — companion to skill-sequence-scoring",
+    "github": "https://github.com/michael-borck/bowling-wpa-analysis"
+  },
+  {
+    "id": "bundle-analyser",
+    "name": "bundle-analyser",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Analyses collections of files in folders or zip archives, dispatching to the analyser family",
+    "github": "https://github.com/michael-borck/bundle-analyser"
+  },
+  {
+    "id": "capstone-connect",
+    "name": "capstone-connect",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Connects students with industry capstone projects through project discovery and management platform.",
+    "github": "https://github.com/michael-borck/capstone-connect"
+  },
+  {
+    "id": "character-craft-lite",
+    "name": "character-craft-lite",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Creates structured chatbot personalities for LLM prompts and RAG pipelines via desktop app.",
+    "github": "https://github.com/michael-borck/character-craft-lite"
+  },
+  {
+    "id": "cloudcore",
+    "name": "cloudcore",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Educational cybersecurity platform simulating cloud security incidents for university courses.",
+    "github": "https://github.com/michael-borck/cloudcore"
+  },
+  {
+    "id": "code-analyser",
+    "name": "code-analyser",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Analyzes and grades student code submissions with plagiarism detection and sandboxed execution.",
+    "github": "https://github.com/michael-borck/code-analyser"
+  },
+  {
+    "id": "conversation-not-delegation",
+    "name": "conversation-not-delegation",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Conversation, Not Delegation: Your expertise + AI's breadth = amplified thinking",
+    "github": "https://github.com/michael-borck/conversation-not-delegation"
+  },
+  {
+    "id": "course-dl",
+    "name": "course-dl",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Download Blackboard course exports from Curtin University's LMS",
+    "github": "https://github.com/michael-borck/course-dl"
+  },
+  {
+    "id": "docslanding",
+    "name": "docslanding",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Jekyll theme for script-generated landing pages with automatic documentation and dark mode",
+    "github": "https://github.com/michael-borck/docslanding"
+  },
+  {
+    "id": "document-analyser",
+    "name": "document-analyser",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Document text and signal extraction (PDF, DOCX, PPTX, MD) for the analyser family",
+    "github": "https://github.com/michael-borck/document-analyser"
+  },
+  {
+    "id": "document-lens",
+    "name": "document-lens",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Batch analyzes PDF documents with domain-specific keywords and visualizes research findings.",
+    "page": "/document-lens/",
+    "github": "https://github.com/michael-borck/document-lens"
+  },
+  {
+    "id": "electron-kit",
+    "name": "electron-kit",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Modular Electron template system with TypeScript, React, and AI integration for desktop apps.",
+    "github": "https://github.com/michael-borck/electron-kit"
+  },
+  {
+    "id": "ensayo",
+    "name": "ensayo",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Generator for educational company simulation sites",
+    "github": "https://github.com/michael-borck/ensayo"
+  },
+  {
+    "id": "fetch-my-weather",
+    "name": "fetch-my-weather",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Fetches weather data from wttr.in API with caching, multiple formats, and educational features.",
+    "github": "https://github.com/michael-borck/fetch-my-weather"
+  },
+  {
+    "id": "gh-toolkit",
+    "name": "gh-toolkit",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Manages GitHub repository portfolios with LLM-powered categorization and site generation.",
+    "github": "https://github.com/michael-borck/gh-toolkit"
+  },
+  {
+    "id": "git-analyser",
+    "name": "git-analyser",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Git repository analysis — commit history, authorship, and code churn signals",
+    "github": "https://github.com/michael-borck/git-analyser"
+  },
+  {
+    "id": "gpu-onboard",
+    "name": "gpu-onboard",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "NVIDIA GPU onboarding and validation tool for second-hand cards",
+    "github": "https://github.com/michael-borck/gpu-onboard"
+  },
+  {
+    "id": "horizon-foundation",
+    "name": "horizon-foundation",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "WorkReady simulation — fictional company website",
+    "github": "https://github.com/michael-borck/horizon-foundation"
+  },
+  {
+    "id": "image-analyser",
+    "name": "image-analyser",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Static image analysis (CLI + FastAPI) for the analyser family",
+    "github": "https://github.com/michael-borck/image-analyser"
+  },
+  {
+    "id": "ironvale-resources",
+    "name": "ironvale-resources",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "WorkReady simulation — fictional company website",
+    "github": "https://github.com/michael-borck/ironvale-resources"
+  },
+  {
+    "id": "keep-asking-app",
+    "name": "keep-asking-app",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Chat interface for the keep-asking conversational nudge study (FastAPI + React)",
+    "github": "https://github.com/michael-borck/keep-asking-app"
+  },
+  {
+    "id": "lane-read",
+    "name": "lane-read",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Tracks bowling lane reads and shot decisions for competitive bowlers to analyze patterns.",
+    "github": "https://github.com/michael-borck/lane-read"
+  },
+  {
+    "id": "learnco",
+    "name": "learnco",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Simulates realistic business environments for university education using web technologies.",
+    "github": "https://github.com/michael-borck/learnco"
+  },
+  {
+    "id": "lecturer-clone",
+    "name": "lecturer-clone",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Generates AI-powered video lectures using uploaded photos, scripts, and voice samples for educators.",
+    "github": "https://github.com/michael-borck/lecturer-clone"
+  },
+  {
+    "id": "llm-fragments-folder",
+    "name": "llm-fragments-folder",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Loads entire folder contents as fragments, turning any directory into a chat-ready knowledge base.",
+    "github": "https://github.com/michael-borck/llm-fragments-folder"
+  },
+  {
+    "id": "loco-agente",
+    "name": "loco-agente",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Local Agentic AI — Can Small Models Think in Loops?",
+    "github": "https://github.com/michael-borck/loco-agente"
+  },
+  {
+    "id": "loco-base",
+    "name": "loco-base",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Ubuntu 22.04 LTS automated workstation setup kit",
+    "github": "https://github.com/michael-borck/loco-base"
+  },
+  {
+    "id": "loco-bench",
+    "name": "loco-bench",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Systematic benchmarks of quantized small language models on consumer hardware",
+    "github": "https://github.com/michael-borck/loco-bench"
+  },
+  {
+    "id": "loco-bench-picker",
+    "name": "loco-bench-picker",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Interactive GPU picker for local AI inference — reads LocoBench benchmark data, plots cards across user-chosen axes, highlights the Pareto frontier",
+    "github": "https://github.com/michael-borck/loco-bench-picker"
+  },
+  {
+    "id": "loco-convoy",
+    "name": "loco-convoy",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Documentation and experiments for running AI inference workloads across multiple GPUs",
+    "github": "https://github.com/michael-borck/loco-convoy"
+  },
+  {
+    "id": "loco-ensayo",
+    "name": "loco-ensayo",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "LocoEnsayo: rehearsal platform for AI-driven teaching scenarios",
+    "github": "https://github.com/michael-borck/loco-ensayo"
+  },
+  {
+    "id": "loco-labo",
+    "name": "loco-labo",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "LocoLab: umbrella project for the Loco research lab",
+    "github": "https://github.com/michael-borck/loco-labo"
+  },
+  {
+    "id": "loco-llm",
+    "name": "loco-llm",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Builds a collaborative ecosystem of task-specific fine-tuned small language models that run on consumer hardware",
+    "github": "https://github.com/michael-borck/loco-llm"
+  },
+  {
+    "id": "loco-puente",
+    "name": "loco-puente",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Where the research meets the student -- equitable, privacy-first AI access for every student",
+    "github": "https://github.com/michael-borck/loco-puente"
+  },
+  {
+    "id": "meridian-advisory",
+    "name": "meridian-advisory",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "WorkReady simulation — fictional company website",
+    "github": "https://github.com/michael-borck/meridian-advisory"
+  },
+  {
+    "id": "metro-council-wa",
+    "name": "metro-council-wa",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "WorkReady simulation — fictional company website",
+    "github": "https://github.com/michael-borck/metro-council-wa"
+  },
+  {
+    "id": "my-resume",
+    "name": "my-resume",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Resume site for Michael Borck — vanilla HTML, CSS & JS",
+    "github": "https://github.com/michael-borck/my-resume"
+  },
+  {
+    "id": "narrative-forge",
+    "name": "narrative-forge",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Interactive Fiction Authoring Tool for Education — Electron + React + Ink",
+    "github": "https://github.com/michael-borck/narrative-forge"
+  },
+  {
+    "id": "nexuspoint-systems",
+    "name": "nexuspoint-systems",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "WorkReady simulation — fictional company website",
+    "github": "https://github.com/michael-borck/nexuspoint-systems"
+  },
+  {
+    "id": "numeron",
+    "name": "numeron",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "NUMERON — The Ancient Science of Numbers, Decoded. A numerology exploration tool by Retroverse Studios.",
+    "github": "https://github.com/michael-borck/numeron"
+  },
+  {
+    "id": "objectville",
+    "name": "objectville",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Interactive Python tutorial teaching object-oriented programming concepts through exercises and exam",
+    "github": "https://github.com/michael-borck/objectville"
+  },
+  {
+    "id": "outline-dl",
+    "name": "outline-dl",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Download unit outline PDFs from Curtin University's LITEC system",
+    "github": "https://github.com/michael-borck/outline-dl"
+  },
+  {
+    "id": "pin-down-the-score",
+    "name": "pin-down-the-score",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Compares traditional and World Bowling scoring systems to assess skill differentiation in ten-pin bo",
+    "github": "https://github.com/michael-borck/pin-down-the-score"
+  },
+  {
+    "id": "portfolio-fusion-solution",
+    "name": "portfolio-fusion-solution",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Responsive portfolio website showcasing web development projects with WCAG accessibility compliance",
+    "github": "https://github.com/michael-borck/portfolio-fusion-solution"
+  },
+  {
+    "id": "programming-paradigms",
+    "name": "programming-paradigms",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Demonstrates imperative, functional, and object-oriented programming paradigms through calculator CL",
+    "github": "https://github.com/michael-borck/programming-paradigms"
+  },
+  {
+    "id": "pypi-toolkit",
+    "name": "pypi-toolkit",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "PyPI package portfolio management and auditing toolkit",
+    "github": "https://github.com/michael-borck/pypi-toolkit"
+  },
+  {
+    "id": "pythink-ai",
+    "name": "pythink-ai",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Teaches Python programming through computational thinking with AI as a learning partner.",
+    "github": "https://github.com/michael-borck/pythink-ai"
+  },
+  {
+    "id": "records-analyser",
+    "name": "records-analyser",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Structured data profiling for the prism lens family",
+    "github": "https://github.com/michael-borck/records-analyser"
+  },
+  {
+    "id": "research.borck.dev",
+    "name": "research.borck.dev",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Research site for Michael Borck — AI, education, and HCI",
+    "github": "https://github.com/michael-borck/research.borck.dev"
+  },
+  {
+    "id": "resume.borck.dev",
+    "name": "resume.borck.dev",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Generates PDF, HTML, and presentation formats of a CV from a single YAML data source using Quarto.",
+    "github": "https://github.com/michael-borck/resume.borck.dev"
+  },
+  {
+    "id": "retailflow",
+    "name": "retailflow",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Demonstrates modern e-commerce website design patterns using HTML/CSS with responsive multi-page arc",
+    "github": "https://github.com/michael-borck/retailflow"
+  },
+  {
+    "id": "scaffolding-ai-interaction",
+    "name": "scaffolding-ai-interaction",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Closing the AI Literacy Gap - project site for co-investigator review",
+    "github": "https://github.com/michael-borck/scaffolding-ai-interaction"
+  },
+  {
+    "id": "sec-utils",
+    "name": "sec-utils",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Provides Docker Compose setup for network security toolkit with HAProxy, Wireshark, and pen-testing ",
+    "github": "https://github.com/michael-borck/sec-utils"
+  },
+  {
+    "id": "ship-python-cookiecutter",
+    "name": "ship-python-cookiecutter",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Cookiecutter template for multi-platform Python apps (FastAPI + React + Electron)",
+    "github": "https://github.com/michael-borck/ship-python-cookiecutter"
+  },
+  {
+    "id": "ship-python-example",
+    "name": "ship-python-example",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Complete working example of multi-platform Python app architecture",
+    "github": "https://github.com/michael-borck/ship-python-example"
+  },
+  {
+    "id": "ship-python-template",
+    "name": "ship-python-template",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Cookiecutter template for multi-platform Python apps (FastAPI + React + Electron)",
+    "github": "https://github.com/michael-borck/ship-python-template"
+  },
+  {
+    "id": "sim-lab",
+    "name": "sim-lab",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Provides unified Python toolkit for agent-based, discrete-event, and stochastic simulations.",
+    "github": "https://github.com/michael-borck/sim-lab"
+  },
+  {
+    "id": "simplebot",
+    "name": "simplebot",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "LLMs made simple for students and educators - A case study from Ship Python, Orchestrate AI",
+    "github": "https://github.com/michael-borck/simplebot"
+  },
+  {
+    "id": "skill-sequence-scoring",
+    "name": "skill-sequence-scoring",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Skill, Sequence, and Scoring: A Mathematical Comparison of Traditional and World Bowling Scoring Systems",
+    "github": "https://github.com/michael-borck/skill-sequence-scoring"
+  },
+  {
+    "id": "slide-vision",
+    "name": "slide-vision",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Enrich markdown slide decks with images — local folders, DALL-E 3, Pexels, or Unsplash",
+    "github": "https://github.com/michael-borck/slide-vision"
+  },
+  {
+    "id": "slinkr",
+    "name": "slinkr",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Flask web app for URL shortening, expanding, QR code generation, and link management",
+    "github": "https://github.com/michael-borck/slinkr"
+  },
+  {
+    "id": "smart-finance-assistant",
+    "name": "smart-finance-assistant",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Builds a finance chatbot with RAG and custom tools using Python, Gradio, and hands-on-ai.",
+    "github": "https://github.com/michael-borck/smart-finance-assistant"
+  },
+  {
+    "id": "southern-cross-financial",
+    "name": "southern-cross-financial",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "WorkReady simulation — fictional company website",
+    "github": "https://github.com/michael-borck/southern-cross-financial"
+  },
+  {
+    "id": "spec-to-code",
+    "name": "spec-to-code",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Provides Claude Code slash commands for structured software development: PRD creation, task generati",
+    "github": "https://github.com/michael-borck/spec-to-code"
+  },
+  {
+    "id": "speech-analyser",
+    "name": "speech-analyser",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Audio transcription and speech analysis for the prism lens family",
+    "github": "https://github.com/michael-borck/speech-analyser"
+  },
+  {
+    "id": "talking-head",
+    "name": "talking-head",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "A pluggable CLI for generating talking-head videos from a portrait + script. Thin orchestrator over ComfyUI; every model is a swappable backend.",
+    "github": "https://github.com/michael-borck/talking-head"
+  },
+  {
+    "id": "teach.borck.dev",
+    "name": "teach.borck.dev",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "teach.borck.dev — needs description",
+    "github": "https://github.com/michael-borck/teach.borck.dev"
+  },
+  {
+    "id": "technova-sim",
+    "name": "technova-sim",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Interactive cybersecurity simulator teaching students to investigate phishing attacks and data breac",
+    "github": "https://github.com/michael-borck/technova-sim"
+  },
+  {
+    "id": "the-ai-exchange",
+    "name": "the-ai-exchange",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Facilitates AI knowledge sharing and collaboration for School of Marketing and Management staff.",
+    "github": "https://github.com/michael-borck/the-ai-exchange"
+  },
+  {
+    "id": "the-ai-skills-passport",
+    "name": "the-ai-skills-passport",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Empowers Curtin University community to develop AI literacy through self-paced, modular learning exp",
+    "github": "https://github.com/michael-borck/the-ai-skills-passport"
+  },
+  {
+    "id": "the-calculator-walkthrough",
+    "name": "the-calculator-walkthrough",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Teaches Python programming best practices through building a calculator with step-by-step explanatio",
+    "github": "https://github.com/michael-borck/the-calculator-walkthrough"
+  },
+  {
+    "id": "three-experts",
+    "name": "three-experts",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Adds three AI expert personas as Claude slash commands for structured software project planning.",
+    "github": "https://github.com/michael-borck/three-experts"
+  },
+  {
+    "id": "udl-lens",
+    "name": "udl-lens",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "udl-lens — needs description",
+    "github": "https://github.com/michael-borck/udl-lens"
+  },
+  {
+    "id": "video-analyser",
+    "name": "video-analyser",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Analyzes presentation videos using speech transcription, computer vision, and AI feedback.",
+    "github": "https://github.com/michael-borck/video-analyser"
+  },
+  {
+    "id": "virtual-lanes",
+    "name": "virtual-lanes",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "Simulates ten-pin bowling games, tournaments, and leagues with CLI/TUI/web interfaces.",
+    "github": "https://github.com/michael-borck/virtual-lanes"
+  },
+  {
+    "id": "wordpress-analyser",
+    "name": "wordpress-analyser",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "WordPress theme and plugin static analysis for the analyser family",
+    "github": "https://github.com/michael-borck/wordpress-analyser"
+  },
+  {
+    "id": "workready-api",
+    "name": "workready-api",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "WorkReady Resume Assessment API — scores student resumes against job postings",
+    "github": "https://github.com/michael-borck/workready-api"
+  },
+  {
+    "id": "workready-deploy",
+    "name": "workready-deploy",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "All-in-one deployment for the WorkReady internship simulation — 9 services, 1 machine, Docker or bare metal",
+    "github": "https://github.com/michael-borck/workready-deploy"
+  },
+  {
+    "id": "workready-jobs",
+    "name": "workready-jobs",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "WorkReady Jobs — simulated job board aggregating positions from 6 fictional WA companies",
+    "github": "https://github.com/michael-borck/workready-jobs"
+  },
+  {
+    "id": "workready-portal",
+    "name": "workready-portal",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "WorkReady student portal — single-page workstation that transforms based on hire state",
+    "github": "https://github.com/michael-borck/workready-portal"
+  },
+  {
+    "id": "workready-primer",
+    "name": "workready-primer",
+    "type": "Desktop App",
+    "tags": [],
+    "shortDesc": "WorkReady — interactive fiction primer for the Curtin internship simulation. Built with Ink + inkjs.",
+    "github": "https://github.com/michael-borck/workready-primer"
+  }
+]
