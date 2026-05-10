@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>borck.education — v2 mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --accent: #06b6d4;
+    --accent-low: #042f2e;
+    --accent-high: #a5f3fc;
+    --white: #e8e6e3;
+    --gray-1: #9a9a9e;
+    --gray-2: #5e5e63;
+    --gray-3: #2a2a30;
+    --gray-4: #1e1e23;
+    --gray-5: #16161a;
+    --gray-6: #111114;
+    --black: #0a0a0b;
+    --font: 'DM Sans', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  body {
+    font-family: var(--font);
+    background: var(--black);
+    color: var(--white);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* ── Topbar ── */
+  .topbar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0 1.25rem;
+    height: 48px;
+    border-bottom: 1px solid var(--gray-3);
+    background: var(--gray-6);
+    flex-shrink: 0;
+  }
+
+  .topbar-logo {
+    font-family: var(--mono);
+    font-size: 0.95rem;
+    font-weight: 700;
+    white-space: nowrap;
+    margin-right: 0.25rem;
+  }
+  .topbar-logo .dot { color: var(--gray-2); }
+  .topbar-logo .edu { color: var(--accent); }
+
+  .topbar-search {
+    flex: 1;
+    max-width: 260px;
+    position: relative;
+  }
+
+  .topbar-search input {
+    width: 100%;
+    background: var(--gray-4);
+    border: 1px solid var(--gray-3);
+    border-radius: 6px;
+    color: var(--white);
+    font-family: var(--font);
+    font-size: 0.82rem;
+    padding: 0.4rem 0.75rem;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .topbar-search input::placeholder { color: var(--gray-2); }
+  .topbar-search input:focus { border-color: var(--accent); }
+
+  .topbar-filter {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .topbar-filter label {
+    font-size: 0.75rem;
+    color: var(--gray-2);
+    white-space: nowrap;
+  }
+
+  .topbar-filter select {
+    background: var(--gray-4);
+    border: 1px solid var(--gray-3);
+    border-radius: 6px;
+    color: var(--white);
+    font-family: var(--font);
+    font-size: 0.82rem;
+    padding: 0.4rem 0.6rem;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+  .topbar-filter select:focus { border-color: var(--accent); }
+
+  .topbar-spacer { flex: 1; }
+
+  .topbar-links { display: flex; gap: 1.25rem; }
+  .topbar-links a { font-size: 0.78rem; color: var(--gray-1); text-decoration: none; }
+  .topbar-links a:hover { color: var(--accent); }
+
+  /* ── Shell ── */
+  .shell {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  /* ── Sidebar ── */
+  .sidebar {
+    width: 220px;
+    flex-shrink: 0;
+    border-right: 1px solid var(--gray-3);
+    background: var(--gray-6);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .sidebar-scroll {
+    flex: 1;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--gray-3) transparent;
+    padding: 0.5rem 0;
+  }
+
+  .sidebar-section {
+    font-size: 0.62rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--gray-2);
+    padding: 0.7rem 1rem 0.3rem;
+  }
+
+  .sidebar-divider {
+    height: 1px;
+    background: var(--gray-3);
+    margin: 0.4rem 0;
+  }
+
+  .sidebar-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.38rem 1rem;
+    font-size: 0.8rem;
+    font-family: var(--mono);
+    color: var(--gray-1);
+    cursor: pointer;
+    transition: background 0.1s, color 0.1s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .sidebar-item:hover { background: var(--gray-4); color: var(--white); }
+  .sidebar-item.active {
+    background: var(--gray-4);
+    color: var(--white);
+    border-left: 2px solid var(--accent);
+    padding-left: calc(1rem - 2px);
+  }
+  .sidebar-item.hidden { display: none; }
+
+  .sidebar-type {
+    font-size: 0.58rem;
+    color: var(--gray-2);
+    background: var(--gray-3);
+    padding: 0.1rem 0.3rem;
+    border-radius: 3px;
+    font-family: var(--font);
+    font-weight: 500;
+    flex-shrink: 0;
+    margin-left: 0.4rem;
+  }
+
+  /* ── Main panel ── */
+  .main {
+    flex: 1;
+    overflow-y: auto;
+    background: var(--gray-5);
+    scrollbar-width: thin;
+    scrollbar-color: var(--gray-3) transparent;
+  }
+
+  /* ── Grid view ── */
+  .grid-view {
+    padding: 1.5rem;
+  }
+
+  .grid-header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .grid-title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--gray-2);
+  }
+
+  .grid-count {
+    font-size: 0.72rem;
+    color: var(--gray-2);
+  }
+
+  .tool-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.85rem;
+  }
+
+  .grid-card {
+    background: var(--gray-4);
+    border: 1px solid var(--gray-3);
+    border-radius: 10px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .grid-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 14px rgba(6,182,212,0.1);
+  }
+  .grid-card.hidden { display: none; }
+
+  .grid-card-name {
+    font-family: var(--mono);
+    font-size: 0.88rem;
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .grid-card-desc {
+    font-size: 0.78rem;
+    color: var(--gray-1);
+    line-height: 1.45;
+    flex: 1;
+  }
+
+  .grid-card-footer {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 0.3rem;
+  }
+
+  .type-badge {
+    font-size: 0.62rem;
+    background: var(--gray-3);
+    color: var(--gray-1);
+    padding: 0.12rem 0.4rem;
+    border-radius: 9999px;
+    font-weight: 500;
+  }
+
+  .tag-badge {
+    font-size: 0.6rem;
+    background: var(--accent-low);
+    color: var(--accent-high);
+    padding: 0.12rem 0.4rem;
+    border-radius: 9999px;
+  }
+
+  /* ── Detail view ── */
+  .detail-view {
+    padding: 2rem 2.5rem 4rem;
+    max-width: 680px;
+    display: none;
+  }
+
+  .detail-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.78rem;
+    color: var(--gray-1);
+    cursor: pointer;
+    margin-bottom: 1.75rem;
+    transition: color 0.15s;
+    border: none;
+    background: none;
+    font-family: var(--font);
+    padding: 0;
+  }
+  .detail-back:hover { color: var(--accent); }
+
+  .detail-name {
+    font-family: var(--mono);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 0.6rem;
+  }
+
+  .detail-badges { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1.25rem; }
+
+  .badge {
+    font-size: 0.65rem;
+    font-weight: 600;
+    padding: 0.18rem 0.55rem;
+    border-radius: 9999px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .badge-type { background: var(--gray-4); color: var(--gray-1); border: 1px solid var(--gray-3); }
+  .badge-tag { background: var(--accent-low); color: var(--accent-high); }
+  .badge-book { background: #2a1a42; color: #c4b5fd; border: 1px solid #3d2a60; }
+
+  .detail-desc {
+    font-size: 1rem;
+    color: var(--gray-1);
+    line-height: 1.65;
+    margin-bottom: 1.75rem;
+    max-width: 540px;
+  }
+
+  .detail-download {
+    background: var(--gray-4);
+    border: 1px solid var(--gray-3);
+    border-radius: 10px;
+    padding: 1.1rem 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .detail-download-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--gray-2);
+    margin-bottom: 0.75rem;
+  }
+
+  .dl-platforms { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+  .dl-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.55rem 1rem;
+    border-radius: 7px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: filter 0.15s;
+    font-family: var(--font);
+  }
+  .dl-btn-win { background: #0078d4; color: #fff; }
+  .dl-btn-mac { background: var(--white); color: var(--black); }
+  .dl-btn-linux { background: var(--gray-3); color: var(--white); border: 1px solid var(--gray-2); }
+  .dl-btn:hover { filter: brightness(1.12); }
+
+  .dl-pip {
+    background: var(--gray-6);
+    border: 1px solid var(--gray-3);
+    border-radius: 7px;
+    padding: 0.6rem 0.9rem;
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    color: var(--accent-high);
+    cursor: text;
+    user-select: all;
+    display: block;
+    width: 100%;
+  }
+
+  .dl-web {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.55rem 1rem;
+    border-radius: 7px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    background: var(--accent);
+    color: var(--black);
+    cursor: pointer;
+    border: none;
+    transition: filter 0.15s;
+    font-family: var(--font);
+  }
+  .dl-web:hover { filter: brightness(1.1); }
+
+  .privacy-strip { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .privacy-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.74rem;
+    color: #4ade80;
+    background: #0f2a1a;
+    border: 1px solid #1a4a2a;
+    padding: 0.25rem 0.65rem;
+    border-radius: 9999px;
+  }
+
+  .detail-section-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--gray-2);
+    margin-bottom: 0.65rem;
+  }
+
+  .detail-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.55rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .detail-feature {
+    background: var(--gray-4);
+    border: 1px solid var(--gray-3);
+    border-radius: 8px;
+    padding: 0.8rem 0.9rem;
+    font-size: 0.8rem;
+    color: var(--gray-1);
+    line-height: 1.4;
+  }
+  .detail-feature strong {
+    display: block;
+    color: var(--white);
+    margin-bottom: 0.15rem;
+    font-size: 0.82rem;
+  }
+
+  .detail-links {
+    display: flex;
+    gap: 1rem;
+    border-top: 1px solid var(--gray-3);
+    padding-top: 1.1rem;
+  }
+  .detail-links a { font-size: 0.8rem; color: var(--gray-1); text-decoration: none; }
+  .detail-links a:hover { color: var(--accent); }
+
+  /* Book cover */
+  .book-header { display: flex; gap: 1.5rem; margin-bottom: 1.5rem; }
+  .book-cover {
+    width: 110px;
+    height: 148px;
+    border-radius: 4px;
+    background: linear-gradient(135deg, var(--accent-low), var(--gray-4));
+    border: 1px solid var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    flex-shrink: 0;
+    box-shadow: 4px 6px 20px rgba(0,0,0,0.5);
+  }
+
+  .empty-state {
+    padding: 4rem 2rem;
+    text-align: center;
+    color: var(--gray-2);
+    font-size: 0.9rem;
+  }
+
+  .no-results {
+    padding: 3rem 0;
+    text-align: center;
+    color: var(--gray-2);
+    font-size: 0.85rem;
+    grid-column: 1 / -1;
+  }
+
+  .mockup-note {
+    position: fixed;
+    bottom: 0.75rem;
+    right: 0.75rem;
+    background: var(--gray-3);
+    border: 1px solid var(--gray-2);
+    border-radius: 6px;
+    padding: 0.4rem 0.75rem;
+    font-size: 0.68rem;
+    color: var(--gray-1);
+    z-index: 100;
+  }
+</style>
+</head>
+<body>
+
+<!-- Topbar: logo | search | goal filter | spacer | links -->
+<div class="topbar">
+  <div class="topbar-logo">
+    <span>borck</span><span class="dot">.</span><span class="edu">education</span>
+  </div>
+
+  <div class="topbar-search">
+    <input type="text" id="search" placeholder="Search…" oninput="onSearch()">
+  </div>
+
+  <div class="topbar-filter">
+    <label for="goal-select">Goal:</label>
+    <select id="goal-select" onchange="onFilter()">
+      <option value="all">All tools</option>
+      <option value="analyze">Analyze</option>
+      <option value="feedback">Get feedback</option>
+      <option value="create">Create</option>
+      <option value="practice">Practice &amp; learn</option>
+      <option value="grade">Grade &amp; assess</option>
+      <option value="research">Research</option>
+      <option value="engage">Engage a class</option>
+      <option value="career">Career &amp; writing</option>
+      <option value="book">Books</option>
+    </select>
+  </div>
+
+  <div class="topbar-spacer"></div>
+
+  <div class="topbar-links">
+    <a href="#">GitHub</a>
+    <a href="#">borck.dev</a>
+    <a href="#">LocoLab</a>
+  </div>
+</div>
+
+<!-- Shell -->
+<div class="shell">
+
+  <!-- Sidebar: flat list, no filters -->
+  <div class="sidebar">
+    <div class="sidebar-scroll" id="sidebar-scroll">
+      <div class="sidebar-section">Books</div>
+      <div class="sidebar-item" data-id="book-hands-on-ai" onclick="showDetail('book-hands-on-ai', this)">
+        Hands-On AI <span class="sidebar-type">Book</span>
+      </div>
+      <div class="sidebar-item" data-id="book-python-edu" onclick="showDetail('book-python-edu', this)">
+        Python for Educators <span class="sidebar-type">Book</span>
+      </div>
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-section">Tools</div>
+      <!-- populated by JS -->
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="main" id="main">
+
+    <!-- Grid view -->
+    <div class="grid-view" id="grid-view">
+      <div class="grid-header">
+        <span class="grid-title" id="grid-label">All tools</span>
+        <span class="grid-count" id="grid-count"></span>
+      </div>
+      <div class="tool-grid" id="tool-grid">
+        <!-- populated by JS -->
+      </div>
+    </div>
+
+    <!-- Detail view -->
+    <div class="detail-view" id="detail-view">
+      <button class="detail-back" onclick="showGrid()">← Back to all tools</button>
+      <div id="detail-content"></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="mockup-note">v2 layout mockup — search &amp; filter in topbar, sidebar = quick-nav, main = grid → detail</div>
+
+<script>
+const tools = [
+  { id:'talk-buddy',       name:'talk-buddy',       type:'Desktop App',    tags:['practice','feedback'],
+    desc:'AI conversation practice with speech recognition and real-time feedback. Rehearse interviews, presentations, and professional conversations.',
+    download:{win:true,mac:true,linux:true},
+    features:[{t:'Speech recognition',b:'Transcribes in real time, no cloud'},{t:'AI feedback',b:'Pronunciation, pacing, clarity scoring'},{t:'Scenario library',b:'Interview, presentation, language modes'},{t:'Export transcripts',b:'Share logs for reflection or marking'}],
+    privacy:['Fully local','No account required','Ollama compatible'],
+    github:'https://github.com/michael-borck/talk-buddy', page:'/talk-buddy/' },
+
+  { id:'study-buddy',      name:'study-buddy',      type:'Desktop App',    tags:['practice'],
+    desc:'Desktop AI tutoring with local inference via Ollama. A private, always-available tutor — no data leaves the device.',
+    download:{win:true,mac:true,linux:true}, pip:'pip install study-buddy',
+    features:[{t:'Local inference',b:'Runs via Ollama, no internet after setup'},{t:'Any subject',b:'Student chooses the topic'},{t:'Conversation history',b:'Sessions saved locally'},{t:'Custom models',b:'Swap Ollama models freely'}],
+    privacy:['100% offline capable','No account required','BYOK or Ollama'],
+    github:'https://github.com/michael-borck/study-buddy', page:'/study-buddy/' },
+
+  { id:'career-compass',   name:'career-compass',   type:'Desktop App',    tags:['career'],
+    desc:'AI career guidance and resume analysis — runs locally. Tailored advice, resume scoring against job descriptions, and cover letter drafting.',
+    download:{win:true,mac:true,linux:true},
+    features:[{t:'Resume analysis',b:'Scores against JD with feedback'},{t:'Career mapping',b:'Paths based on skills and interests'},{t:'Cover letter',b:'Draft and refine with AI'},{t:'Interview prep',b:'Role-specific practice questions'}],
+    privacy:['Runs locally','Resume never uploaded','BYOK or Ollama'],
+    github:'https://github.com/michael-borck/career-compass', page:'/career-compass/' },
+
+  { id:'deep-talk',        name:'deep-talk',        type:'Desktop App',    tags:['analyze','research'],
+    desc:'Transcribes and analyzes audio/video conversations locally. AI-powered insights, sentiment, and thematic summaries from interviews, discussions, or lectures.',
+    download:{win:true,mac:true,linux:true},
+    features:[{t:'Local transcription',b:'Whisper-based, any language'},{t:'AI insights',b:'Themes, sentiment, key moments'},{t:'Batch processing',b:'Multiple recordings in one run'},{t:'Export reports',b:'PDF and CSV output'}],
+    privacy:['Fully local','Audio never leaves device','Ollama compatible'],
+    github:'https://github.com/michael-borck/deep-talk', page:'/deep-talk/' },
+
+  { id:'document-lens',    name:'document-lens',    type:'Desktop App',    tags:['analyze','research'],
+    desc:'Batch PDF analysis with domain-specific keywords, n-grams, and research visualisations. Built for literature reviews, policy analysis, and thematic research.',
+    download:{win:true,mac:true,linux:true},
+    features:[{t:'Batch PDF analysis',b:'Hundreds of documents at once'},{t:'Keyword frameworks',b:'Domain-specific term sets'},{t:'Visualizations',b:'Word clouds, frequency, co-occurrence'},{t:'Export data',b:'CSV and charts for reports'}],
+    privacy:['Fully local','PDFs never uploaded','No API required'],
+    github:'https://github.com/michael-borck/document-lens-desktop', page:'/document-lens/' },
+
+  { id:'insight-lens',     name:'insight-lens',     type:'Desktop App',    tags:['analyze'],
+    desc:'Analyzes university survey PDFs with AI insights and data visualizations. Extracts themes, sentiment, and patterns from unit evaluation data.',
+    download:{win:true,mac:true,linux:true},
+    features:[{t:'Survey PDF parsing',b:'Standard university eval formats'},{t:'Sentiment analysis',b:'Tone breakdown across responses'},{t:'Theme extraction',b:'Clusters common feedback'},{t:'Year-on-year compare',b:'Track changes across semesters'}],
+    privacy:['Fully local','Student data stays on device','BYOK'],
+    github:'https://github.com/michael-borck/insight-lens', page:'/insight-lens/' },
+
+  { id:'feed-forward',     name:'feed-forward',     type:'Python · CLI',   tags:['feedback','grade'],
+    desc:'Generates formative feedback on student assignments using multiple AI models. Batch processing, rubric alignment, per-student reports.',
+    pip:'pip install feed-forward',
+    features:[{t:'Multi-model',b:'Run and compare several models'},{t:'Rubric alignment',b:'Feedback stays on-criteria'},{t:'Batch mode',b:'Full cohort in one command'},{t:'Report generation',b:'Per-student markdown or PDF'}],
+    privacy:['BYOK or local Ollama','No student data in cloud logs','Audit-friendly'],
+    github:'https://github.com/michael-borck/feed-forward' },
+
+  { id:'curriculum-curator',name:'curriculum-curator',type:'Desktop App',  tags:['create'],
+    desc:'AI-powered course content creation aligned with your teaching philosophy. Generates structured learning materials, assessments, and rubrics from curriculum frameworks.',
+    download:{win:true,mac:true,linux:true}, pip:'pip install curriculum-curator',
+    features:[{t:'Framework-aligned',b:'Input your learning outcomes'},{t:'Assessment generation',b:'Quizzes, rubrics, case studies'},{t:'Teaching philosophy',b:'Tone and approach personalisation'},{t:'Export ready',b:'Word, PDF, or Markdown output'}],
+    privacy:['Runs locally','BYOK or Ollama','No telemetry'],
+    github:'https://github.com/michael-borck/curriculum-curator' },
+
+  { id:'case-crafter',     name:'case-crafter',     type:'Desktop App',    tags:['create','engage'],
+    desc:'Generates AI-powered business case studies for education with offline functionality. Cross-platform, customisable to discipline and difficulty.',
+    download:{win:true,mac:true,linux:true},
+    features:[{t:'Discipline templates',b:'Finance, marketing, management, IS'},{t:'Difficulty levels',b:'Undergrad to postgrad scenarios'},{t:'Discussion questions',b:'Auto-generated with teaching notes'},{t:'Offline capable',b:'Works without internet connection'}],
+    privacy:['Fully local','No account needed','MIT licensed'],
+    github:'https://github.com/michael-borck/case-crafter' },
+
+  { id:'character-craft',  name:'character-craft',  type:'Desktop App',    tags:['create','engage'],
+    desc:'Creates structured chatbot personalities for LLM prompts and RAG pipelines. Educators design AI characters with defined knowledge and personality — exportable as system prompts.',
+    download:{win:true,mac:true,linux:true},
+    features:[{t:'Personality builder',b:'Backstory, tone, constraints'},{t:'Knowledge boundaries',b:'Define what the character knows'},{t:'Prompt export',b:'Works with Ollama, OpenAI, Claude'},{t:'RAG integration',b:'Attach document collections'}],
+    privacy:['Runs locally','Export to any provider','No telemetry'],
+    github:'https://github.com/michael-borck/character-craft' },
+
+  { id:'class-pulse',      name:'class-pulse',      type:'Web App',        tags:['engage'],
+    desc:'Real-time audience engagement with polls, word clouds, and QR code joining. Students join on any device with no install or account required.',
+    web:'https://classpulse.eduserver.au',
+    features:[{t:'QR join',b:'Any device, no install required'},{t:'Live polls',b:'Multiple choice and open text'},{t:'Word clouds',b:'Real-time visual responses'},{t:'Self-hosted',b:'No SaaS dependency'}],
+    privacy:['Self-hosted','No third-party analytics','Data on your server'],
+    github:'https://github.com/michael-borck/class-pulse' },
+
+  { id:'video-lens',       name:'video-lens',       type:'Desktop App',    tags:['analyze','feedback'],
+    desc:'Analyzes presentation videos with speech transcription, computer vision, and AI feedback. For students improving delivery or educators reviewing recordings.',
+    download:{win:true,mac:true,linux:true},
+    features:[{t:'Speech analysis',b:'Transcription plus delivery feedback'},{t:'Computer vision',b:'Body language and slide timing'},{t:'AI coaching',b:'Specific improvement suggestions'},{t:'Batch mode',b:'Process a cohort of recordings'}],
+    privacy:['Runs locally','Video never uploaded','Ollama compatible'],
+    github:'https://github.com/michael-borck/video-lens' },
+
+  { id:'code-lens',        name:'code-lens',        type:'Desktop App',    tags:['grade','feedback'],
+    desc:'Analyzes and grades student code with plagiarism detection and sandboxed execution. Runs code safely, scores against criteria, flags similarity across submissions.',
+    download:{win:true,mac:true,linux:true},
+    features:[{t:'Sandboxed execution',b:'Student code runs in isolation'},{t:'Plagiarism detection',b:'Cross-submission similarity scoring'},{t:'AI code review',b:'Style, correctness, logic feedback'},{t:'Batch grading',b:'Full cohort in one pass'}],
+    privacy:['Fully local','Code never uploaded','BYOK or Ollama'],
+    github:'https://github.com/michael-borck/code-lens' },
+
+  { id:'mark-mate',        name:'mark-mate',        type:'Python · CLI',   tags:['grade'],
+    desc:'Batch-grade assignments with consistent rubric application via AI. Reduces marking time and variance across large cohorts.',
+    pip:'pip install mark-mate',
+    features:[{t:'Rubric input',b:'Plain text or structured format'},{t:'Batch processing',b:'Entire cohort in one command'},{t:'Consistency scoring',b:'Reduce inter-rater variance'},{t:'Audit trail',b:'Per-submission reasoning logged'}],
+    privacy:['BYOK or Ollama','No student data stored externally','Open source'],
+    github:'https://github.com/michael-borck/mark-mate' },
+
+  { id:'assessment-bench', name:'assessment-bench', type:'Python · CLI',   tags:['grade'],
+    desc:'Benchmarks AI grading systems using three-tier evaluation with statistical analysis. Compare models and prompts for marking consistency and accuracy.',
+    features:[{t:'Three-tier eval',b:'Accuracy, consistency, and alignment'},{t:'Statistical analysis',b:'Inter-rater reliability metrics'},{t:'Model comparison',b:'Run multiple LLMs side by side'},{t:'Report output',b:'CSV and chart exports'}],
+    privacy:['Runs locally','BYOK','MIT licensed'],
+    github:'https://github.com/michael-borck/assessment-bench' },
+
+  { id:'cite-sight',       name:'cite-sight',       type:'Desktop App',    tags:['research','career'],
+    desc:'AI-powered citation and reference analysis for academic writing. Checks citation correctness, completeness, and format consistency.',
+    download:{win:true,mac:true,linux:true},
+    features:[{t:'Format checking',b:'APA, IEEE, Harvard, and more'},{t:'Completeness scan',b:'Missing fields flagged automatically'},{t:'AI suggestions',b:'Rewrite and correction proposals'},{t:'Batch mode',b:'Scan a full reference list at once'}],
+    privacy:['Runs locally','No document uploaded','BYOK'],
+    github:'https://github.com/michael-borck/cite-sight' },
+
+  { id:'style-mirror',     name:'style-mirror',     type:'Web App',        tags:['career','practice'],
+    desc:'Analyzes and mirrors writing styles through conversation examples — get AI to write the way you do. Upload samples, get a style prompt you can use anywhere.',
+    web:'https://stylemirror.eduserver.au',
+    features:[{t:'Style extraction',b:'Learns from your own writing samples'},{t:'Prompt generation',b:'Exportable system prompt for any LLM'},{t:'Comparison mode',b:'Before/after style diff'},{t:'Privacy option',b:'Self-host for sensitive documents'}],
+    privacy:['Optional self-host','BYOK for API calls','No retention by default'],
+    github:'https://github.com/michael-borck/style-mirror' },
+
+  { id:'slide-stream',     name:'slide-stream',     type:'Python',         tags:['create'],
+    desc:'Convert Markdown or PowerPoint slides to AI-narrated video presentations. Generate a voiceover script and render video without recording.',
+    pip:'pip install slide-stream',
+    features:[{t:'Markdown input',b:'Write slides as plain text'},{t:'PPTX support',b:'Convert existing presentations'},{t:'AI narration',b:'Script generated from slide content'},{t:'Video output',b:'MP4 with timing and transitions'}],
+    privacy:['BYOK or local TTS','No slides uploaded to cloud','MIT licensed'],
+    github:'https://github.com/michael-borck/slide-stream' },
+
+  { id:'hands-on-ai',      name:'hands-on-ai',      type:'Jupyter',        tags:['practice','create'],
+    desc:'Educational AI toolkit with chatbot, RAG, and agent modules. Lets students build and experiment with AI systems hands-on — understanding how they work from the inside.',
+    pip:'pip install hands-on-ai',
+    features:[{t:'Chatbot module',b:'Build a basic LLM chat interface'},{t:'RAG pipeline',b:'Add document retrieval to a model'},{t:'Agent module',b:'Simple tool-using agents'},{t:'Teaching notes',b:'Instructor materials for each module'}],
+    privacy:['BYOK or Ollama','No student data centralized','MIT licensed'],
+    github:'https://github.com/michael-borck/hands-on-ai' },
+
+  { id:'critique-quest',   name:'critique-quest',   type:'Python',         tags:['practice','feedback'],
+    desc:'AI case studies designed to build critical thinking and analytical skills. Students work through scenarios with guided AI feedback on their reasoning.',
+    features:[{t:'Scenario library',b:'Business, ethics, IS, and more'},{t:'Guided reasoning',b:'AI questions rather than answers'},{t:'Instructor mode',b:'Create your own scenarios'},{t:'Progress tracking',b:'Local session history'}],
+    privacy:['Runs locally','BYOK or Ollama','No account needed'],
+    github:'https://github.com/michael-borck/critique-quest' },
+
+  { id:'venture-lab',      name:'venture-lab',      type:'Desktop App',    tags:['practice','create'],
+    desc:'AI tools for entrepreneurship education and business planning. Business model canvas, lean startup exercises, and pitch scaffolding.',
+    download:{win:true,mac:true,linux:true},
+    features:[{t:'Business model canvas',b:'AI-assisted canvas completion'},{t:'Lean startup',b:'Hypothesis and experiment design'},{t:'Pitch scaffolding',b:'Structure and feedback on pitches'},{t:'Offline capable',b:'Works without internet'}],
+    privacy:['Runs locally','BYOK or Ollama','No telemetry'],
+    github:'https://github.com/michael-borck/venture-lab' },
+
+  { id:'extracta',         name:'extracta',         type:'Python · Lib',   tags:['analyze','research'],
+    desc:'Python library for academic content analysis across multiple media types — text, PDF, audio, and video. For research pipelines and integrity checking.',
+    pip:'pip install extracta',
+    features:[{t:'Multi-media',b:'Text, PDF, audio, video input'},{t:'Academic NLP',b:'Citation, keyword, and entity extraction'},{t:'Integrity checks',b:'Similarity and pattern detection'},{t:'Pipeline-ready',b:'Clean API for research workflows'}],
+    privacy:['Runs locally','No content sent externally','MIT licensed'],
+    github:'https://github.com/michael-borck/extracta' },
+];
+
+const books = [
+  { id:'book-hands-on-ai', emoji:'🤖', name:'Hands-On AI',
+    subtitle:'A practical guide for educators and students',
+    desc:'A hands-on introduction to building AI applications in Python. Covers chatbots, retrieval-augmented generation, and autonomous agents — written for educators and students who want to go beyond prompting.',
+    url:'https://books.borck.education',
+    features:[{t:'Jupyter-based',b:'Every chapter is a runnable notebook'},{t:'Privacy-first',b:'Uses local models throughout'},{t:'Classroom-ready',b:'Exercises and assessments included'},{t:'Open access',b:'Free to read online'}] },
+  { id:'book-python-edu', emoji:'🐍', name:'Python for Educators',
+    subtitle:'Automate the boring parts of teaching',
+    desc:'A practical guide to using Python for educator workflows — batch marking, data analysis, report generation, and building simple tools. No programming background required.',
+    url:'https://books.borck.education',
+    features:[{t:'Zero to useful fast',b:'Designed for non-programmers'},{t:'Real educator tasks',b:'Mark, report, and automate workflows'},{t:'Open source',b:'All code on GitHub, MIT licensed'},{t:'Companion tools',b:'Links to borck.education tools throughout'}] },
+];
+
+// ── State ──
+let activeFilter = 'all';
+let activeSearch = '';
+let activeDetailId = null;
+
+// ── Sidebar tool list ──
+function buildSidebar() {
+  const scroll = document.getElementById('sidebar-scroll');
+  tools.forEach(t => {
+    const el = document.createElement('div');
+    el.className = 'sidebar-item';
+    el.dataset.id = t.id;
+    el.dataset.tags = t.tags.join(' ');
+    el.innerHTML = t.name + '<span class="sidebar-type">' + t.type.split('·')[0].trim() + '</span>';
+    el.onclick = () => showDetail(t.id, el);
+    scroll.appendChild(el);
+  });
+}
+
+// ── Grid ──
+function buildGrid() {
+  const grid = document.getElementById('tool-grid');
+  tools.forEach(t => {
+    const card = document.createElement('div');
+    card.className = 'grid-card';
+    card.dataset.id = t.id;
+    card.dataset.tags = t.tags.join(' ');
+    const tagBadge = '<span class="tag-badge">' + t.tags[0] + '</span>';
+    card.innerHTML = `
+      <div class="grid-card-name">${t.name}</div>
+      <div class="grid-card-desc">${t.desc.split('.')[0]}.</div>
+      <div class="grid-card-footer">
+        <span class="type-badge">${t.type}</span>
+        ${tagBadge}
+      </div>`;
+    card.onclick = () => showDetail(t.id, document.querySelector('.sidebar-item[data-id="'+t.id+'"]'));
+    grid.appendChild(card);
+  });
+}
+
+// ── Filter & search logic ──
+function applyFilters() {
+  const filter = activeFilter;
+  const search = activeSearch;
+
+  let visibleCount = 0;
+
+  // Grid cards
+  document.querySelectorAll('#tool-grid .grid-card').forEach(card => {
+    const tags = (card.dataset.tags || '').split(' ');
+    const name = card.querySelector('.grid-card-name').textContent.toLowerCase();
+    const desc = card.querySelector('.grid-card-desc').textContent.toLowerCase();
+    const matchTag = filter === 'all' || filter === 'book' ? filter !== 'book' : tags.includes(filter);
+    const matchSearch = !search || name.includes(search) || desc.includes(search);
+    const show = matchTag && matchSearch;
+    card.classList.toggle('hidden', !show);
+    if (show) visibleCount++;
+  });
+
+  // Books in grid — not shown (they're separate), but sidebar items:
+  document.querySelectorAll('.sidebar-item').forEach(item => {
+    const id = item.dataset.id;
+    const tool = tools.find(t => t.id === id);
+    if (!tool) return;
+    const tags = (item.dataset.tags || '').split(' ');
+    const matchTag = filter === 'all' || filter === 'book' ? filter !== 'book' : tags.includes(filter);
+    const matchSearch = !search || tool.name.includes(search) || tool.desc.toLowerCase().includes(search);
+    item.classList.toggle('hidden', !(matchTag && matchSearch));
+  });
+
+  // No results message
+  let noResults = document.getElementById('no-results');
+  if (visibleCount === 0 && filter !== 'book') {
+    if (!noResults) {
+      noResults = document.createElement('div');
+      noResults.id = 'no-results';
+      noResults.className = 'no-results';
+      noResults.textContent = 'No tools match — try a different filter or search term.';
+      document.getElementById('tool-grid').appendChild(noResults);
+    }
+  } else {
+    if (noResults) noResults.remove();
+  }
+
+  // Grid label
+  const label = filter === 'book' ? 'Books' :
+    filter === 'all' ? 'All tools' :
+    document.querySelector('#goal-select option[value="'+filter+'"]')?.textContent || filter;
+
+  document.getElementById('grid-label').textContent = label + (search ? ' · "' + search + '"' : '');
+  document.getElementById('grid-count').textContent = filter === 'book' ? '' : visibleCount + ' tools';
+
+  // Show/hide book grid items vs book sidebar section
+  const showBooks = filter === 'all' || filter === 'book';
+  document.querySelectorAll('.sidebar-item[data-id^="book-"]').forEach(el => {
+    el.classList.toggle('hidden', !showBooks && filter !== 'book');
+  });
+}
+
+function onSearch() {
+  activeSearch = document.getElementById('search').value.trim().toLowerCase();
+  if (activeDetailId) showGrid();
+  applyFilters();
+}
+
+function onFilter() {
+  activeFilter = document.getElementById('goal-select').value;
+  if (activeDetailId) showGrid();
+  applyFilters();
+}
+
+// ── Views ──
+function showGrid() {
+  activeDetailId = null;
+  document.getElementById('grid-view').style.display = '';
+  document.getElementById('detail-view').style.display = 'none';
+  document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
+  document.getElementById('detail-back').textContent = '← Back to ' + (document.getElementById('grid-label').textContent);
+}
+
+function showDetail(id, sidebarEl) {
+  activeDetailId = id;
+  document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
+  if (sidebarEl) sidebarEl.classList.add('active');
+
+  const tool = tools.find(t => t.id === id);
+  const book = books.find(b => b.id === id);
+  const content = document.getElementById('detail-content');
+  const backLabel = document.getElementById('grid-label').textContent;
+
+  document.getElementById('detail-back').textContent = '← ' + (backLabel || 'All tools');
+  document.getElementById('grid-view').style.display = 'none';
+  document.getElementById('detail-view').style.display = '';
+
+  if (book) { content.innerHTML = renderBook(book); return; }
+  if (tool) { content.innerHTML = renderTool(tool); return; }
+}
+
+function renderTool(t) {
+  const tagBadges = t.tags.map(tag => '<span class="badge badge-tag">' + tag + '</span>').join('');
+
+  let dl = '';
+  if (t.download) {
+    const btns = [
+      t.download.win ? '<button class="dl-btn dl-btn-win">⊞ Windows</button>' : '',
+      t.download.mac ? '<button class="dl-btn dl-btn-mac"> Mac</button>' : '',
+      t.download.linux ? '<button class="dl-btn dl-btn-linux">🐧 Linux</button>' : '',
+    ].join('');
+    dl = `<div class="detail-download"><div class="detail-download-label">Download</div><div class="dl-platforms">${btns}</div></div>`;
+    if (t.pip) dl += `<div class="detail-download" style="margin-top:0.5rem"><div class="detail-download-label">Or install via pip</div><div class="dl-pip">${t.pip}</div></div>`;
+  } else if (t.pip) {
+    dl = `<div class="detail-download"><div class="detail-download-label">Install</div><div class="dl-pip">${t.pip}</div></div>`;
+  } else if (t.web) {
+    dl = `<div class="detail-download"><div class="detail-download-label">Open in browser</div><button class="dl-web">Open ${t.name} ↗</button></div>`;
+  }
+
+  const features = (t.features||[]).map(f => `<div class="detail-feature"><strong>${f.t}</strong>${f.b}</div>`).join('');
+  const privacy = (t.privacy||[]).map(p => `<span class="privacy-pill">✓ ${p}</span>`).join('');
+  const links = [
+    t.page ? `<a href="${t.page}">Full page ↗</a>` : '',
+    t.github ? `<a href="${t.github}">GitHub ↗</a>` : '',
+    t.pip ? `<a href="#">PyPI ↗</a>` : '',
+  ].filter(Boolean).join('');
+
+  return `
+    <div class="detail-name">${t.name}</div>
+    <div class="detail-badges"><span class="badge badge-type">${t.type}</span>${tagBadges}</div>
+    <p class="detail-desc">${t.desc}</p>
+    ${dl}
+    <div class="privacy-strip">${privacy}</div>
+    <div class="detail-section-label">What it does</div>
+    <div class="detail-features">${features}</div>
+    <div class="detail-links">${links}</div>`;
+}
+
+function renderBook(b) {
+  const features = (b.features||[]).map(f => `<div class="detail-feature"><strong>${f.t}</strong>${f.b}</div>`).join('');
+  return `
+    <div class="book-header">
+      <div class="book-cover">${b.emoji}</div>
+      <div>
+        <div class="detail-name">${b.name}</div>
+        <div class="detail-badges"><span class="badge badge-type">Book</span><span class="badge badge-book">Open access</span></div>
+        <p style="font-size:0.88rem;color:var(--gray-1);margin-top:0.6rem;line-height:1.5">${b.subtitle}</p>
+        <button class="dl-web" style="margin-top:0.85rem">Read online ↗</button>
+      </div>
+    </div>
+    <p class="detail-desc">${b.desc}</p>
+    <div class="detail-section-label">What's inside</div>
+    <div class="detail-features">${features}</div>
+    <div class="detail-links"><a href="${b.url}">books.borck.education ↗</a></div>`;
+}
+
+// ── Init ──
+buildSidebar();
+buildGrid();
+applyFilters();
+</script>
+</body>
+</html>
