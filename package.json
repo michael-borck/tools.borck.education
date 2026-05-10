@@ -6,6 +6,8 @@
     "sync": "node scripts/sync-tools.mjs",
     "bootstrap:list": "node scripts/bootstrap-list.mjs",
     "bootstrap:tag": "node scripts/bootstrap-tag.mjs",
+    "bootstrap:untag:list": "node scripts/bootstrap-untag-list.mjs",
+    "bootstrap:untag": "node scripts/bootstrap-untag.mjs",
     "fetch-releases": "node scripts/fetch-releases.mjs",
     "build": "node scripts/sync-tools.mjs && node scripts/fetch-releases.mjs && astro build",
     "preview": "astro preview"
