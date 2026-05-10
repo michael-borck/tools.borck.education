@@ -101,10 +101,10 @@ export const books: Book[] = [
 
 export const goals = [
   { value: 'all', label: 'All' },
-  { value: 'analyze', label: 'Analyze' },
+  { value: 'analyze', label: 'Analyse' },
   { value: 'feedback', label: 'Get feedback' },
   { value: 'create', label: 'Create' },
-  { value: 'practice', label: 'Practice & learn' },
+  { value: 'practice', label: 'Practise & learn' },
   { value: 'grade', label: 'Grade & assess' },
   { value: 'research', label: 'Research' },
   { value: 'engage', label: 'Engage a class' },

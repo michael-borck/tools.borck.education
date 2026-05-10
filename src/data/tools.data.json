@@ -61,7 +61,7 @@
       "analyze",
       "research"
     ],
-    "shortDesc": "Transcribes and analyzes audio/video conversations locally with AI-powered insights.",
+    "shortDesc": "Transcribes and analyses audio/video conversations locally with AI-powered insights.",
     "page": "/deep-talk/",
     "github": "https://github.com/michael-borck/deep-talk",
     "download": {
@@ -78,7 +78,7 @@
     "tags": [
       "analyze"
     ],
-    "shortDesc": "Analyzes university survey PDFs with AI insights and data visualizations.",
+    "shortDesc": "Analyses university survey PDFs with AI insights and data visualisations.",
     "page": "/insight-lens/",
     "github": "https://github.com/michael-borck/insight-lens",
     "download": {
@@ -323,7 +323,7 @@
     "name": "code-analyser",
     "type": "Desktop App",
     "tags": [],
-    "shortDesc": "Analyzes and grades student code submissions with plagiarism detection and sandboxed execution.",
+    "shortDesc": "Analyses and grades student code submissions with plagiarism detection and sandboxed execution.",
     "github": "https://github.com/michael-borck/code-analyser"
   },
   {
@@ -347,7 +347,7 @@
     "name": "document-lens",
     "type": "Desktop App",
     "tags": [],
-    "shortDesc": "Batch analyzes PDF documents with domain-specific keywords and visualizes research findings.",
+    "shortDesc": "Batch analyses PDF documents with domain-specific keywords and visualises research findings.",
     "page": "/document-lens/",
     "github": "https://github.com/michael-borck/document-lens"
   },
@@ -372,7 +372,7 @@
     "name": "gh-toolkit",
     "type": "Desktop App",
     "tags": [],
-    "shortDesc": "Manages GitHub repository portfolios with LLM-powered categorization and site generation.",
+    "shortDesc": "Manages GitHub repository portfolios with LLM-powered categorisation and site generation.",
     "github": "https://github.com/michael-borck/gh-toolkit"
   },
   {
@@ -412,7 +412,7 @@
     "name": "lane-read",
     "type": "Desktop App",
     "tags": [],
-    "shortDesc": "Tracks bowling lane reads and shot decisions for competitive bowlers to analyze patterns.",
+    "shortDesc": "Tracks bowling lane reads and shot decisions for competitive bowlers to analyse patterns.",
     "github": "https://github.com/michael-borck/lane-read"
   },
   {
@@ -580,7 +580,7 @@
     "name": "video-analyser",
     "type": "Desktop App",
     "tags": [],
-    "shortDesc": "Analyzes presentation videos using speech transcription, computer vision, and AI feedback.",
+    "shortDesc": "Analyses presentation videos using speech transcription, computer vision, and AI feedback.",
     "github": "https://github.com/michael-borck/video-analyser"
   },
   {
