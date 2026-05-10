@@ -2,12 +2,12 @@
 import Base from '../layouts/Base.astro';
 import { tools, books, goals } from '../data/tools';
 ---
-<Base title="borck.education — AI tools for educators">
+<Base title="tools.borck.education — AI tools for educators">
 
 <!-- Topbar -->
 <div class="topbar">
   <a href="/" class="topbar-logo">
-    <span>borck</span><span class="dot">.</span><span class="edu">education</span>
+    <span>tools</span><span class="dot">.</span><span>borck</span><span class="dot">.</span><span class="edu">education</span>
   </a>
   <div class="topbar-search">
     <input type="text" id="search" placeholder="Search…" autocomplete="off" />
@@ -20,6 +20,7 @@ import { tools, books, goals } from '../data/tools';
   </div>
   <div class="topbar-spacer"></div>
   <nav class="topbar-links">
+    <a href="https://borck.education">borck.education</a>
     <a href="https://teach.borck.education">Teaching</a>
     <a href="https://github.com/michael-borck">GitHub</a>
     <a href="https://borck.dev/">borck.dev</a>
@@ -76,7 +77,7 @@ import { tools, books, goals } from '../data/tools';
     <!-- Home / landing view (default) -->
     <div class="home-view" id="home-view">
       <div class="home-hero">
-        <p class="home-eyebrow">borck.education</p>
+        <p class="home-eyebrow">tools.borck.education</p>
         <h1 class="home-title">AI tools for <span class="home-accent">teaching</span> and <span class="home-accent">learning</span></h1>
         <p class="home-sub">
           {tools.length} privacy-first tools and {books.length} books.<br />
