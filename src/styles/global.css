@@ -93,104 +93,10 @@ html, body {
 .topbar-links a { font-size: 0.78rem; color: var(--gray-1); text-decoration: none; }
 .topbar-links a:hover { color: var(--accent); }
 
-/* ── Shell ── */
-.shell {
-  display: flex;
-  height: calc(100vh - 48px);
-  overflow: hidden;
-}
-
-/* ── Sidebar ── */
-.sidebar {
-  width: 220px;
-  flex-shrink: 0;
-  border-right: 1px solid var(--gray-3);
-  background: var(--gray-6);
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: var(--gray-3) transparent;
-  padding: 0.5rem 0;
-}
-
-.sidebar-section {
-  font-size: 0.62rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--gray-2);
-  padding: 0.7rem 1rem 0.3rem;
-}
-
-.sidebar-toggle {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.7rem 1rem 0.3rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 0.62rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--gray-2);
-  transition: color 0.15s;
-}
-.sidebar-toggle:hover { color: var(--gray-1); }
-
-.sidebar-chevron {
-  font-style: normal;
-  font-size: 0.8rem;
-  line-height: 1;
-  transition: transform 0.2s ease;
-  display: inline-block;
-}
-.sidebar-toggle.open .sidebar-chevron { transform: rotate(90deg); }
-
-.sidebar-section-items { display: none; }
-.sidebar-section-items.open { display: block; }
-
-.sidebar-divider {
-  height: 1px;
-  background: var(--gray-3);
-  margin: 0.4rem 0;
-}
-
-.sidebar-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.38rem 1rem;
-  font-size: 0.8rem;
-  font-family: var(--mono);
-  color: var(--gray-1);
-  text-decoration: none;
-  transition: background 0.1s, color 0.1s;
-}
-.sidebar-item:hover { background: var(--gray-4); color: var(--text); }
-.sidebar-item.active { background: var(--gray-4); color: var(--text); border-left: 2px solid var(--accent); padding-left: calc(1rem - 2px); }
-.sidebar-item.hidden { display: none; }
-
-.sidebar-type {
-  font-size: 0.58rem;
-  color: var(--gray-2);
-  background: var(--gray-3);
-  padding: 0.1rem 0.3rem;
-  border-radius: 3px;
-  font-family: var(--font);
-  font-weight: 500;
-  flex-shrink: 0;
-  margin-left: 0.4rem;
-}
-
 /* ── Main ── */
 .main {
-  flex: 1;
-  overflow-y: auto;
   background: var(--gray-5);
-  scrollbar-width: thin;
-  scrollbar-color: var(--gray-3) transparent;
+  min-height: calc(100vh - 48px);
 }
 
 /* ── Grid ── */
@@ -800,37 +706,6 @@ html.embedded .app-shot img { max-width: 40%; height: auto; margin: 0 auto; disp
   margin: 0;
   line-height: 1.5;
 }
-
-/* Book panel */
-.book-panel-name { font-size: clamp(1.4rem, 3.5vw, 2rem); }
-.book-panel-subtitle {
-  font-size: 1rem;
-  color: var(--gray-2);
-  font-style: italic;
-  margin: -0.75rem 0 1.5rem;
-}
-.book-panel-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  align-items: center;
-  margin-bottom: 1.75rem;
-}
-.book-amazon-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  background: #ff9900;
-  color: #0a0a0b;
-  font-family: var(--font);
-  font-size: 0.9rem;
-  font-weight: 600;
-  padding: 0.7rem 1.4rem;
-  border-radius: 9999px;
-  text-decoration: none;
-  transition: filter 0.15s;
-}
-.book-amazon-btn:hover { filter: brightness(1.1); }
 
 /* GitHub link at bottom */
 .panel-github-link {

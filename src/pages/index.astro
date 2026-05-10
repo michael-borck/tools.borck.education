@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { tools, books, goals } from '../data/tools';
+import { tools, goals } from '../data/tools';
 ---
 <Base title="tools.borck.education — AI tools for educators">
 
@@ -28,151 +28,90 @@ import { tools, books, goals } from '../data/tools';
   </nav>
 </div>
 
-<!-- Shell -->
-<div class="shell">
+<!-- Main -->
+<main class="main" id="main">
 
-  <!-- Sidebar -->
-  <aside class="sidebar" id="sidebar">
-    <button class="sidebar-toggle" data-section="books">
-      Books <span class="sidebar-chevron">›</span>
-    </button>
-    <div class="sidebar-section-items" id="sidebar-books">
-      {books.map(b => (
-        <a href={b.readUrl}
-           class="sidebar-item"
-           data-id={b.id}
-           data-tags="book"
-           data-book={b.id}>
-          {b.name}
-          <span class="sidebar-type">{b.track}</span>
-        </a>
-      ))}
+  <!-- Home / landing view (default) -->
+  <div class="home-view" id="home-view">
+    <div class="home-hero">
+      <p class="home-eyebrow">tools.borck.education</p>
+      <h1 class="home-title">AI tools for <span class="home-accent">teaching</span> and <span class="home-accent">learning</span></h1>
+      <p class="home-sub">
+        {tools.length} privacy-first tools for educators, researchers, students and the curious.<br />
+        All tools run locally — no data uploaded, no accounts required.
+      </p>
+
+      <div class="home-goals">
+        {goals.filter(g => g.value !== 'all').map(g => (
+          <button class="home-goal-btn" data-filter={g.value}>{g.label}</button>
+        ))}
+      </div>
+
+      <button class="home-browse-btn" id="browse-all-btn">Browse everything →</button>
     </div>
-    <div class="sidebar-divider"></div>
-    <button class="sidebar-toggle" data-section="tools">
-      Tools <span class="sidebar-chevron">›</span>
-    </button>
-    <div class="sidebar-section-items" id="sidebar-tools">
+
+    <div class="home-trust">
+      <span class="home-trust-item">✓ Fully local</span>
+      <span class="home-trust-item">✓ BYOK or Ollama</span>
+      <span class="home-trust-item">✓ No accounts</span>
+      <span class="home-trust-item">✓ MIT licensed</span>
+    </div>
+  </div>
+
+  <!-- Grid view (shown after interaction) -->
+  <div class="grid-view hidden" id="grid-view">
+    <div class="grid-header">
+      <span class="grid-title" id="grid-label">All tools</span>
+      <span class="grid-count" id="grid-count">{tools.length} tools</span>
+    </div>
+    <div class="tool-grid" id="tool-grid">
       {tools.map(t => (
         <a href={t.page || t.github || t.web || '#'}
-           class="sidebar-item"
+           class="grid-card"
            data-id={t.id}
            data-tags={t.tags.join(' ')}
            data-tool={t.id}>
-          {t.name}
-          <span class="sidebar-type">{t.type.split('·')[0].trim()}</span>
+          <div class="grid-card-name">{t.name}</div>
+          <div class="grid-card-desc">{t.shortDesc}</div>
+          <div class="grid-card-footer">
+            <span class="type-badge">{t.type}</span>
+            <span class="tag-badge">{t.tags[0]}</span>
+          </div>
         </a>
       ))}
     </div>
-    <div class="sidebar-divider"></div>
-    <a href="https://teach.borck.education" class="sidebar-item">
-      Teaching
-      <span class="sidebar-type">teach.borck.education ↗</span>
-    </a>
-  </aside>
+  </div>
 
-  <!-- Main -->
-  <main class="main" id="main">
-
-    <!-- Home / landing view (default) -->
-    <div class="home-view" id="home-view">
-      <div class="home-hero">
-        <p class="home-eyebrow">tools.borck.education</p>
-        <h1 class="home-title">AI tools for <span class="home-accent">teaching</span> and <span class="home-accent">learning</span></h1>
-        <p class="home-sub">
-          {tools.length} privacy-first tools and {books.length} books.<br />
-          For educators, researchers, students and the curious.<br />
-          All tools run locally — no data uploaded, no accounts required.
-        </p>
-
-        <div class="home-goals">
-          {goals.filter(g => g.value !== 'all').map(g => (
-            <button class="home-goal-btn" data-filter={g.value}>{g.label}</button>
-          ))}
-        </div>
-
-        <button class="home-browse-btn" id="browse-all-btn">Browse everything →</button>
-      </div>
-
-      <div class="home-trust">
-        <span class="home-trust-item">✓ Fully local</span>
-        <span class="home-trust-item">✓ BYOK or Ollama</span>
-        <span class="home-trust-item">✓ No accounts</span>
-        <span class="home-trust-item">✓ MIT licensed</span>
-      </div>
+  <!-- Detail view (shown on tool click) -->
+  <div class="detail-view hidden" id="detail-view">
+    <div class="detail-back-bar">
+      <button class="back-btn" id="back-btn">← All tools</button>
     </div>
+    <div id="detail-content"></div>
+  </div>
 
-    <!-- Grid view (shown after interaction) -->
-    <div class="grid-view hidden" id="grid-view">
-      <div class="grid-header">
-        <span class="grid-title" id="grid-label">All tools</span>
-        <span class="grid-count" id="grid-count">{tools.length} tools</span>
-      </div>
-      <div class="tool-grid" id="tool-grid">
-        {tools.map(t => (
-          <a href={t.page || t.github || t.web || '#'}
-             class="grid-card"
-             data-id={t.id}
-             data-tags={t.tags.join(' ')}
-             data-tool={t.id}>
-            <div class="grid-card-name">{t.name}</div>
-            <div class="grid-card-desc">{t.shortDesc}</div>
-            <div class="grid-card-footer">
-              <span class="type-badge">{t.type}</span>
-              <span class="tag-badge">{t.tags[0]}</span>
-            </div>
-          </a>
-        ))}
-        {books.map(b => (
-          <a href={b.readUrl}
-             class="grid-card"
-             data-id={b.id}
-             data-tags="book"
-             data-book={b.id}>
-            <div class="grid-card-name">{b.name}</div>
-            <div class="grid-card-desc">{b.description}</div>
-            <div class="grid-card-footer">
-              <span class="type-badge">Book</span>
-              <span class="tag-badge">{b.track}</span>
-            </div>
-          </a>
-        ))}
-      </div>
+  <footer class="site-footer" id="site-footer">
+    <div class="footer-links">
+      <a href="https://borck.education">Education</a>
+      <a href="https://borck.consulting">Consulting</a>
+      <a href="https://research.borck.dev">Research</a>
+      <a href="https://resume.borck.dev">Resume</a>
+      <a href="https://borck.dev/">borck.dev</a>
+      <a href="https://linkedin.com/in/michaelborck">LinkedIn</a>
     </div>
-
-    <!-- Detail view (shown on tool or book click) -->
-    <div class="detail-view hidden" id="detail-view">
-      <div class="detail-back-bar">
-        <button class="back-btn" id="back-btn">← All tools</button>
-      </div>
-      <div id="detail-content"></div>
-    </div>
-
-    <footer class="site-footer" id="site-footer">
-      <div class="footer-links">
-        <a href="https://borck.education">Education</a>
-        <a href="https://borck.consulting">Consulting</a>
-        <a href="https://research.borck.dev">Research</a>
-        <a href="https://resume.borck.dev">Resume</a>
-        <a href="https://borck.dev/">borck.dev</a>
-        <a href="https://linkedin.com/in/michaelborck">LinkedIn</a>
-      </div>
-      <p>Michael Borck · Perth, WA</p>
-    </footer>
-  </main>
-</div>
+    <p>Michael Borck · Perth, WA</p>
+  </footer>
+</main>
 
 </Base>
 
-<script define:vars={{ toolsData: tools, booksData: books }}>
+<script define:vars={{ toolsData: tools }}>
 const TOOLS = toolsData;
-const BOOKS = booksData;
 
 const goalLabels = {
   all: 'All', analyze: 'Analyse', feedback: 'Get feedback',
   create: 'Create', practice: 'Practise & learn', grade: 'Grade & assess',
   research: 'Research', engage: 'Engage a class', career: 'Career & writing',
-  book: 'Books',
 };
 
 let activeFilter = 'all';
@@ -189,35 +128,15 @@ const homeView = document.getElementById('home-view');
 const detailContent = document.getElementById('detail-content');
 const mainEl = document.getElementById('main');
 
-// ── Sidebar collapse ──────────────────────────────────────
-function toggleSection(section, open) {
-  const items = document.getElementById(`sidebar-${section}`);
-  const btn = document.querySelector(`.sidebar-toggle[data-section="${section}"]`);
-  if (!items || !btn) return;
-  items.classList.toggle('open', open);
-  btn.classList.toggle('open', open);
-}
-
-document.querySelectorAll('.sidebar-toggle').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const section = btn.dataset.section;
-    const isOpen = btn.classList.contains('open');
-    toggleSection(section, !isOpen);
-  });
-});
-
 // ── Home → Grid transition ────────────────────────────────
 function showGrid() {
   homeView.classList.add('hidden');
   gridView.classList.remove('hidden');
-  toggleSection('books', true);
-  toggleSection('tools', true);
 }
 
 // ── Filtering ─────────────────────────────────────────────
 function applyFilters() {
   const cards = document.querySelectorAll('#tool-grid .grid-card');
-  const sidebarItems = document.querySelectorAll('#sidebar .sidebar-item[data-id]');
   let visible = 0;
 
   cards.forEach(card => {
@@ -231,29 +150,9 @@ function applyFilters() {
     if (show) visible++;
   });
 
-  sidebarItems.forEach(item => {
-    const tags = (item.dataset.tags || '').split(' ');
-    const name = item.textContent?.toLowerCase() || '';
-    const matchTag = activeFilter === 'all' || tags.includes(activeFilter);
-    const matchSearch = !activeSearch || name.includes(activeSearch);
-    item.classList.toggle('hidden', !(matchTag && matchSearch));
-  });
-
   const label = goalLabels[activeFilter] || activeFilter;
   gridLabel.textContent = label + (activeSearch ? ` · "${activeSearch}"` : '');
   gridCount.textContent = `${visible} items`;
-
-  // Auto-expand sidebar sections based on active filter
-  if (activeFilter === 'book') {
-    toggleSection('books', true);
-    toggleSection('tools', false);
-  } else if (activeFilter !== 'all') {
-    toggleSection('books', false);
-    toggleSection('tools', true);
-  } else {
-    toggleSection('books', true);
-    toggleSection('tools', true);
-  }
 
   let noRes = document.getElementById('no-results');
   if (visible === 0) {
@@ -314,24 +213,6 @@ function openTool(id) {
     detailContent.innerHTML = renderInlinePanel(tool);
   }
 
-  toggleSection('tools', true);
-  setActive(id);
-  currentTool = id;
-}
-
-function openBook(id) {
-  const book = BOOKS.find(b => b.id === id);
-  if (!book) return;
-
-  homeView.classList.add('hidden');
-  gridView.classList.add('hidden');
-  mainEl.classList.remove('has-iframe');
-  detailView.classList.remove('has-iframe');
-  detailView.classList.remove('hidden');
-  detailContent.innerHTML = renderBookPanel(book);
-
-  toggleSection('books', true);
-  setActive(id);
   currentTool = id;
 }
 
@@ -344,14 +225,7 @@ function closeDetail() {
   detailView.classList.remove('has-iframe');
   gridView.classList.remove('hidden');
   mainEl.classList.remove('has-iframe');
-  document.querySelectorAll('.sidebar-item').forEach(el => el.classList.remove('active'));
   currentTool = null;
-}
-
-function setActive(id) {
-  document.querySelectorAll('.sidebar-item').forEach(el => el.classList.remove('active'));
-  const sideItem = document.querySelector(`.sidebar-item[data-id="${id}"]`);
-  if (sideItem) sideItem.classList.add('active');
 }
 
 function renderIframePanel(tool) {
@@ -439,43 +313,10 @@ function renderInlinePanel(tool) {
   </div>`;
 }
 
-function renderBookPanel(book) {
-  return `<div class="tool-inline-panel">
-    <div class="panel-col-left">
-      <div class="panel-name book-panel-name">${book.name}</div>
-      <div class="panel-badges">
-        <span class="type-badge">Book</span>
-        <span class="tag-badge">${book.track}</span>
-      </div>
-      <p class="book-panel-subtitle">${book.subtitle}</p>
-      <p class="panel-desc">${book.description}</p>
-      <div class="panel-github-link">
-        <a href="https://books.borck.education" target="_blank" rel="noopener">All books at books.borck.education ↗</a>
-      </div>
-    </div>
-    <div class="panel-col-right">
-      <div class="book-panel-actions">
-        <a href="${book.readUrl}" class="panel-web-btn" target="_blank" rel="noopener">Read online →</a>
-        <a href="${book.amazonUrl}" class="book-amazon-btn" target="_blank" rel="noopener">Amazon ↗</a>
-      </div>
-      <div class="panel-section-label" style="margin-top:1.25rem">Every online edition includes</div>
-      <div class="panel-trust">
-        <span class="trust-badge">✓ Chatbot</span>
-        <span class="trust-badge">✓ PDF download</span>
-        <span class="trust-badge">✓ EPUB download</span>
-        <span class="trust-badge">✓ llms.txt</span>
-      </div>
-    </div>
-  </div>`;
-}
-
 // ── Click delegation ──────────────────────────────────────
 document.addEventListener('click', e => {
   const toolEl = e.target.closest('[data-tool]');
   if (toolEl) { e.preventDefault(); openTool(toolEl.dataset.tool); return; }
-
-  const bookEl = e.target.closest('[data-book]');
-  if (bookEl) { e.preventDefault(); openBook(bookEl.dataset.book); return; }
 });
 
 document.getElementById('back-btn')?.addEventListener('click', closeDetail);
