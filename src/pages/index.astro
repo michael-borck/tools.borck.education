@@ -148,7 +148,7 @@ import { tools, books, goals } from '../data/tools';
       <div id="detail-content"></div>
     </div>
 
-    <footer class="site-footer hidden" id="site-footer">
+    <footer class="site-footer" id="site-footer">
       <div class="footer-links">
         <a href="https://borck.education">Education</a>
         <a href="https://borck.consulting">Consulting</a>
@@ -188,7 +188,6 @@ const gridView = document.getElementById('grid-view');
 const homeView = document.getElementById('home-view');
 const detailContent = document.getElementById('detail-content');
 const mainEl = document.getElementById('main');
-const siteFooter = document.getElementById('site-footer');
 
 // ── Sidebar collapse ──────────────────────────────────────
 function toggleSection(section, open) {
@@ -211,7 +210,6 @@ document.querySelectorAll('.sidebar-toggle').forEach(btn => {
 function showGrid() {
   homeView.classList.add('hidden');
   gridView.classList.remove('hidden');
-  siteFooter.classList.remove('hidden');
   toggleSection('books', true);
   toggleSection('tools', true);
 }
@@ -304,7 +302,6 @@ function openTool(id) {
 
   homeView.classList.add('hidden');
   gridView.classList.add('hidden');
-  siteFooter.classList.add('hidden');
   detailView.classList.remove('hidden');
 
   if (tool.page) {
@@ -328,7 +325,6 @@ function openBook(id) {
 
   homeView.classList.add('hidden');
   gridView.classList.add('hidden');
-  siteFooter.classList.add('hidden');
   mainEl.classList.remove('has-iframe');
   detailView.classList.remove('has-iframe');
   detailView.classList.remove('hidden');
@@ -347,7 +343,6 @@ function closeDetail() {
   detailView.classList.add('hidden');
   detailView.classList.remove('has-iframe');
   gridView.classList.remove('hidden');
-  siteFooter.classList.remove('hidden');
   mainEl.classList.remove('has-iframe');
   document.querySelectorAll('.sidebar-item').forEach(el => el.classList.remove('active'));
   currentTool = null;
