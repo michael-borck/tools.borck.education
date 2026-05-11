@@ -25,6 +25,7 @@ export const tools: Tool[] = toolsData as Tool[];
 
 export const goals = [
   { value: 'all', label: 'All' },
+  { value: 'showcase', label: 'Show Case' },
   { value: 'analyze', label: 'Analyse' },
   { value: 'feedback', label: 'Get feedback' },
   { value: 'create', label: 'Create' },
