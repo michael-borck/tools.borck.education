@@ -7,6 +7,7 @@ const repos = [
   'michael-borck/talk-buddy',
   'michael-borck/study-buddy',
   'michael-borck/deep-talk',
+  'michael-borck/document-lens',
   'michael-borck/career-compass',
   'michael-borck/insight-lens',
   'michael-borck/venture-lab',
