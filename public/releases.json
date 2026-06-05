@@ -9,34 +9,24 @@
     "mac": "https://github.com/michael-borck/study-buddy/releases/download/v0.4.2/Study.Buddy-0.4.2-arm64.dmg",
     "linux": "https://github.com/michael-borck/study-buddy/releases/download/v0.4.2/Study.Buddy-0.4.2.AppImage"
   },
-  "michael-borck/deep-talk": {
-    "win": "https://github.com/michael-borck/debrief/releases/download/v1.10.1/Debrief.Setup.1.10.1.exe",
-    "mac": "https://github.com/michael-borck/debrief/releases/download/v1.10.1/Debrief-1.10.1-arm64.dmg",
-    "linux": "https://github.com/michael-borck/debrief/releases/download/v1.10.1/Debrief-1.10.1.AppImage"
-  },
-  "michael-borck/document-lens": {
-    "win": "https://github.com/michael-borck/document-lens/releases/download/v0.20.4/Document.Lens.Setup.0.20.4.exe",
-    "mac": "https://github.com/michael-borck/document-lens/releases/download/v0.20.4/Document.Lens-0.20.4-arm64.dmg",
-    "linux": "https://github.com/michael-borck/document-lens/releases/download/v0.20.4/Document.Lens-0.20.4.AppImage"
-  },
   "michael-borck/career-compass": {
     "win": "https://github.com/michael-borck/career-compass/releases/download/v0.4.5/Career-Compass-Setup-0.4.5.exe",
     "mac": "https://github.com/michael-borck/career-compass/releases/download/v0.4.5/Career-Compass-0.4.5-arm64.dmg",
     "linux": "https://github.com/michael-borck/career-compass/releases/download/v0.4.5/Career-Compass-0.4.5-x86_64.AppImage"
+  },
+  "michael-borck/deep-talk": {
+    "win": "https://github.com/michael-borck/debrief/releases/download/v1.10.1/Debrief.Setup.1.10.1.exe",
+    "mac": "https://github.com/michael-borck/debrief/releases/download/v1.10.1/Debrief-1.10.1-arm64.dmg",
+    "linux": "https://github.com/michael-borck/debrief/releases/download/v1.10.1/Debrief-1.10.1.AppImage"
   },
   "michael-borck/insight-lens": {
     "win": "https://github.com/michael-borck/insight-lens/releases/download/v1.7.6/InsightLens-Setup-1.7.6.exe",
     "mac": "https://github.com/michael-borck/insight-lens/releases/download/v1.7.6/InsightLens-1.7.6-arm64.dmg",
     "linux": "https://github.com/michael-borck/insight-lens/releases/download/v1.7.6/InsightLens-1.7.6.AppImage"
   },
-  "michael-borck/venture-lab": {
-    "win": "https://github.com/michael-borck/venture-lab/releases/download/v1.1.0/VentureLab_1.0.0_x64-setup.exe",
-    "mac": "https://github.com/michael-borck/venture-lab/releases/download/v1.1.0/VentureLab_1.0.0_aarch64.dmg",
-    "linux": "https://github.com/michael-borck/venture-lab/releases/download/v1.1.0/VentureLab_1.0.0_amd64.AppImage"
-  },
-  "michael-borck/cite-sight": {
-    "win": "https://github.com/michael-borck/cite-sight/releases/download/v0.3.7/CiteSight-Setup-0.3.7.exe",
-    "mac": "https://github.com/michael-borck/cite-sight/releases/download/v0.3.7/CiteSight-0.3.7-arm64.dmg",
-    "linux": "https://github.com/michael-borck/cite-sight/releases/download/v0.3.7/CiteSight-0.3.7.AppImage"
+  "michael-borck/document-lens": {
+    "win": "https://github.com/michael-borck/document-lens/releases/download/v0.20.4/Document.Lens.Setup.0.20.4.exe",
+    "mac": "https://github.com/michael-borck/document-lens/releases/download/v0.20.4/Document.Lens-0.20.4-arm64.dmg",
+    "linux": "https://github.com/michael-borck/document-lens/releases/download/v0.20.4/Document.Lens-0.20.4.AppImage"
   }
 }
