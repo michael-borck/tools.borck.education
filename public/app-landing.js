@@ -1,7 +1,7 @@
 // Powers the per-app landing page download cluster.
 // Each landing page has <div class="app-download" data-repo="owner/name"></div>
-// Detects the visitor's OS, looks up public/releases.json, and renders
-// a primary "Download for <OS>" button + alt platform pills.
+// Detects the visitor's OS, fetches the latest release from the GitHub API at
+// runtime, and renders a primary "Download for <OS>" button + alt platform pills.
 (function () {
   const ICONS = {
     win: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.5l9.9-1.4v9.6H0zm11.1-1.5L24 0v11.7H11.1zM0 12.6h9.9v9.6L0 20.8zm11.1-.3H24V24l-12.9-1.8z"/></svg>',
@@ -19,12 +19,37 @@
     return 'win';
   }
 
-  function render(container, release) {
+  function parseRelease(ghRelease) {
+    const assets = ghRelease.assets || [];
+    const result = {};
+
+    // Win: first .exe (electron-builder produces one)
+    const winAsset = assets.find(a => a.name.toLowerCase().endsWith('.exe'));
+    if (winAsset) result.win = winAsset.browser_download_url;
+
+    // Mac: prefer universal .dmg (no arch suffix), then arm64, then x64
+    const dmgs = assets.filter(a => a.name.toLowerCase().endsWith('.dmg'));
+    const macAsset =
+      dmgs.find(a => !/-arm64|-x64/i.test(a.name)) ||
+      dmgs.find(a => /-arm64/i.test(a.name)) ||
+      dmgs.find(a => /-x64/i.test(a.name));
+    if (macAsset) result.mac = macAsset.browser_download_url;
+
+    // Linux: prefer .AppImage, fallback to .deb
+    const linuxAsset =
+      assets.find(a => a.name.toLowerCase().endsWith('.appimage')) ||
+      assets.find(a => a.name.toLowerCase().endsWith('.deb'));
+    if (linuxAsset) result.linux = linuxAsset.browser_download_url;
+
+    return result;
+  }
+
+  function render(container, release, repo) {
     const detected = detectPlatform();
     const order = [detected, ...['win', 'mac', 'linux'].filter(p => p !== detected)];
     const primary = release[detected] ? detected : order.find(p => release[p]);
     if (!primary) {
-      container.innerHTML = '<div class="dl-meta">No downloads available yet — check the <a href="https://github.com/' + container.dataset.repo + '/releases">releases page</a>.</div>';
+      container.innerHTML = '<div class="dl-meta">No downloads available yet — check the <a href="https://github.com/' + repo + '/releases">releases page</a>.</div>';
       return;
     }
     let html = '<a class="dl-primary" href="' + release[primary] + '">' + ICONS[primary] + '<span>Download for ' + LABELS[primary] + '</span></a>';
@@ -34,26 +59,26 @@
       html += '<a class="dl-pill" href="' + release[p] + '" title="Download for ' + LABELS[p] + '">' + ICONS[p] + '<span>' + LABELS[p] + '</span></a>';
     }
     html += '</div>';
-    html += '<div class="dl-meta">Free &amp; open source · <a href="https://github.com/' + container.dataset.repo + '/releases">All releases</a></div>';
+    html += '<div class="dl-meta">Free &amp; open source · <a href="https://github.com/' + repo + '/releases">All releases</a></div>';
     container.innerHTML = html;
   }
 
   document.addEventListener('DOMContentLoaded', () => {
     const containers = document.querySelectorAll('.app-download[data-repo]');
     if (!containers.length) return;
-    fetch('/releases.json')
-      .then(r => r.ok ? r.json() : {})
-      .then(releases => {
-        containers.forEach(c => {
-          const r = releases[c.dataset.repo];
-          if (r) render(c, r);
-          else c.innerHTML = '<div class="dl-meta">No downloads available yet — check the <a href="https://github.com/' + c.dataset.repo + '/releases">releases page</a>.</div>';
+
+    containers.forEach(c => {
+      const repo = c.dataset.repo;
+      fetch('https://api.github.com/repos/' + repo + '/releases/latest')
+        .then(r => r.ok ? r.json() : Promise.reject(r.status))
+        .then(ghRelease => {
+          const release = parseRelease(ghRelease);
+          if (Object.keys(release).length) render(c, release, repo);
+          else c.innerHTML = '<div class="dl-meta">No downloads available yet — check the <a href="https://github.com/' + repo + '/releases">releases page</a>.</div>';
+        })
+        .catch(() => {
+          c.innerHTML = '<div class="dl-meta">Could not load releases — visit the <a href="https://github.com/' + repo + '/releases">releases page</a>.</div>';
         });
-      })
-      .catch(() => {
-        containers.forEach(c => {
-          c.innerHTML = '<div class="dl-meta">Could not load releases — visit the <a href="https://github.com/' + c.dataset.repo + '/releases">releases page</a>.</div>';
-        });
-      });
+    });
   });
 })();

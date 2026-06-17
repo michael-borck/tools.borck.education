@@ -8,9 +8,8 @@
     "bootstrap:tag": "node scripts/bootstrap-tag.mjs",
     "bootstrap:untag:list": "node scripts/bootstrap-untag-list.mjs",
     "bootstrap:untag": "node scripts/bootstrap-untag.mjs",
-    "fetch-releases": "node scripts/fetch-releases.mjs",
     "optimize-shots": "node scripts/optimize-shots.mjs",
-    "build": "node scripts/sync-tools.mjs && node scripts/fetch-releases.mjs && astro build",
+    "build": "node scripts/sync-tools.mjs && node scripts/validate-repos.mjs && astro build",
     "preview": "astro preview"
   },
   "dependencies": {
