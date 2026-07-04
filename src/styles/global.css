@@ -198,16 +198,37 @@ a { color: inherit; }
 .home-mini {
   flex: 0 0 250px;
   scroll-snap-align: start;
-  display: flex;
-  gap: 0.75rem;
+  position: relative;
   background: var(--gray-5);
   border: 1px solid var(--gray-4);
   border-radius: 12px;
-  padding: 0.75rem;
-  text-decoration: none;
   transition: box-shadow 0.2s, border-color 0.2s;
 }
 .home-mini:hover { box-shadow: 0 8px 20px rgba(30,25,10,0.08); border-color: var(--gray-3); }
+.home-mini-main {
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  text-decoration: none;
+  height: 100%;
+}
+.home-mini-links {
+  position: absolute;
+  right: 0.65rem;
+  bottom: 0.55rem;
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+}
+.home-mini-guide {
+  font-size: 0.69rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-decoration: none;
+}
+.home-mini-guide:hover { text-decoration: underline; }
+.home-mini-gh { display: flex; color: #b3afa1; }
+.home-mini-gh:hover { color: #333; }
 .home-mini-shot { flex: 0 0 64px; height: 64px; border-radius: 9px; overflow: hidden; background: #eceae4; }
 .home-mini-shot img { width: 100%; height: 100%; object-fit: cover; object-position: top left; }
 .home-mini-mono {

@@ -15,7 +15,8 @@
       "mac": true,
       "linux": true
     },
-    "brand": "talk-buddy"
+    "brand": "talk-buddy",
+    "web": "https://talkbuddy.eduserver.au"
   },
   {
     "id": "study-buddy",
@@ -34,7 +35,8 @@
       "mac": true,
       "linux": true
     },
-    "brand": "study-buddy"
+    "brand": "study-buddy",
+    "web": "https://studybuddy.eduserver.au"
   },
   {
     "id": "career-compass",
@@ -51,7 +53,8 @@
       "mac": true,
       "linux": true
     },
-    "brand": "career-compass"
+    "brand": "career-compass",
+    "web": "https://careercompass.eduserver.au"
   },
   {
     "id": "debrief",
@@ -69,7 +72,8 @@
       "mac": true,
       "linux": true
     },
-    "brand": "debrief"
+    "brand": "debrief",
+    "web": "https://debrief.eduserver.au"
   },
   {
     "id": "insight-lens",
@@ -247,7 +251,8 @@
       "win": true,
       "mac": true,
       "linux": true
-    }
+    },
+    "web": "https://venturelab.eduserver.au"
   },
   {
     "id": "hands-on-ai",
@@ -349,10 +354,14 @@
     "id": "document-lens",
     "name": "document-lens",
     "type": "Desktop App",
-    "tags": [],
+    "tags": [
+      "analyze",
+      "research"
+    ],
     "shortDesc": "Batch analyses PDF documents with domain-specific keywords and visualises research findings.",
     "page": "/document-lens/",
-    "github": "https://github.com/michael-borck/document-lens"
+    "github": "https://github.com/michael-borck/document-lens",
+    "web": "https://documentlens.eduserver.au"
   },
   {
     "id": "ensayo",
@@ -363,7 +372,8 @@
       "practice"
     ],
     "shortDesc": "Wix-like simulation generator — practise the situation before the situation.",
-    "github": "https://github.com/michael-borck/ensayo"
+    "github": "https://github.com/michael-borck/ensayo",
+    "web": "https://ensayo.locoensayo.org"
   },
   {
     "id": "playable-lessons",
@@ -374,7 +384,8 @@
       "practice"
     ],
     "shortDesc": "Turn a tutorial or worksheet into a standalone interactive-fiction story students play through.",
-    "github": "https://github.com/michael-borck/playable-lessons"
+    "github": "https://github.com/michael-borck/playable-lessons",
+    "web": "https://playablelessons.eduserver.au"
   },
   {
     "id": "assessment-lens",
@@ -385,6 +396,49 @@
     ],
     "shortDesc": "Analyse assessment tasks for alignment, clarity and AI-vulnerability before they go out.",
     "github": "https://github.com/michael-borck/assessment-lens"
+  },
+  {
+    "id": "lesson-loom",
+    "name": "lesson-loom",
+    "type": "Web App",
+    "tags": [
+      "create"
+    ],
+    "shortDesc": "AI-assisted lesson planning — upload teaching material, pick a pedagogical framework, generate and refine structured lesson plans.",
+    "github": "https://github.com/michael-borck/lesson-loom"
+  },
+  {
+    "id": "ethos-mirror",
+    "name": "ethos-mirror",
+    "type": "Web App",
+    "tags": [
+      "create"
+    ],
+    "shortDesc": "Teaching reflection and philosophy builder — surface tensions between stated values and practice, build an evidence-grounded philosophy statement.",
+    "github": "https://github.com/michael-borck/ethos-mirror",
+    "web": "https://ethosmirror.eduserver.au"
+  },
+  {
+    "id": "book-forge",
+    "name": "book-forge",
+    "type": "Web App",
+    "tags": [
+      "create"
+    ],
+    "shortDesc": "Generates complete books with AI — multiple providers, exportable to PDF.",
+    "github": "https://github.com/michael-borck/book-forge",
+    "web": "https://bookforge.eduserver.au"
+  },
+  {
+    "id": "headline-hunter",
+    "name": "headline-hunter",
+    "type": "Web App",
+    "tags": [
+      "create",
+      "engage"
+    ],
+    "shortDesc": "Converts journalism worksheets into interactive web tools for headline and key-message drafting.",
+    "github": "https://github.com/michael-borck/headline-hunter"
   },
   {
     "id": "fetch-my-weather",
