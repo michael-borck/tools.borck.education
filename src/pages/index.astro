@@ -1,306 +1,216 @@
 ---
+import { readdirSync } from 'node:fs';
+import { join } from 'node:path';
 import Base from '../layouts/Base.astro';
-import { tools, goals } from '../data/tools';
+import { tools, goals, audSections, spotlightIds } from '../data/tools';
+
+const titleCase = (id: string) => id.split('-').map(w => w[0].toUpperCase() + w.slice(1)).join(' ');
+
+const PALETTE = ['#0e7490', '#7c3aed', '#b45309', '#047857', '#be123c', '#4f46e5', '#0f766e', '#c2410c'];
+const hue = (id: string) => PALETTE[[...id].reduce((a, c) => a + c.charCodeAt(0), 0) % PALETTE.length];
+const monogram = (id: string) => id.split('-').map(w => w[0]).join('').slice(0, 2).toUpperCase();
+
+const normType = (t: string) =>
+  /web/i.test(t) ? 'Web app' : /cli|python/i.test(t) ? 'Command line' : 'Desktop app';
+
+// Screenshot auto-discovery, same convention as ToolPage: public/screenshots/<id>-1.<ext>
+let shotFiles: string[] = [];
+try {
+  shotFiles = readdirSync(join(process.cwd(), 'public', 'screenshots'));
+} catch { /* no screenshots dir */ }
+const shot = (id: string) => {
+  const f = shotFiles.find(f => new RegExp(`^${id}-1\\.(png|jpe?g|webp|gif|avif)$`).test(f));
+  return f ? `/screenshots/${f}` : null;
+};
+
+const link = (t: any) => t.page || t.web || t.github || '#';
+const isExternal = (t: any) => !t.page && (t.web || t.github);
+
+const byGoal = (key: string) => tools.filter(t => t.tags.includes(key));
+const stubs = tools.filter(t => t.tags.length === 0);
+
+const spotlight = spotlightIds
+  .map(id => tools.find(t => t.id === id))
+  .filter(Boolean)
+  .map(t => ({
+    id: t!.id,
+    name: titleCase(t!.id),
+    desc: t!.shortDesc,
+    href: link(t!),
+    external: isExternal(t!),
+    shot: shot(t!.id),
+  }));
 ---
 <Base title="tools.borck.education — AI tools for educators">
 
-<!-- Topbar -->
 <div class="topbar">
-  <a href="/" class="topbar-logo">
-    <span>tools</span><span class="dot">.</span><span>borck</span><span class="dot">.</span><span class="edu">education</span>
-  </a>
-  <div class="topbar-search">
-    <input type="text" id="search" placeholder="Search…" autocomplete="off" />
-  </div>
-  <div class="topbar-filter">
-    <label for="goal-select">Goal:</label>
-    <select id="goal-select">
-      {goals.map(g => <option value={g.value}>{g.label}</option>)}
-    </select>
-  </div>
+  <a href="/" class="topbar-logo">Michael Borck · <strong>Teaching Tools</strong></a>
   <div class="topbar-spacer"></div>
   <nav class="topbar-links">
     <a href="https://borck.education" title="Tools, books, and teaching for educators and students">Education</a>
     <a href="https://research.borck.dev" title="Academic research, papers, and HCI work">Research</a>
     <a href="https://resume.borck.dev" title="CV in 10 formats from a single YAML data source">Resume</a>
-    <a href="https://borck.dev/" title="Builder, educator, researcher, and consultant">borck.dev</a>
+    <a href="https://github.com/michael-borck">GitHub</a>
+    <a href="https://borck.dev/">borck.dev</a>
   </nav>
 </div>
 
-<!-- Main -->
-<main class="main" id="main">
+<main class="home">
 
-  <!-- Home / landing view (default) -->
-  <div class="home-view" id="home-view">
-    <div class="home-hero">
-      <p class="home-eyebrow">tools.borck.education</p>
-      <h1 class="home-title">AI tools for <span class="home-accent">teaching</span> and <span class="home-accent">learning</span></h1>
-      <p class="home-sub">
-        {tools.length} privacy-first tools for educators, researchers, students and the curious.<br />
-        All tools run locally — no data uploaded, no accounts required.
-      </p>
-
-      <div class="home-goals">
-        {goals.filter(g => g.value !== 'all').map(g => (
-          <button class="home-goal-btn" data-filter={g.value}>{g.label}</button>
-        ))}
+  <!-- Hero: copy left, spotlight slider right -->
+  <div class="home-hero-row">
+    <div class="home-hero-copy">
+      <h1>Free, private AI tools for your classroom</h1>
+      <p>Built by an educator, for educators. Everything runs on your machine or in your
+         browser — your students' work never leaves your hands. No accounts, no cost, no catch.</p>
+      <div class="home-trust">
+        <span>🔒 Private by design</span><span>💸 Free forever</span><span>🧑‍🏫 Made for teaching</span>
       </div>
-
-      <button class="home-browse-btn" id="browse-all-btn">Browse everything →</button>
     </div>
 
-    <div class="home-trust">
-      <span class="home-trust-item">✓ Fully local</span>
-      <span class="home-trust-item">✓ BYOK or Ollama</span>
-      <span class="home-trust-item">✓ No accounts</span>
-      <span class="home-trust-item">✓ MIT licensed</span>
+    <div class="home-spot" id="home-spot">
+      {spotlight.map((s, i) => (
+        <a class={`home-slide ${i === 0 ? 'active' : ''}`} href={s.href}
+           target={s.external ? '_blank' : undefined} rel={s.external ? 'noopener' : undefined}>
+          {s.shot
+            ? <img class="home-slide-img" src={s.shot} alt={`${s.name} screenshot`} loading={i === 0 ? 'eager' : 'lazy'} />
+            : <div class="home-slide-tile" style={`background:linear-gradient(135deg, ${hue(s.id)}, ${hue(s.id)}b0)`}>
+                <span>{monogram(s.id)}</span>
+              </div>}
+          <div class="home-slide-cap">
+            <div class="home-kicker">Spotlight</div>
+            <h2>{s.name}</h2>
+            <p>{s.desc}</p>
+          </div>
+        </a>
+      ))}
+      {spotlight.length > 1 && (
+        <div class="home-spot-dots">
+          {spotlight.map((s, i) => (
+            <button type="button" class={i === 0 ? 'active' : ''} aria-label={`Show ${s.name}`}></button>
+          ))}
+        </div>
+      )}
     </div>
   </div>
 
-  <!-- Grid view (shown after interaction) -->
-  <div class="grid-view hidden" id="grid-view">
-    <div class="grid-header">
-      <span class="grid-title" id="grid-label">All tools</span>
-      <span class="grid-count" id="grid-count">{tools.length} tools</span>
-    </div>
-    <div class="tool-grid" id="tool-grid">
-      {tools.map(t => (
-        <a href={t.page || t.github || t.web || '#'}
-           class="grid-card"
-           data-id={t.id}
-           data-tags={t.tags.join(' ')}
-           data-tool={t.id}
-           data-showcase={t.page ? 'true' : 'false'}>
-          <div class="grid-card-name">{t.name}</div>
-          <div class="grid-card-desc">{t.shortDesc}</div>
-          <div class="grid-card-footer">
-            <span class="type-badge">{t.type}</span>
-            <span class="tag-badge">{t.tags[0]}</span>
-            {t.page && <span class="page-badge">Page →</span>}
+  <div class="home-filter-row">
+    <input class="home-search" id="home-search" type="search" placeholder="Search tools…" autocomplete="off" />
+  </div>
+
+  {audSections.map(sec => (
+    <div class="home-aud-section" id={`for-${sec.aud}`}>
+      <div class="home-aud-head">
+        <h2>{sec.title}</h2>
+        <p>{sec.sub}</p>
+      </div>
+      {goals.filter(g => g.aud === sec.aud && byGoal(g.key).length > 0).map(g => (
+        <div class="home-shelf-wrap" id={g.key}>
+          <div class="home-shelf-head">
+            <h3>{g.label}</h3>
+            <p>{g.blurb}</p>
           </div>
+          <div class="home-shelf">
+            {byGoal(g.key).map(t => (
+              <a class="home-mini" href={link(t)}
+                 target={isExternal(t) ? '_blank' : undefined} rel={isExternal(t) ? 'noopener' : undefined}
+                 data-name={titleCase(t.id).toLowerCase()} data-desc={t.shortDesc.toLowerCase()}>
+                {shot(t.id)
+                  ? <div class="home-mini-shot"><img src={shot(t.id)} alt="" loading="lazy" /></div>
+                  : <div class="home-mini-mono" style={`background:${hue(t.id)}`}>{monogram(t.id)}</div>}
+                <div class="home-mini-body">
+                  <h4>{titleCase(t.id)}</h4>
+                  <p>{t.shortDesc}</p>
+                  <span class="home-mini-type">{normType(t.type)}{t.page ? ' · guide' : t.web ? ' · live' : ''}</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  ))}
+
+  <div class="home-rest" id="everything-else">
+    <h2>Everything else</h2>
+    <p>Utilities, experiments and building blocks — mostly for the technically inclined.</p>
+    <div class="home-rest-grid">
+      {stubs.map(t => (
+        <a class="home-rest-item" href={t.github || '#'} target="_blank" rel="noopener"
+           data-name={titleCase(t.id).toLowerCase()} data-desc={t.shortDesc.toLowerCase()}>
+          <strong>{titleCase(t.id)}</strong>
+          <span>{t.shortDesc}</span>
         </a>
       ))}
     </div>
   </div>
 
-  <!-- Detail view (shown on tool click) -->
-  <div class="detail-view hidden" id="detail-view">
-    <div class="detail-back-bar">
-      <button class="back-btn" id="back-btn">← All tools</button>
-    </div>
-    <div id="detail-content"></div>
+  <div class="home-no-results hidden" id="home-no-results">
+    No tools match that search — try another term.
   </div>
 
   <footer class="site-footer">
-    <div class="footer-links">
-      <a href="https://borck.dev">borck.dev</a>
-    </div>
-    <p>Michael Borck · Perth, WA · <a href="mailto:hello@borck.dev">hello@borck.dev</a></p>
+    <p>Michael Borck · Perth, WA · <a href="mailto:hello@borck.dev">hello@borck.dev</a> · <a href="https://borck.dev">borck.dev</a></p>
   </footer>
 </main>
 
 </Base>
 
-<script define:vars={{ toolsData: tools }}>
-const TOOLS = toolsData;
-
-const goalLabels = {
-  all: 'All', showcase: 'Show Case', analyze: 'Analyse', feedback: 'Get feedback',
-  create: 'Create', practice: 'Practise & learn', grade: 'Grade & assess',
-  research: 'Research', engage: 'Engage a class', career: 'Career & writing',
-};
-
-let activeFilter = 'all';
-let activeSearch = '';
-let currentTool = null;
-
-const searchEl = document.getElementById('search');
-const goalEl = document.getElementById('goal-select');
-const gridLabel = document.getElementById('grid-label');
-const gridCount = document.getElementById('grid-count');
-const detailView = document.getElementById('detail-view');
-const gridView = document.getElementById('grid-view');
-const homeView = document.getElementById('home-view');
-const detailContent = document.getElementById('detail-content');
-const mainEl = document.getElementById('main');
-
-// ── Home → Grid transition ────────────────────────────────
-function showGrid() {
-  homeView.classList.add('hidden');
-  gridView.classList.remove('hidden');
-}
-
-// ── Filtering ─────────────────────────────────────────────
-function applyFilters() {
-  const cards = document.querySelectorAll('#tool-grid .grid-card');
-  let visible = 0;
-
-  cards.forEach(card => {
-    const tags = (card.dataset.tags || '').split(' ');
-    const name = card.querySelector('.grid-card-name')?.textContent?.toLowerCase() || '';
-    const desc = card.querySelector('.grid-card-desc')?.textContent?.toLowerCase() || '';
-    let matchTag;
-    if (activeFilter === 'all') matchTag = true;
-    else if (activeFilter === 'showcase') matchTag = card.dataset.showcase === 'true';
-    else matchTag = tags.includes(activeFilter);
-    const matchSearch = !activeSearch || name.includes(activeSearch) || desc.includes(activeSearch);
-    const show = matchTag && matchSearch;
-    card.classList.toggle('hidden', !show);
-    if (show) visible++;
-  });
-
-  const label = goalLabels[activeFilter] || activeFilter;
-  gridLabel.textContent = label + (activeSearch ? ` · "${activeSearch}"` : '');
-  gridCount.textContent = `${visible} items`;
-
-  let noRes = document.getElementById('no-results');
-  if (visible === 0) {
-    if (!noRes) {
-      noRes = document.createElement('div');
-      noRes.id = 'no-results';
-      noRes.className = 'no-results';
-      noRes.textContent = 'No results — try a different filter or search term.';
-      document.getElementById('tool-grid').appendChild(noRes);
+<script>
+  // ── Spotlight rotation ──
+  const spot = document.getElementById('home-spot');
+  if (spot) {
+    const slides = [...spot.querySelectorAll('.home-slide')];
+    const dots = [...spot.querySelectorAll('.home-spot-dots button')];
+    if (slides.length > 1) {
+      let cur = 0;
+      let timer: ReturnType<typeof setInterval> | null = null;
+      const go = (n: number) => {
+        slides[cur].classList.remove('active'); dots[cur]?.classList.remove('active');
+        cur = (n + slides.length) % slides.length;
+        slides[cur].classList.add('active'); dots[cur]?.classList.add('active');
+      };
+      const spin = () => {
+        if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        timer = setInterval(() => go(cur + 1), 6000);
+      };
+      const stop = () => { if (timer) clearInterval(timer); };
+      dots.forEach((d, n) => d.addEventListener('click', e => { e.preventDefault(); stop(); go(n); spin(); }));
+      spot.addEventListener('mouseenter', stop);
+      spot.addEventListener('mouseleave', spin);
+      spin();
     }
-  } else {
-    noRes?.remove();
-  }
-}
-
-searchEl?.addEventListener('input', () => {
-  if (currentTool) closeDetail();
-  showGrid();
-  activeSearch = searchEl.value.trim().toLowerCase();
-  applyFilters();
-});
-
-goalEl?.addEventListener('change', () => {
-  if (currentTool) closeDetail();
-  showGrid();
-  activeFilter = goalEl.value;
-  applyFilters();
-});
-
-document.getElementById('browse-all-btn')?.addEventListener('click', showGrid);
-
-document.querySelectorAll('.home-goal-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const filter = btn.dataset.filter;
-    goalEl.value = filter;
-    activeFilter = filter;
-    showGrid();
-    applyFilters();
-  });
-});
-
-// ── Detail panel ──────────────────────────────────────────
-function openTool(id) {
-  const tool = TOOLS.find(t => t.id === id);
-  if (!tool) return;
-
-  homeView.classList.add('hidden');
-  gridView.classList.add('hidden');
-  detailView.classList.remove('hidden');
-  detailContent.innerHTML = renderInlinePanel(tool);
-  currentTool = id;
-}
-
-function closeDetail() {
-  detailContent.innerHTML = '';
-  detailView.classList.add('hidden');
-  gridView.classList.remove('hidden');
-  currentTool = null;
-}
-
-function renderInlinePanel(tool) {
-  const releasesUrl = tool.github ? tool.github + '/releases/latest' : '#';
-
-  let installHtml = '';
-  if (tool.download) {
-    const btns = [];
-    if (tool.download.win) btns.push(`<a href="${releasesUrl}" class="panel-dl-btn win" target="_blank" rel="noopener">⊞ Windows</a>`);
-    if (tool.download.mac) btns.push(`<a href="${releasesUrl}" class="panel-dl-btn" target="_blank" rel="noopener"> Mac</a>`);
-    if (tool.download.linux) btns.push(`<a href="${releasesUrl}" class="panel-dl-btn" target="_blank" rel="noopener">🐧 Linux</a>`);
-    installHtml = `<div class="panel-dl-box">
-      <div class="panel-section-label">Download</div>
-      <div class="panel-dl-buttons">${btns.join('')}</div>
-    </div>`;
-  } else if (tool.pip) {
-    installHtml = `<div class="panel-pip-box">
-      <div class="panel-section-label">Install</div>
-      <code class="panel-pip-code">${tool.pip}</code>
-      ${tool.pypi ? `<div class="panel-pypi-link"><a href="${tool.pypi}" target="_blank" rel="noopener">PyPI ↗</a></div>` : ''}
-    </div>`;
-  } else if (tool.web) {
-    installHtml = `<a href="${tool.web}" class="panel-web-btn" target="_blank" rel="noopener">Open App →</a>`;
   }
 
-  let trustHtml = '';
-  if (tool.download) {
-    trustHtml = `<div class="panel-trust">
-      <span class="trust-badge">✓ Fully local</span>
-      <span class="trust-badge">✓ Data stays on your machine</span>
-      <span class="trust-badge">✓ BYOK or Ollama</span>
-    </div>`;
-  } else if (tool.pip) {
-    trustHtml = `<div class="panel-trust">
-      <span class="trust-badge">✓ Runs locally</span>
-      <span class="trust-badge">✓ Data stays on your machine</span>
-    </div>`;
+  // ── Search (shareable via ?q=) ──
+  const searchEl = document.getElementById('home-search') as HTMLInputElement | null;
+  function applySearch(q: string) {
+    const query = q.trim().toLowerCase();
+    document.querySelectorAll<HTMLElement>('.home-mini, .home-rest-item').forEach(el => {
+      el.classList.toggle('hidden', !!query && !`${el.dataset.name} ${el.dataset.desc}`.includes(query));
+    });
+    document.querySelectorAll('.home-shelf-wrap').forEach(w => {
+      const items = [...w.querySelectorAll('.home-mini')];
+      w.classList.toggle('hidden', !items.some(el => !el.classList.contains('hidden')));
+    });
+    document.querySelectorAll('.home-aud-section').forEach(sec => {
+      const shelves = [...sec.querySelectorAll('.home-shelf-wrap')];
+      sec.classList.toggle('hidden', shelves.every(s => s.classList.contains('hidden')));
+    });
+    const rest = document.getElementById('everything-else');
+    const restItems = [...document.querySelectorAll('.home-rest-item')];
+    rest?.classList.toggle('hidden', !restItems.some(el => !el.classList.contains('hidden')));
+    const anyVisible = document.querySelector('.home-mini:not(.hidden), .home-rest-item:not(.hidden)');
+    document.getElementById('home-no-results')?.classList.toggle('hidden', !!anyVisible);
+
+    const url = new URL(location.href);
+    if (query) url.searchParams.set('q', q.trim());
+    else url.searchParams.delete('q');
+    history.replaceState(null, '', url);
   }
-
-  let featuresHtml = '';
-  if (tool.features && tool.features.length > 0) {
-    const cards = tool.features.map(f =>
-      `<div class="panel-feature"><strong>${f.title}</strong><p>${f.desc}</p></div>`
-    ).join('');
-    featuresHtml = `<div class="panel-features-section">
-      <div class="panel-section-label">What it does</div>
-      <div class="panel-features-grid">${cards}</div>
-    </div>`;
+  if (searchEl) {
+    searchEl.addEventListener('input', () => applySearch(searchEl.value));
+    const initial = new URLSearchParams(location.search).get('q');
+    if (initial) { searchEl.value = initial; applySearch(initial); }
   }
-
-  const tagBadges = tool.tags.map(t => `<span class="tag-badge">${t}</span>`).join('');
-  const githubHtml = tool.github
-    ? `<div class="panel-github-link"><a href="${tool.github}" target="_blank" rel="noopener">GitHub ↗</a></div>`
-    : '';
-  const landingHtml = tool.page
-    ? `<a class="panel-landing-link" href="${tool.page}">View full page →</a>`
-    : '';
-
-  const hasRight = installHtml || trustHtml || featuresHtml;
-
-  if (!hasRight) {
-    return `<div class="tool-inline-panel panel-single">
-      <div class="panel-name">${tool.name}</div>
-      <div class="panel-badges"><span class="type-badge">${tool.type}</span>${tagBadges}</div>
-      <p class="panel-desc">${tool.shortDesc}</p>
-      ${landingHtml}
-      ${githubHtml}
-    </div>`;
-  }
-
-  return `<div class="tool-inline-panel">
-    <div class="panel-col-left">
-      <div class="panel-name">${tool.name}</div>
-      <div class="panel-badges"><span class="type-badge">${tool.type}</span>${tagBadges}</div>
-      <p class="panel-desc">${tool.shortDesc}</p>
-      ${landingHtml}
-      ${githubHtml}
-    </div>
-    <div class="panel-col-right">
-      ${installHtml}
-      ${trustHtml}
-      ${featuresHtml}
-    </div>
-  </div>`;
-}
-
-// ── Click delegation ──────────────────────────────────────
-document.addEventListener('click', e => {
-  const toolEl = e.target.closest('[data-tool]');
-  if (toolEl) { e.preventDefault(); openTool(toolEl.dataset.tool); return; }
-});
-
-document.getElementById('back-btn')?.addEventListener('click', closeDetail);
 </script>

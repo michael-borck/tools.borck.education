@@ -1,28 +1,42 @@
 #!/usr/bin/env node
-// Syncs src/data/tools.data.json from GitHub.
+// Refreshes src/data/tools.data.json metadata from GitHub.
 //
-// Source of truth: public repos under USER tagged with the OPT_IN_TOPIC topic.
-// Curated fields (shortDesc, type, tags, features, brand, pip, pypi, web, download)
-// are preserved across syncs. Auto-fields (id, name, github, page) are refreshed.
-// Repos that lose the topic are dropped. New repos are appended at the end.
+// MEMBERSHIP: tools.data.json is the source of truth. This script NEVER adds
+// or removes entries — adding a tool to the site is a deliberate edit to the
+// manifest. Per entry it only:
+//   - re-detects the dedicated page (src/pages/<id>.astro → "page")
+//   - fills in a missing shortDesc from the GitHub repo description
+//   - warns when the repo can't be found (renamed / private / deleted)
+// It also prints repos tagged SUGGEST_TOPIC that aren't in the manifest yet,
+// as candidates for you to add.
+//
+// Any GitHub API failure is non-fatal: the build proceeds with committed data.
 
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const USER = 'michael-borck';
-const OPT_IN_TOPIC = 'borck-edu';
+const SUGGEST_TOPIC = 'edu-tools';
 const TOOLS_JSON = 'src/data/tools.data.json';
 const PAGES_DIR = 'src/pages';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const projectRoot = join(__dirname, '..');
 
-// Field order in the emitted JSON — keeps diffs stable across runs.
+// Known fields first (stable diffs); unknown curated fields are preserved
+// after them rather than dropped.
 const FIELD_ORDER = [
   'id', 'name', 'type', 'tags', 'shortDesc',
   'page', 'github', 'pypi', 'pip', 'web', 'download', 'brand', 'features',
 ];
+
+function orderFields(obj) {
+  const out = {};
+  for (const k of FIELD_ORDER) if (obj[k] !== undefined) out[k] = obj[k];
+  for (const k of Object.keys(obj)) if (out[k] === undefined) out[k] = obj[k];
+  return out;
+}
 
 async function ghFetch(url) {
   const headers = {
@@ -53,106 +67,61 @@ function detectPage(slug) {
   return existsSync(file) ? `/${slug}/` : undefined;
 }
 
-function orderFields(obj) {
-  const out = {};
-  for (const k of FIELD_ORDER) {
-    if (obj[k] !== undefined) out[k] = obj[k];
-  }
-  return out;
-}
-
 async function main() {
   const toolsPath = join(projectRoot, TOOLS_JSON);
-  const existing = existsSync(toolsPath)
-    ? JSON.parse(readFileSync(toolsPath, 'utf-8'))
-    : [];
+  const tools = JSON.parse(readFileSync(toolsPath, 'utf-8'));
 
-  console.log(`Fetching public repos for ${USER}…`);
-  const all = await fetchAllPublicRepos();
-  const tagged = all.filter(r =>
-    !r.private && !r.archived && (r.topics || []).includes(OPT_IN_TOPIC)
-  );
-  console.log(`  ${tagged.length} repos tagged '${OPT_IN_TOPIC}' (out of ${all.length} public)`);
-
-  // Safety: when nothing is tagged but we already have curated data, leave it
-  // alone. Either the bootstrap hasn't been done, the API is rate-limited, or
-  // the topic name is wrong — none of these are intent to wipe the file.
-  // Logged loudly so CI still surfaces the state, but exits 0 so the build
-  // proceeds with the last-known-good data.
-  if (tagged.length === 0 && existing.length > 0) {
-    console.warn(
-      `\n  ⚠ No public repos under '${USER}' carry the '${OPT_IN_TOPIC}' topic.`
-    );
-    console.warn(`    Leaving ${TOOLS_JSON} unchanged (${existing.length} tools).`);
-    console.warn(`    Bootstrap once with:`);
-    for (const t of existing.filter(x => x.github)) {
-      const slug = t.github.replace('https://github.com/', '');
-      console.warn(`      gh repo edit ${slug} --add-topic ${OPT_IN_TOPIC}`);
-    }
-    console.warn('');
+  let repos = [];
+  try {
+    console.log(`Fetching public repos for ${USER}…`);
+    repos = await fetchAllPublicRepos();
+  } catch (e) {
+    console.warn(`  ⚠ GitHub API unavailable (${e.message}) — keeping ${TOOLS_JSON} as committed.`);
     return;
   }
+  const byUrl = new Map(repos.map(r => [r.html_url.toLowerCase(), r]));
 
-  const taggedByUrl = new Map(tagged.map(r => [r.html_url.toLowerCase(), r]));
-  const out = [];
+  let changed = false;
+  for (const t of tools) {
+    // Auto-field: dedicated page detection.
+    const page = detectPage(t.id);
+    if (page && t.page !== page) { t.page = page; changed = true; }
+    if (!page && t.page) { delete t.page; changed = true; }
 
-  // Pass 1: keep existing entries (preserving order + curation) if still tagged.
-  for (const t of existing) {
-    if (!t.github) {
-      console.warn(`  ! '${t.id}' has no github URL — dropping`);
-      continue;
-    }
-    const url = t.github.toLowerCase();
-    const repo = taggedByUrl.get(url);
+    if (!t.github) continue;
+    const repo = byUrl.get(t.github.toLowerCase());
     if (!repo) {
-      console.log(`  - dropped: ${t.name} (no longer tagged '${OPT_IN_TOPIC}')`);
+      console.warn(`  ⚠ '${t.id}': repo not found on GitHub (renamed, private or deleted?) — keeping entry.`);
       continue;
     }
-    const slug = repo.name;
-    const page = detectPage(slug);
-
-    if (t.id !== slug || t.name !== slug) {
-      console.log(`  ~ renamed: ${t.name} → ${slug}`);
-      const oldPage = detectPage(t.id);
-      if (oldPage && !page) {
-        console.warn(`    ⚠ dedicated page src/pages/${t.id}.astro exists but new slug '${slug}' has no matching page`);
-      }
+    // Fill missing description from GitHub; never overwrite curated copy.
+    if ((!t.shortDesc || /needs description/i.test(t.shortDesc)) && repo.description) {
+      t.shortDesc = repo.description;
+      changed = true;
+      console.log(`  ~ '${t.id}': shortDesc filled from GitHub.`);
     }
-
-    const updated = { ...t, id: slug, name: slug, github: repo.html_url };
-    if (page) updated.page = page;
-    else delete updated.page;
-
-    out.push(updated);
-    taggedByUrl.delete(url);
   }
 
-  // Pass 2: append newly-tagged repos (alphabetical for predictability).
-  const newRepos = [...taggedByUrl.values()].sort((a, b) =>
-    a.name.localeCompare(b.name)
+  // Candidates: tagged repos not yet in the manifest. Informational only.
+  const known = new Set(tools.filter(t => t.github).map(t => t.github.toLowerCase()));
+  const candidates = repos.filter(r =>
+    !r.archived && (r.topics || []).includes(SUGGEST_TOPIC) && !known.has(r.html_url.toLowerCase())
   );
-  for (const repo of newRepos) {
-    const slug = repo.name;
-    const page = detectPage(slug);
-    const stub = {
-      id: slug,
-      name: slug,
-      type: 'Desktop App',
-      tags: [],
-      shortDesc: repo.description || `${slug} — needs description`,
-      github: repo.html_url,
-    };
-    if (page) stub.page = page;
-    out.push(stub);
-    console.log(`  + new: ${slug}`);
+  if (candidates.length) {
+    console.log(`\n  ${candidates.length} repos tagged '${SUGGEST_TOPIC}' are not in ${TOOLS_JSON} (add manually if wanted):`);
+    for (const r of candidates) console.log(`    + ${r.name}${r.description ? ` — ${r.description}` : ''}`);
+    console.log('');
   }
 
-  const ordered = out.map(orderFields);
-  writeFileSync(toolsPath, JSON.stringify(ordered, null, 2) + '\n');
-  console.log(`Wrote ${TOOLS_JSON} (${ordered.length} tools)`);
+  if (changed) {
+    writeFileSync(toolsPath, JSON.stringify(tools.map(orderFields), null, 2) + '\n');
+    console.log(`Wrote ${TOOLS_JSON} (${tools.length} tools).`);
+  } else {
+    console.log(`${TOOLS_JSON} unchanged (${tools.length} tools).`);
+  }
 }
 
 main().catch(e => {
-  console.error(e);
-  process.exit(1);
+  // Never fail the build over a sync problem — the committed manifest is valid.
+  console.warn(`  ⚠ sync-tools: ${e.message} — keeping ${TOOLS_JSON} as committed.`);
 });

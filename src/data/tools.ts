@@ -23,15 +23,38 @@ export interface Tool {
 
 export const tools: Tool[] = toolsData as Tool[];
 
-export const goals = [
-  { value: 'all', label: 'All' },
-  { value: 'showcase', label: 'Show Case' },
-  { value: 'analyze', label: 'Analyse' },
-  { value: 'feedback', label: 'Get feedback' },
-  { value: 'create', label: 'Create' },
-  { value: 'practice', label: 'Practise & learn' },
-  { value: 'grade', label: 'Grade & assess' },
-  { value: 'research', label: 'Research' },
-  { value: 'engage', label: 'Engage a class' },
-  { value: 'career', label: 'Career & writing' },
+// Goal shelves, grouped by audience. A tool tagged with goals from both
+// audiences (e.g. talk-buddy: practice + feedback) appears in both sections —
+// that's how dual-purpose lecturer/student apps are expressed.
+export interface Goal {
+  key: string;
+  label: string;
+  blurb: string;
+  aud: 'staff' | 'students';
+}
+
+export const goals: Goal[] = [
+  { key: 'feedback', label: 'Give better feedback',     blurb: 'Formative feedback and critique, at scale.',                        aud: 'staff' },
+  { key: 'engage',   label: 'Engage your class',        blurb: 'Live polls, discussion and participation.',                          aud: 'staff' },
+  { key: 'grade',    label: 'Grade & assess',           blurb: 'Marking support and assessment design.',                             aud: 'staff' },
+  { key: 'create',   label: 'Create course content',    blurb: 'Slides, case studies, simulations and curriculum.',                  aud: 'staff' },
+  { key: 'analyze',  label: 'Analyse documents & data', blurb: 'Pull insight out of documents and datasets.',                        aud: 'staff' },
+  { key: 'research', label: 'Research & referencing',   blurb: 'Citations, papers and reading support.',                             aud: 'staff' },
+  { key: 'practice', label: 'Practise & prepare',       blurb: 'Safe spaces to rehearse — interviews, conversations, scenarios.',    aud: 'students' },
+  { key: 'career',   label: 'Career & writing help',    blurb: 'CVs, professional writing and finding your voice.',                  aud: 'students' },
+];
+
+export const audSections = [
+  { aud: 'staff' as const,    title: 'For your teaching', sub: 'Tools you use to prepare, run and mark your classes.' },
+  { aud: 'students' as const, title: 'For your students', sub: 'Tools to share with students — several import scenarios you create with the teaching tools above.' },
+];
+
+// The rotating spotlight on the home page: a hand-picked advert, not a catalog.
+// Order matters; ids missing from tools.data.json are skipped.
+export const spotlightIds = [
+  'talk-buddy',
+  'playable-lessons',
+  'ensayo',
+  'curriculum-curator',
+  'feed-forward',
 ];

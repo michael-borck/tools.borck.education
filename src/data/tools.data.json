@@ -161,7 +161,8 @@
     ],
     "shortDesc": "Generates formative feedback on student assignments using multiple AI models.",
     "github": "https://github.com/michael-borck/feed-forward",
-    "pip": "pip install feed-forward"
+    "pip": "pip install feed-forward",
+    "web": "https://feedforward.eduserver.au"
   },
   {
     "id": "curriculum-curator",
@@ -174,6 +175,7 @@
     "github": "https://github.com/michael-borck/curriculum-curator",
     "pypi": "https://pypi.org/project/curriculum-curator/",
     "pip": "pip install curriculum-curator",
+    "web": "https://curriculumcurator.eduserver.au",
     "download": {
       "win": true,
       "mac": true,
@@ -200,6 +202,7 @@
     ],
     "shortDesc": "AI-powered citation and reference analysis for academic writing.",
     "github": "https://github.com/michael-borck/cite-sight",
+    "web": "https://citesight.eduserver.au",
     "download": {
       "win": true,
       "mac": true,
@@ -355,9 +358,33 @@
     "id": "ensayo",
     "name": "ensayo",
     "type": "Desktop App",
-    "tags": [],
-    "shortDesc": "Generator for educational company simulation sites",
+    "tags": [
+      "create",
+      "practice"
+    ],
+    "shortDesc": "Wix-like simulation generator — practise the situation before the situation.",
     "github": "https://github.com/michael-borck/ensayo"
+  },
+  {
+    "id": "playable-lessons",
+    "name": "playable-lessons",
+    "type": "Desktop App",
+    "tags": [
+      "create",
+      "practice"
+    ],
+    "shortDesc": "Turn a tutorial or worksheet into a standalone interactive-fiction story students play through.",
+    "github": "https://github.com/michael-borck/playable-lessons"
+  },
+  {
+    "id": "assessment-lens",
+    "name": "assessment-lens",
+    "type": "Desktop App",
+    "tags": [
+      "grade"
+    ],
+    "shortDesc": "Analyse assessment tasks for alignment, clarity and AI-vulnerability before they go out.",
+    "github": "https://github.com/michael-borck/assessment-lens"
   },
   {
     "id": "fetch-my-weather",
@@ -572,7 +599,7 @@
     "name": "udl-lens",
     "type": "Desktop App",
     "tags": [],
-    "shortDesc": "udl-lens — needs description",
+    "shortDesc": "Audits unit assessments against UDL Guidelines 3.0 using AI to pre-fill ratings, generates radar charts and PDF reports for accessibility improvements aligned with Assessment 2030.",
     "github": "https://github.com/michael-borck/udl-lens"
   },
   {
