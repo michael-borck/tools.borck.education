@@ -90,7 +90,8 @@
       "mac": true,
       "linux": true
     },
-    "brand": "insight-lens"
+    "brand": "insight-lens",
+    "web": "https://insightlens.eduserver.au"
   },
   {
     "id": "case-crafter",
@@ -265,7 +266,8 @@
     "shortDesc": "Educational AI toolkit with chatbot, RAG, and agent modules for hands-on learning.",
     "github": "https://github.com/michael-borck/hands-on-ai",
     "pypi": "https://pypi.org/project/hands-on-ai/",
-    "pip": "pip install hands-on-ai"
+    "pip": "pip install hands-on-ai",
+    "web": "https://handsonai.eduserver.au"
   },
   {
     "id": "critique-quest",
