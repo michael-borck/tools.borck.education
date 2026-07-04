@@ -289,7 +289,7 @@ a { color: inherit; }
 .app-page[data-brand="talk-buddy"]      { --brand: #4d8271; --brand-glow: rgba(111,164,147,0.22); }
 .app-page[data-brand="study-buddy"]     { --brand: #5d6f9e; --brand-glow: rgba(142,157,196,0.22); }
 .app-page[data-brand="career-compass"]  { --brand: #a86540; --brand-glow: rgba(197,134,96,0.22); }
-.app-page[data-brand="deep-talk"]       { --brand: #7a5aa8; --brand-glow: rgba(155,126,200,0.22); }
+.app-page[data-brand="debrief"]         { --brand: #7a5aa8; --brand-glow: rgba(155,126,200,0.22); }
 .app-page[data-brand="document-lens"]   { --brand: #2f7cc4; --brand-glow: rgba(96,165,250,0.22); }
 .app-page[data-brand="insight-lens"]    { --brand: #0e9268; --brand-glow: rgba(52,211,153,0.22); }
 

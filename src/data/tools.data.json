@@ -54,22 +54,22 @@
     "brand": "career-compass"
   },
   {
-    "id": "deep-talk",
-    "name": "deep-talk",
+    "id": "debrief",
+    "name": "debrief",
     "type": "Desktop App",
     "tags": [
       "analyze",
       "research"
     ],
     "shortDesc": "Transcribes and analyses audio/video conversations locally with AI-powered insights.",
-    "page": "/deep-talk/",
-    "github": "https://github.com/michael-borck/deep-talk",
+    "page": "/debrief/",
+    "github": "https://github.com/michael-borck/debrief",
     "download": {
       "win": true,
       "mac": true,
       "linux": true
     },
-    "brand": "deep-talk"
+    "brand": "debrief"
   },
   {
     "id": "insight-lens",
