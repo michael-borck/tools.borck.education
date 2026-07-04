@@ -36,7 +36,8 @@ if (missing.length) {
   process.exit(1);
 }
 
-const files = readdirSync(dir).filter(f => f.toLowerCase().endsWith('.png')).sort();
+// Skip macOS AppleDouble junk ('._*') that appears on exFAT volumes.
+const files = readdirSync(dir).filter(f => f.toLowerCase().endsWith('.png') && !f.startsWith('._')).sort();
 if (!files.length) {
   console.log('No PNGs found in public/screenshots/');
   process.exit(0);
