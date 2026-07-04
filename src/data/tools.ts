@@ -54,6 +54,7 @@ export const audSections = [
 export const spotlightIds = [
   'talk-buddy',
   'playable-lessons',
+  'lesson-loom',
   'ensayo',
   'curriculum-curator',
   'feed-forward',
