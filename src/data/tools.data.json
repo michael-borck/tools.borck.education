@@ -190,12 +190,14 @@
   {
     "id": "assessment-bench",
     "name": "assessment-bench",
-    "type": "Python · CLI",
+    "type": "Desktop App",
     "tags": [
       "grade"
     ],
-    "shortDesc": "Benchmarks AI grading systems using three-tier evaluation with statistical analysis.",
-    "github": "https://github.com/michael-borck/assessment-bench"
+    "shortDesc": "Runs a cohort through competing marking approaches — pure-LLM, deterministic signals and hybrid — to see which agrees with your marks.",
+    "github": "https://github.com/michael-borck/assessment-bench-desktop",
+    "web": "https://assessmentbench.eduserver.au",
+    "pip": "pip install assessment-bench"
   },
   {
     "id": "cite-sight",
@@ -268,17 +270,6 @@
     "pypi": "https://pypi.org/project/hands-on-ai/",
     "pip": "pip install hands-on-ai",
     "web": "https://handsonai.eduserver.au"
-  },
-  {
-    "id": "critique-quest",
-    "name": "critique-quest",
-    "type": "Python",
-    "tags": [
-      "practice",
-      "feedback"
-    ],
-    "shortDesc": "AI case studies designed to build critical thinking and analytical skills.",
-    "github": "https://github.com/michael-borck/critique-quest"
   },
   {
     "id": "ask-docs",
@@ -396,8 +387,10 @@
     "tags": [
       "grade"
     ],
-    "shortDesc": "Analyse assessment tasks for alignment, clarity and AI-vulnerability before they go out.",
-    "github": "https://github.com/michael-borck/assessment-lens"
+    "shortDesc": "Checks student submissions against your rubric — cited evidence per criterion, so you weigh the observations and assign the marks.",
+    "github": "https://github.com/michael-borck/assessment-lens-desktop",
+    "web": "https://assessmentlens.eduserver.au",
+    "pip": "pip install assessment-lens"
   },
   {
     "id": "lesson-loom",

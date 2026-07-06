@@ -12,7 +12,7 @@ AI-powered tools for educators — privacy-first, locally-run, and built for the
 
 ## More Tools
 
-case-crafter · critique-quest · deep-talk · career-compass · slide-stream · insight-lens · venture-lab · mark-mate · cite-sight
+case-crafter · deep-talk · career-compass · slide-stream · insight-lens · venture-lab · mark-mate · cite-sight
 
 ## Development
 
