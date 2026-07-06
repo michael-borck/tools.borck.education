@@ -94,40 +94,6 @@
     "web": "https://insightlens.eduserver.au"
   },
   {
-    "id": "case-crafter",
-    "name": "case-crafter",
-    "type": "Desktop App",
-    "tags": [
-      "create",
-      "engage"
-    ],
-    "shortDesc": "Generates AI-powered business case studies for education with offline functionality.",
-    "github": "https://github.com/michael-borck/case-crafter",
-    "download": {
-      "win": true,
-      "mac": true,
-      "linux": true
-    },
-    "features": [
-      {
-        "title": "Case generation",
-        "desc": "AI writes realistic business case studies in minutes"
-      },
-      {
-        "title": "Curriculum aligned",
-        "desc": "Fits your learning outcomes, industry, and context"
-      },
-      {
-        "title": "Offline mode",
-        "desc": "Generates cases without an internet connection"
-      },
-      {
-        "title": "Export ready",
-        "desc": "PDF and web-friendly output for immediate classroom use"
-      }
-    ]
-  },
-  {
     "id": "class-pulse",
     "name": "class-pulse",
     "type": "Web App",
@@ -159,14 +125,13 @@
   {
     "id": "feed-forward",
     "name": "feed-forward",
-    "type": "Python · CLI",
+    "type": "Web App",
     "tags": [
       "feedback",
       "grade"
     ],
-    "shortDesc": "Generates formative feedback on student assignments using multiple AI models.",
+    "shortDesc": "Centralised feedback web app — you set up the class assessment, students upload their work and receive AI formative feedback.",
     "github": "https://github.com/michael-borck/feed-forward",
-    "pip": "pip install feed-forward",
     "web": "https://feedforward.eduserver.au"
   },
   {
@@ -433,7 +398,7 @@
       "create",
       "engage"
     ],
-    "shortDesc": "Converts journalism worksheets into interactive web tools for headline and key-message drafting.",
+    "shortDesc": "Turns research papers into press releases — AI-assisted headline and key-message drafting from your publications.",
     "github": "https://github.com/michael-borck/headline-hunter",
     "web": "https://headlinehunter.eduserver.au"
   },
