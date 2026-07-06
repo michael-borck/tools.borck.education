@@ -135,6 +135,18 @@
     "web": "https://feedforward.eduserver.au"
   },
   {
+    "id": "feed-forward-desktop",
+    "name": "feed-forward-desktop",
+    "type": "Desktop App",
+    "tags": [
+      "practice",
+      "feedback"
+    ],
+    "shortDesc": "FeedForward's standalone app — students open the rubric you shared, paste a draft, and practise with private, rubric-aligned AI feedback.",
+    "github": "https://github.com/michael-borck/feed-forward-desktop",
+    "web": "https://feedforwarddesktop.eduserver.au"
+  },
+  {
     "id": "curriculum-curator",
     "name": "curriculum-curator",
     "type": "Desktop App",
