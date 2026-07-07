@@ -212,10 +212,11 @@
     "tags": [
       "create"
     ],
-    "shortDesc": "Convert Markdown or PowerPoint slides to AI-narrated video presentations.",
+    "shortDesc": "Turns a Markdown or PowerPoint deck into a narrated video — spoken in a clone of your own voice, with AI images and an optional talking-head avatar.",
     "github": "https://github.com/michael-borck/slide-stream",
     "pypi": "https://pypi.org/project/slide-stream/",
-    "pip": "pip install slide-stream"
+    "pip": "pip install slide-stream",
+    "web": "https://slidestream.eduserver.au"
   },
   {
     "id": "venture-lab",
