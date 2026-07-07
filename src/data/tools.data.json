@@ -473,6 +473,19 @@
     "github": "https://github.com/michael-borck/lane-read"
   },
   {
+    "id": "limn",
+    "name": "limn",
+    "type": "Desktop App",
+    "tags": [
+      "create"
+    ],
+    "shortDesc": "Type a description, get an image — a small, privacy-first text-to-image tool where prompts go only to the provider you choose.",
+    "github": "https://github.com/michael-borck/limn",
+    "pypi": "https://pypi.org/project/limn/",
+    "pip": "pip install limn",
+    "web": "https://limn.eduserver.au"
+  },
+  {
     "id": "llm-fragments-folder",
     "name": "llm-fragments-folder",
     "type": "Desktop App",
