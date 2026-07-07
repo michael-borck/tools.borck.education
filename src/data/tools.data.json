@@ -571,10 +571,13 @@
   {
     "id": "slinkr",
     "name": "slinkr",
-    "type": "Desktop App",
-    "tags": [],
-    "shortDesc": "Flask web app for URL shortening, expanding, QR code generation, and link management",
-    "github": "https://github.com/michael-borck/slinkr"
+    "type": "Web App",
+    "tags": [
+      "engage"
+    ],
+    "shortDesc": "The friendly URL toolkit — shorten links for slides and handouts, expand mystery URLs, generate QR codes with your logo, and check link health.",
+    "github": "https://github.com/michael-borck/slinkr",
+    "web": "https://slinkr.eduserver.au"
   },
   {
     "id": "spec-to-code",
