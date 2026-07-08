@@ -5,7 +5,8 @@
     "type": "Desktop App",
     "tags": [
       "practice",
-      "feedback"
+      "feedback",
+      "infra"
     ],
     "shortDesc": "AI conversation practice with speech recognition and real-time feedback.",
     "github": "https://github.com/michael-borck/talk-buddy",
@@ -41,7 +42,8 @@
     "name": "career-compass",
     "type": "Desktop App",
     "tags": [
-      "career"
+      "career",
+      "infra"
     ],
     "shortDesc": "AI career guidance and resume analysis — runs locally, no data uploaded.",
     "github": "https://github.com/michael-borck/career-compass",
@@ -135,7 +137,8 @@
     "type": "Desktop App",
     "tags": [
       "practice",
-      "feedback"
+      "feedback",
+      "infra"
     ],
     "shortDesc": "FeedForward's standalone app — students open the rubric you shared, paste a draft, and practise with private, rubric-aligned AI feedback.",
     "github": "https://github.com/michael-borck/feed-forward-desktop",
@@ -236,7 +239,8 @@
     "type": "Jupyter",
     "tags": [
       "practice",
-      "create"
+      "create",
+      "infra"
     ],
     "shortDesc": "Educational AI toolkit with chatbot, RAG, and agent modules for hands-on learning.",
     "github": "https://github.com/michael-borck/hands-on-ai",
@@ -357,7 +361,8 @@
     "name": "assessment-lens",
     "type": "Desktop App",
     "tags": [
-      "grade"
+      "grade",
+      "infra"
     ],
     "shortDesc": "Checks student submissions against your rubric — cited evidence per criterion, so you weigh the observations and assign the marks.",
     "github": "https://github.com/michael-borck/assessment-lens-desktop",
@@ -534,6 +539,19 @@
     "tags": [],
     "shortDesc": "Download unit outline PDFs from Curtin University's LITEC system",
     "github": "https://github.com/michael-borck/outline-dl"
+  },
+  {
+    "id": "puente",
+    "name": "puente",
+    "type": "CLI",
+    "tags": [
+      "infra"
+    ],
+    "shortDesc": "A local-first AI orchestrator — spin up a private stack for chat, images, speech, search and notebooks on your own hardware, so student work never leaves the box.",
+    "github": "https://github.com/michael-borck/loco-puente",
+    "pypi": "https://pypi.org/project/locopuente/",
+    "pip": "pip install locopuente",
+    "web": "https://locopuente.org/"
   },
   {
     "id": "pypi-toolkit",

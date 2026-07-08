@@ -40,6 +40,7 @@ export const goals: Goal[] = [
   { key: 'create',   label: 'Create course content',    blurb: 'Slides, case studies, simulations and curriculum.',                  aud: 'staff' },
   { key: 'analyze',  label: 'Analyse documents & data', blurb: 'Pull insight out of documents and datasets.',                        aud: 'staff' },
   { key: 'research', label: 'Research & referencing',   blurb: 'Citations, papers and reading support.',                             aud: 'staff' },
+  { key: 'infra',    label: 'Run AI privately',         blurb: 'Self-host the AI behind these tools on your own hardware.',           aud: 'staff' },
   { key: 'practice', label: 'Practise & prepare',       blurb: 'Safe spaces to rehearse — interviews, conversations, scenarios.',    aud: 'students' },
   { key: 'career',   label: 'Career & writing help',    blurb: 'CVs, professional writing and finding your voice.',                  aud: 'students' },
 ];
@@ -58,4 +59,5 @@ export const spotlightIds = [
   'ensayo',
   'curriculum-curator',
   'feed-forward',
+  'puente',
 ];
