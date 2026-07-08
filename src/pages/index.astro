@@ -13,7 +13,7 @@ const monogram = (id: string) => id.split('-').map(w => w[0]).join('').slice(0, 
 const normType = (t: string) =>
   /web/i.test(t) ? 'Web app' : /cli|python/i.test(t) ? 'Command line' : 'Desktop app';
 
-// Screenshot auto-discovery, same convention as ToolPage: public/screenshots/<id>-1.<ext>
+// Screenshot auto-discovery: public/screenshots/<id>-1.<ext>
 let shotFiles: string[] = [];
 try {
   shotFiles = readdirSync(join(process.cwd(), 'public', 'screenshots'));
