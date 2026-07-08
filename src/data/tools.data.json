@@ -8,7 +8,6 @@
       "feedback"
     ],
     "shortDesc": "AI conversation practice with speech recognition and real-time feedback.",
-    "page": "/talk-buddy/",
     "github": "https://github.com/michael-borck/talk-buddy",
     "download": {
       "win": true,
@@ -26,7 +25,6 @@
       "practice"
     ],
     "shortDesc": "Desktop AI tutoring with local inference via Ollama — no data leaves your machine.",
-    "page": "/study-buddy/",
     "github": "https://github.com/michael-borck/study-buddy",
     "pypi": "https://pypi.org/project/study-buddy/",
     "pip": "pip install study-buddy",
@@ -46,7 +44,6 @@
       "career"
     ],
     "shortDesc": "AI career guidance and resume analysis — runs locally, no data uploaded.",
-    "page": "/career-compass/",
     "github": "https://github.com/michael-borck/career-compass",
     "download": {
       "win": true,
@@ -65,7 +62,6 @@
       "research"
     ],
     "shortDesc": "Transcribes and analyses audio/video conversations locally with AI-powered insights.",
-    "page": "/debrief/",
     "github": "https://github.com/michael-borck/debrief",
     "download": {
       "win": true,
@@ -83,7 +79,6 @@
       "analyze"
     ],
     "shortDesc": "Analyses university survey PDFs with AI insights and data visualisations.",
-    "page": "/insight-lens/",
     "github": "https://github.com/michael-borck/insight-lens",
     "download": {
       "win": true,
@@ -330,7 +325,6 @@
       "research"
     ],
     "shortDesc": "Batch analyses PDF documents with domain-specific keywords and visualises research findings.",
-    "page": "/document-lens/",
     "github": "https://github.com/michael-borck/document-lens",
     "web": "https://documentlens.eduserver.au"
   },
