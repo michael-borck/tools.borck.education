@@ -784,5 +784,18 @@
     "tags": [],
     "shortDesc": "All-in-one deployment for the WorkReady internship simulation — 9 services, 1 machine, Docker or bare metal",
     "github": "https://github.com/michael-borck/workready-deploy"
+  },
+  {
+    "id": "lectern",
+    "name": "lectern",
+    "type": "Self-hosted service",
+    "tags": [
+      "teaching",
+      "presentations",
+      "infra"
+    ],
+    "shortDesc": "Self-hosted, multi-user synced slide-sharing for courses and client workshops.",
+    "github": "https://github.com/michael-borck/lectern",
+    "web": "https://lectern.borck.education"
   }
 ]
