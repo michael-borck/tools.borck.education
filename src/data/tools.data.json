@@ -333,6 +333,23 @@
     "web": "https://documentlens.borck.education"
   },
   {
+    "id": "winnow",
+    "name": "winnow",
+    "type": "Desktop App",
+    "tags": [
+      "research",
+      "analyze"
+    ],
+    "shortDesc": "Privacy-first literature search and review — verifies every DOI, grounds claims in quotes, and runs locally.",
+    "github": "https://github.com/michael-borck/winnow",
+    "download": {
+      "win": true,
+      "mac": true,
+      "linux": true
+    },
+    "web": "https://winnow.borck.education"
+  },
+  {
     "id": "ensayo",
     "name": "ensayo",
     "type": "Desktop App",
