@@ -350,6 +350,24 @@
     "web": "https://winnow.borck.education"
   },
   {
+    "id": "honeyguide",
+    "name": "honeyguide",
+    "type": "Web App",
+    "tags": [
+      "create",
+      "research",
+      "infra"
+    ],
+    "shortDesc": "Finds and verifies videos, papers, sites and podcasts to support your teaching — with licensing and a rationale.",
+    "github": "https://github.com/michael-borck/honeyguide",
+    "web": "https://honeyguide.eduserver.au",
+    "download": {
+      "win": true,
+      "mac": true,
+      "linux": true
+    }
+  },
+  {
     "id": "ensayo",
     "name": "ensayo",
     "type": "Desktop App",
