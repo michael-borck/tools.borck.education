@@ -392,6 +392,44 @@
     "web": "https://playablelessons.borck.education"
   },
   {
+    "id": "lorekeeper",
+    "name": "lorekeeper",
+    "type": "Web App",
+    "tags": [
+      "practice"
+    ],
+    "shortDesc": "Story-driven courses for your personal learning path — short readings, checkpoints and hands-on challenges.",
+    "web": "https://lorekeeper.borck.education"
+  },
+  {
+    "id": "knotebook",
+    "name": "knotebook",
+    "type": "Web App",
+    "tags": [
+      "create",
+      "practice"
+    ],
+    "shortDesc": "Write, map and publish branching stories — an LLM-friendly studio and offline player built on Ink.",
+    "github": "https://github.com/michael-borck/knotebook",
+    "web": "https://knotebook.borck.education",
+    "download": {
+      "win": true,
+      "mac": true,
+      "linux": true
+    }
+  },
+  {
+    "id": "cairn",
+    "name": "cairn",
+    "type": "Desktop App",
+    "tags": [
+      "practice"
+    ],
+    "shortDesc": "A personal tutor that runs on your machine — imports your notes, maps your skills, and adapts practice.",
+    "github": "https://github.com/michael-borck/cairn",
+    "web": "https://cairn.borck.education"
+  },
+  {
     "id": "assessment-lens",
     "name": "assessment-lens",
     "type": "Desktop App",
